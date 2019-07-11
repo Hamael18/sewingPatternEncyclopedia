@@ -1,0 +1,15 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row"><i class="fas fa-plus-circle fa-3x mr-3"></i><h1>Ajouter une marque</h1></div>
+        <div class="my-3">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg">Créer</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

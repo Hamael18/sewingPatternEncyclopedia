@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        {{ encore_entry_link_tags('materia') }}
+        {{ encore_entry_link_tags('app') }}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% include 'admin/partials/_navbar.html.twig' %}
+        {% block body %}{% endblock %}
+
+        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('jquery') }}
+        {{ encore_entry_script_tags('popper') }}
+        {{ encore_entry_script_tags('bootstrap') }}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

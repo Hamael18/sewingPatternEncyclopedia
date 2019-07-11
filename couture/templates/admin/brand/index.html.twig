@@ -1,0 +1,11 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Liste des marques de patrons de couture{% endblock %}
+
+{% block content %}
+
+    <h1>Toutes les marques présentes sur le site</h1>
+    {% for brand in brands %}
+        <a href="{{ brand.url }}">{{ brand.name }}</a>
+    {% endfor %}
+{% endblock %}

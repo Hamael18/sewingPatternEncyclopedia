@@ -1,0 +1,12 @@
+<div class="my-3 text-dark">
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.lien) }}
+    {{ form_row(form.brand) }}
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-primary btn-lg">{{ bouton_label }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
