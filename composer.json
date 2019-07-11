@@ -1,0 +1,11 @@
+{
+    "name": "hamael/couture",
+    "description": "Sewing Pattern Encyclopedia",
+    "authors": [
+        {
+            "name": "julie",
+            "email": "hamael18@hotmail.com"
+        }
+    ],
+    "require": {}
+}
