@@ -10,14 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminPatternController extends AbstractController
+class AdminPatternController extends BaseController
 {
-    private $manager;
-
-    public function __construct(ObjectManager $manager)
-    {
-        $this->manager = $manager;
-    }
 
     /**
      * @Route("/admin/pattern", name="admin_pattern")
@@ -32,7 +26,7 @@ class AdminPatternController extends AbstractController
     }
 
     /**
-     * @Route("/admin/pattern/add", name="admin_pattern_new")
+     * @Route("/admin/pattern/new", name="admin_pattern_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -45,7 +39,7 @@ class AdminPatternController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($pattern);
             $this->manager->flush();
-            $this->addFlash('success', "Pattern créé avec succès !");
+            $this->addFlash('success', "Patron créé avec succès !");
             return $this->redirectToRoute('admin_pattern');
         }
 
@@ -67,7 +61,7 @@ class AdminPatternController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Pattern modifié avec succès !");
+            $this->addFlash('success', "Patron modifié avec succès !");
             return $this->redirectToRoute('admin_pattern');
         }
 
@@ -86,7 +80,7 @@ class AdminPatternController extends AbstractController
     {
         $this->manager->remove($pattern);
         $this->manager->flush();
-        $this->addFlash('success', "Pattern supprimé avec succès !");
+        $this->addFlash('success', "Patron supprimé avec succès !");
         return $this->redirectToRoute('admin_pattern');
     }
 }

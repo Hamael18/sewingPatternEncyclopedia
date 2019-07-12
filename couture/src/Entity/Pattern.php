@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Pattern
      * @ORM\JoinColumn(nullable=false)
      */
     private $brand;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Language", inversedBy="patterns")
+     */
+    private $languages;
+
+    public function __construct()
+    {
+        $this->languages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -108,6 +120,37 @@ class Pattern
     public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function canBeDeleted()
+    {
+        return true; //A voir la condition pour qu'un patron ne soit pas supprimé
+    }
+
+    /**
+     * @return Collection|Language[]
+     */
+    public function getLanguages(): Collection
+    {
+        return $this->languages;
+    }
+
+    public function addLanguage(Language $language): self
+    {
+        if (!$this->languages->contains($language)) {
+            $this->languages[] = $language;
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(Language $language): self
+    {
+        if ($this->languages->contains($language)) {
+            $this->languages->removeElement($language);
+        }
 
         return $this;
     }

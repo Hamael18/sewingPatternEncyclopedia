@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminBrandController extends AbstractController
+class AdminBrandController extends BaseController
 {
     /**
      * @Route("admin/brand", name="admin_brand")
@@ -27,20 +27,55 @@ class AdminBrandController extends AbstractController
     /**
      * @Route("admin/brand/new", name="admin_brand_new")
      */
-    public function createBrand(Request $request, ObjectManager $manager)
+    public function createBrand(Request $request)
     {
         $brand = new Brand();
         $form = $this->createForm(NewBrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($brand);
-            $manager->flush();
+            $this->manager->persist($brand);
+            $this->manager->flush();
             $this->addFlash('success', "Marque créé avec succès !");
             return $this->redirectToRoute('admin_brand');
         }
         return $this->render('admin/brand/add.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/brand/edit/{id}", name="admin_brand_edit")
+     * @param Request $request
+     * @param Brand $brand
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editBrand(Request $request, Brand $brand)
+    {
+        $form = $this->createForm(NewBrandType::class, $brand);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->manager->flush();
+            $this->addFlash('success', "Marque modifiée avec succès !");
+            return $this->redirectToRoute('admin_brand');
+        }
+        return $this->render('admin/brand/add.html.twig', [
+            'form' => $form->createView(),
+            'brand' => $brand
+        ]);
+    }
+
+    /**
+     * @Route("/admin/brand/delete/{id}", name="admin_brand_delete")
+     * @param Brand $brand
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteBrand(Brand $brand)
+    {
+        $this->manager->remove($brand);
+        $this->manager->flush();
+        $this->addFlash('success', "Marque supprimée avec succès !");
+        return $this->redirectToRoute('admin_brand');
     }
 }

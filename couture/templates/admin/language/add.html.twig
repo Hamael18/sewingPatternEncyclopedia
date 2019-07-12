@@ -1,15 +1,10 @@
-{% extends 'layout.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Ajouter une langue pour les patrons de couture {% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row"><i class="fas fa-plus-circle fa-3x mr-3"></i><h1>Ajouter une langue</h1></div>
-        <div class="my-3">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg">Créer</button>
-            </div>
-            {{ form_end(form) }}
-        </div>
+        {% include 'admin/language/_form.html.twig' with {'bouton_label' : 'Ajouter'} %}
     </div>
 {% endblock %}

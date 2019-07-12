@@ -102,4 +102,13 @@ class Brand
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function canBeDeleted()
+    {
+        $can_be_deleted = ($this->getPatterns()->count() == 0);
+        return $can_be_deleted;
+    }
 }

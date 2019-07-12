@@ -14,12 +14,12 @@
     <div class="collapse {% if requete starts with '/admin/brand' %}show{% endif %}" id="brand">
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center text-primary" href="{{ path('admin_brand') }}">Marques</a>
+                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_brand') }}"><i class="fas fa-list"></i></a>
             </li>
         </ul>
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center text-primary" href="{{ path('admin_brand_new') }}">Créer</a>
+                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_brand_new') }}"><i class="fas fa-plus"></i></a>
             </li>
         </ul>
     </div>
@@ -39,7 +39,12 @@
     <div class="collapse {% if requete starts with '/admin/pattern' %}show{% endif %}" id="pattern">
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center text-primary" href="{{ path('admin_pattern') }}">Patterns</a>
+                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_pattern') }}"><i class="fas fa-list"></i></a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_pattern_new') }}"><i class="fas fa-plus"></i></a>
             </li>
         </ul>
     </div>
@@ -59,7 +64,12 @@
     <div class="collapse {% if requete starts with '/admin/language' %}show{% endif %}" id="language">
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center text-primary" href="{{ path('admin_language') }}"></a>
+                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_language') }}"><i class="fas fa-list"></i></a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_language_new') }}"><i class="fas fa-plus"></i></a>
             </li>
         </ul>
     </div>

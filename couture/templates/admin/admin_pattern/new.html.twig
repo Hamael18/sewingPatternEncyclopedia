@@ -2,15 +2,7 @@
 
 {% block title %}Nouveau pattern{% endblock %}
 
-{% block stylesheets %}
-    {{ encore_entry_link_tags('autocomplete') }}
-{% endblock %}
-
 {% block content %}
     <div class="row"><i class="fas fa-plus-circle fa-3x mr-3"></i><h1>Créer un pattern</h1></div>
     {% include 'admin/admin_pattern/_form.html.twig' with {'bouton_label': 'Créer'} %}
-{% endblock %}
-
-{% block javascripts %}
-    {{ encore_entry_script_tags('select') }}
 {% endblock %}

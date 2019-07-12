@@ -25,8 +25,8 @@
                     <td class="align-middle">{{ pattern.lien }}</td>
                     <td class="align-middle">{{ pattern.brand }}</td>
                     <td class="align-middle">
-                        <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-warning"><i class="fas fa-wrench"></i></a>
-                        {% if gallerie.canBeDeleted %}
+                        <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
+                        {% if pattern.canBeDeleted %}
                             <a href="{{ path('admin_pattern_delete', {'id': pattern.id }) }}"
                                onclick="return confirm('Supprimer ce pattern ?')"
                                class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
@@ -36,15 +36,5 @@
             {% endfor %}
             </tbody>
         </table>
-    </div>
-{% endblock %}
-
-{% block actions %}
-    <div class="card mt-4 bg-gradient-light text-black-50" id="box-actions">
-        <h3 class="card-header py-1"></h3>
-        <div class="card-body d-flex justify-content-center">
-            <a href="{{ path('admin_pattern_new') }}"
-               class="btn btn-outline-success"><i class="fas fa-plus"></i></a>
-        </div>
     </div>
 {% endblock %}
