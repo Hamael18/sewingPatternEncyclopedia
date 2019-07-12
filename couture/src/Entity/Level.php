@@ -26,6 +26,11 @@ class Level
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -36,5 +41,10 @@ class Level
         $this->name = $name;
 
         return $this;
+    }
+
+    public function canBeDeleted()
+    {
+        return true;
     }
 }
