@@ -50,6 +50,32 @@
     </div>
 </div>
 <div>
+    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#gender" role="button" aria-expanded="false" aria-controls="gender">
+        <div class="row">
+            <div class="col-3">
+                <i class="fas fa-language fa-2x"></i>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-3">
+                Genres
+            </div>
+        </div>
+    </a>
+    <div class="collapse {% if requete starts with '/admin/gender' %}show{% endif %}" id="gender">
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_gender') }}"><i class="fas fa-list"></i></a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_gender_new') }}"><i class="fas fa-plus"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div>
     <a class="btn btn-secondary w-100" data-toggle="collapse" href="#language" role="button" aria-expanded="false" aria-controls="language">
         <div class="row">
             <div class="col-3">

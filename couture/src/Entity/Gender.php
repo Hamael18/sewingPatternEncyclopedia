@@ -37,4 +37,12 @@ class Gender
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
+    public function canBeDeleted()
+    {
+        return true; //A voir la condition pour qu'un genre ne soit pas supprimé
+    }
 }

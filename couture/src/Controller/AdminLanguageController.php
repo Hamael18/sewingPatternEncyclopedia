@@ -36,7 +36,7 @@ class AdminLanguageController extends BaseController
             $this->addFlash('success', "Nouvelle langue ajouté avec succès !");
             return $this->redirectToRoute('admin_language');
         }
-        return $this->render('admin/language/add.html.twig', [
+        return $this->render('admin/language/new.html.twig', [
             'form' => $form->createView()
         ]);
     }

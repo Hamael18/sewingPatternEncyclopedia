@@ -39,7 +39,7 @@ class AdminBrandController extends BaseController
             $this->addFlash('success', "Marque créé avec succès !");
             return $this->redirectToRoute('admin_brand');
         }
-        return $this->render('admin/brand/add.html.twig', [
+        return $this->render('admin/brand/new.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -60,7 +60,7 @@ class AdminBrandController extends BaseController
             $this->addFlash('success', "Marque modifiée avec succès !");
             return $this->redirectToRoute('admin_brand');
         }
-        return $this->render('admin/brand/add.html.twig', [
+        return $this->render('admin/brand/edit.html.twig', [
             'form' => $form->createView(),
             'brand' => $brand
         ]);
