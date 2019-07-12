@@ -20,7 +20,7 @@ class AdminPatternController extends BaseController
      */
     public function index(PatternRepository $patternRepository)
     {
-        return $this->render('admin/admin_pattern/list.html.twig', [
+        return $this->render('admin/pattern/list.html.twig', [
             'patterns' => $patternRepository->findAll()
         ]);
     }
@@ -43,7 +43,7 @@ class AdminPatternController extends BaseController
             return $this->redirectToRoute('admin_pattern');
         }
 
-        return $this->render('admin/admin_pattern/new.html.twig', [
+        return $this->render('admin/pattern/new.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -65,7 +65,7 @@ class AdminPatternController extends BaseController
             return $this->redirectToRoute('admin_pattern');
         }
 
-        return $this->render('admin/admin_pattern/edit.html.twig', [
+        return $this->render('admin/pattern/edit.html.twig', [
             'form' => $form->createView(),
             'pattern' => $pattern
         ]);
