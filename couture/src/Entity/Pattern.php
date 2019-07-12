@@ -49,9 +49,15 @@ class Pattern
      */
     private $languages;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Gender", inversedBy="patterns")
+     */
+    private $genres;
+
     public function __construct()
     {
         $this->languages = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,6 +156,32 @@ class Pattern
     {
         if ($this->languages->contains($language)) {
             $this->languages->removeElement($language);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gender[]
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Gender $genre): self
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Gender $genre): self
+    {
+        if ($this->genres->contains($genre)) {
+            $this->genres->removeElement($genre);
         }
 
         return $this;
