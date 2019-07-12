@@ -5,13 +5,12 @@ Encore
     .setPublicPath('/build')
 
     .addEntry('app', './assets/js/app.js')
-    .addEntry('jquery', './assets/js/jquery.min.js')
     .addEntry('popper', './assets/js/popper.min.js')
     .addEntry('bootstrap', './assets/js/bootstrap.min.js')
-    .addEntry('select', './assets/js/select.min.js')
+    .addEntry('bootstrap-select-js', './assets/js/bootstrap-select.js')
 
     .addStyleEntry('materia', './assets/css/materia.min.css')
-    .addStyleEntry('autocomplete', './assets/css/autocomplete.min.css')
+    .addStyleEntry('bootstrap-select-css', './assets/css/bootstrap-select.css')
 
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()

@@ -37,17 +37,34 @@ class PatternType extends AbstractType
             ])
             ->add('brand', EntityType::class, [
                 'label' => false,
-                'class' => Brand::class
+                'class' => Brand::class,
+                'attr' => [
+                    'class' => 'selectpicker',
+                    'data-live-search' => true,
+                    'data-none-selected-text' => 'Choisir une marque'
+                ]
             ])
             ->add('languages', EntityType::class, [
                 'label' => false,
                 'class' => Language::class,
-                'multiple' => true
+                'multiple' => true,
+                'attr' => [
+                    'class' => 'selectpicker',
+                    'data-live-search' => true,
+                    'multiple' => true,
+                    'data-none-selected-text' => 'Choisir une ou plusieurs langue(s)'
+                ]
             ])
             ->add('genres', EntityType::class, [
                 'label' => false,
                 'class' => Gender::class,
-                'multiple' => true
+                'multiple' => true,
+                'attr' => [
+                    'class' => 'selectpicker',
+                    'data-live-search' => true,
+                    'multiple' => true,
+                    'data-none-selected-text' => 'Choisir un ou plusieurs genre(s)'
+                ]
             ])
         ;
     }
