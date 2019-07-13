@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         {{ encore_entry_link_tags('materia') }}
         {{ encore_entry_link_tags('app') }}
-{#        {{ encore_entry_link_tags('autocomplete') }}#}
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -14,10 +13,8 @@
         {% block body %}{% endblock %}
 
         {{ encore_entry_script_tags('app') }}
-        {{ encore_entry_script_tags('jquery') }}
         {{ encore_entry_script_tags('popper') }}
         {{ encore_entry_script_tags('bootstrap') }}
-{#        {{ encore_entry_script_tags('select') }}#}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

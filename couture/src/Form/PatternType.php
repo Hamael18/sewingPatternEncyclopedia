@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Brand;
+use App\Entity\Gender;
+use App\Entity\Language;
 use App\Entity\Pattern;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -39,7 +41,29 @@ class PatternType extends AbstractType
                 'attr' => [
                     'class' => 'selectpicker',
                     'data-live-search' => true,
-                    'data-none-selected-text' => "Choisir une marque"
+                    'data-none-selected-text' => 'Choisir une marque'
+                ]
+            ])
+            ->add('languages', EntityType::class, [
+                'label' => false,
+                'class' => Language::class,
+                'multiple' => true,
+                'attr' => [
+                    'class' => 'selectpicker',
+                    'data-live-search' => true,
+                    'multiple' => true,
+                    'data-none-selected-text' => 'Choisir une ou plusieurs langue(s)'
+                ]
+            ])
+            ->add('genres', EntityType::class, [
+                'label' => false,
+                'class' => Gender::class,
+                'multiple' => true,
+                'attr' => [
+                    'class' => 'selectpicker',
+                    'data-live-search' => true,
+                    'multiple' => true,
+                    'data-none-selected-text' => 'Choisir un ou plusieurs genre(s)'
                 ]
             ])
         ;
