@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Length;
 use App\Form\LengthType;
+use App\Repository\LengthRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,10 +13,10 @@ class AdminLengthController extends BaseController
     /**
      * @Route("/admin/length", name="admin_length")
      */
-    public function index()
+    public function index(LengthRepository $repository)
     {
         return $this->render('admin/length/index.html.twig', [
-            'controller_name' => 'AdminLengthController',
+            'lengths' => $repository->findAll()
         ]);
     }
 
