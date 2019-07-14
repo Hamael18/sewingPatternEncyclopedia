@@ -85,4 +85,13 @@ class Collar
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function canBeDeleted()
+    {
+        $can_be_deleted = ($this->getVersions()->count() == 0);
+        return $can_be_deleted;
+    }
 }

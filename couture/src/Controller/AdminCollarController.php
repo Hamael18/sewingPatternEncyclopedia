@@ -62,7 +62,7 @@ class AdminCollarController extends BaseController
 
         return $this->render('admin/collar/edit.html.twig', [
             'form' => $form->createView(),
-            'style' => $collar
+            'collar' => $collar
         ]);
     }
 

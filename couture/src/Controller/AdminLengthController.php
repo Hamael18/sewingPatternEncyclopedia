@@ -62,7 +62,7 @@ class AdminLengthController extends BaseController
 
         return $this->render('admin/length/edit.html.twig', [
             'form' => $form->createView(),
-            'style' => $length
+            'length' => $length
         ]);
     }
 

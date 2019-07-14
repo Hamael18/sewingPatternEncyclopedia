@@ -20,6 +20,11 @@ class AdminHandleController extends BaseController
         ]);
     }
 
+    /**
+     * @Route("/admin/handle/new", name="admin_handle_new")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function newCollar(Request $request)
     {
         $handle = new Handle();
@@ -38,6 +43,12 @@ class AdminHandleController extends BaseController
         ]);
     }
 
+    /**
+     * @Route("/admin/handle/edit/{id}", name="admin_handle_edit")
+     * @param Request $request
+     * @param Handle $handle
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editStyle(Request $request, Handle $handle)
     {
         $form = $this->createForm(HandleType::class, $handle);
@@ -51,10 +62,15 @@ class AdminHandleController extends BaseController
 
         return $this->render('admin/handle/edit.html.twig', [
             'form' => $form->createView(),
-            'style' => $handle
+            'handle' => $handle
         ]);
     }
 
+    /**
+     * @Route("/admin/handle/delete/{id}", name="admin_handle_delete")
+     * @param Handle $handle
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteStyle(Handle $handle)
     {
         $this->manager->remove($handle);
