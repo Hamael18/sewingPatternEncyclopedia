@@ -8,6 +8,7 @@ Encore
     .addEntry('popper', './assets/js/popper.min.js')
     .addEntry('bootstrap', './assets/js/bootstrap.min.js')
     .addEntry('bootstrap-select-js', './assets/js/bootstrap-select.js')
+    .addEntry('upload', './assets/js/upload.js')
 
     .addStyleEntry('materia', './assets/css/materia.min.css')
     .addStyleEntry('bootstrap-select-css', './assets/css/bootstrap-select.css')
