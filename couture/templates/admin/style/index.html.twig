@@ -20,7 +20,7 @@
                         <a href="{{ path('admin_style_edit', {'id': style.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
                         {% if style.canBeDeleted %}
                             <a href="{{ path('admin_style_delete', {'id': style.id }) }}"
-                               onclick="return confirm('Supprimer cette langue ?')"
+                               onclick="return confirm('Supprimer ce style ?')"
                                class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </td>
