@@ -16,13 +16,13 @@
             <tbody>
             {% for fabric in fabrics %}
                 <tr>
-                    <td class="align-middle font-weight-bold h5">{{ name }}</td>
-                    <td class="align-middle">{{ extensible }}</td>
+                    <td class="align-middle font-weight-bold h5">{{ fabric.name }}</td>
+                    <td class="align-middle">{{ fabric.extensible }}</td>
                     <td class="align-middle">
                         <a href="{{ path('admin_fabric_edit', {'id': fabric.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
                         {% if fabric.canBeDeleted %}
                             <a href="{{ path('admin_fabric_delete', {'id': fabric.id }) }}"
-                               onclick="return confirm('Supprimer cette langue ?')"
+                               onclick="return confirm('Supprimer ce tissu ?')"
                                class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </td>

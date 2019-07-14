@@ -23,7 +23,10 @@ class FabricType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'data-toggle' => 'toggle',
-                    'data-onstyle' => 'success'
+                    'data-onstyle' => 'success',
+                    'data-on' => 'Oui',
+                    'data-off' => 'Non',
+                    'data-width' => "100"
                 ]
             ])
         ;
