@@ -42,4 +42,9 @@ class Style
 
         return $this;
     }
+
+    public function canBeDeleted()
+    {
+        return true;
+    }
 }
