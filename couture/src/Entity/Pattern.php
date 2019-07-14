@@ -54,10 +54,16 @@ class Pattern
      */
     private $genres;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="pattern")
+     */
+    private $versions;
+
     public function __construct()
     {
         $this->languages = new ArrayCollection();
         $this->genres = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,6 +188,37 @@ class Pattern
     {
         if ($this->genres->contains($genre)) {
             $this->genres->removeElement($genre);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Version[]
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setPattern($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->contains($version)) {
+            $this->versions->removeElement($version);
+            // set the owning side to null (unless already changed)
+            if ($version->getPattern() === $this) {
+                $version->setPattern(null);
+            }
         }
 
         return $this;
