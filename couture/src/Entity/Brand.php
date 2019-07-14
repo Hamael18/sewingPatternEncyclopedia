@@ -49,12 +49,8 @@ class Brand
      * @Assert\File(
      *     maxSize="1M",
      *     maxSizeMessage="La taille du fichier doit être inférieure à 1Mo !",
-     *     mimeTypes={"image/png"},
-     *     mimeTypesMessage="Le fichier doit être un .png !"
-     * )
-     * @Assert\Image(
-     *     maxRatio="1",
-     *     maxRatioMessage="L'image doit être carrée !"
+     *     mimeTypes={"image/png", "image/jpeg", "image/jpg"},
+     *     mimeTypesMessage="Le fichier doit être un .png ou un .jpg/jpeg !"
      * )
      */
     private $imageFile;
