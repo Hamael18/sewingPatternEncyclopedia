@@ -1,25 +1,27 @@
 {% extends 'admin/layout.html.twig' %}
 
-{% block title %}Liste des styles{% endblock %}
+{% block title %}Liste des tissus{% endblock %}
 
 {% block content %}
-    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des styles</h1></div>
+    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des tissus</h1></div>
     <div class="my-3">
         <table class="table table-hover table-striped">
             <thead class="thead-dark h5">
             <tr>
                 <th class="align-middle">Nom</th>
+                <th class="align-middle">Extensible</th>
                 <th class="col-2 align-middle"></th>
             </tr>
             </thead>
             <tbody>
-            {% for style in styles %}
+            {% for fabric in fabrics %}
                 <tr>
-                    <td class="align-middle font-weight-bold h5">{{ style }}</td>
+                    <td class="align-middle font-weight-bold h5">{{ name }}</td>
+                    <td class="align-middle">{{ extensible }}</td>
                     <td class="align-middle">
-                        <a href="{{ path('admin_style_edit', {'id': style.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
-                        {% if style.canBeDeleted %}
-                            <a href="{{ path('admin_style_delete', {'id': style.id }) }}"
+                        <a href="{{ path('admin_fabric_edit', {'id': fabric.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
+                        {% if fabric.canBeDeleted %}
+                            <a href="{{ path('admin_fabric_delete', {'id': fabric.id }) }}"
                                onclick="return confirm('Supprimer cette langue ?')"
                                class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                         {% endif %}
