@@ -9,6 +9,7 @@
             <thead class="thead-dark h5">
             <tr>
                 <th class="align-middle">Nom</th>
+                <th class="align-middle">Patron</th>
                 <th class="col-2 align-middle"></th>
             </tr>
             </thead>
@@ -16,13 +17,14 @@
             {% for version in versions %}
                 <tr>
                     <td class="align-middle font-weight-bold h5">{{ version.name }}</td>
+                    <td class="align-middle">{{ version.pattern }}</td>
                     <td class="align-middle">
-{#                        <a href="{{ path('admin_style_edit', {'id': style.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>#}
-{#                        {% if style.canBeDeleted %}#}
-{#                            <a href="{{ path('admin_style_delete', {'id': style.id }) }}"#}
-{#                               onclick="return confirm('Supprimer ce style ?')"#}
-{#                               class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>#}
-{#                        {% endif %}#}
+                        <a href="{{ path('admin_style_edit', {'id': style.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
+                        {% if style.canBeDeleted %}
+                            <a href="{{ path('admin_style_delete', {'id': style.id }) }}"
+                               onclick="return confirm('Supprimer ce style ?')"
+                               class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

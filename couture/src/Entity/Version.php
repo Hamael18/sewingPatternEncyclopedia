@@ -101,6 +101,11 @@ class Version
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -242,5 +247,14 @@ class Version
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeDeleted()
+    {
+        $canBeDeleted = ($this->getPattern() != null);
+        return $canBeDeleted;
     }
 }

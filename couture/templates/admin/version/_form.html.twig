@@ -1,0 +1,20 @@
+<div class="my-3">
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.pattern) }}
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form.level) }}
+    <div class="row">
+        <div class="col-6">Taille min : {{ form_row(form.sizeMin) }}</div>
+        <div class="col-6">Taille max : {{ form_row(form.sizeMax) }}</div>
+    </div>
+    {{ form_row(form.collar) }}
+    {{ form_row(form.length) }}
+    {{ form_row(form.handle) }}
+    {{ form_row(form.fabric) }}
+    {{ form_row(form.style) }}
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-lg">{{ bouton_label }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
