@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class NewBrandType extends AbstractType
 {
@@ -21,6 +22,11 @@ class NewBrandType extends AbstractType
             ->add("url", UrlType::class, [
                 'label' => false,
                 'attr' => ['placeholder' => 'Party-link de la marque']
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => ['placeholder' => 'Sélectionnez une image']
             ])
         ;
     }
