@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VersionRepository")
+ * @Vich\Uploadable()
  */
 class Version
 {
@@ -67,6 +71,34 @@ class Version
      * @ORM\ManyToOne(targetEntity="App\Entity\Style", inversedBy="versions")
      */
     private $style;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="version_image", fileNameProperty="image")
+     * @var File
+     * @Assert\File(
+     *     maxSize="1M",
+     *     maxSizeMessage="La taille du fichier doit être inférieure à 1Mo !",
+     *     mimeTypes={"image/png"},
+     *     mimeTypesMessage="Le fichier doit être un .png !"
+     * )
+     * @Assert\Image(
+     *     maxRatio="1",
+     *     maxRatioMessage="L'image doit être carrée !"
+     * )
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -191,5 +223,28 @@ class Version
         $this->style = $style;
 
         return $this;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }
