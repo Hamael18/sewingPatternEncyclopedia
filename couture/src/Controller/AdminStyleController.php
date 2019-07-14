@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminStyleController extends BaseController
 {
     /**
-     * @Route("/admin/style", name="admin_style")
+     * @Route("/admin/version/style", name="admin_style")
      */
     public function index(StyleRepository $repository)
     {
@@ -21,7 +21,7 @@ class AdminStyleController extends BaseController
     }
 
     /**
-     * @Route("/admin/style/new", name="admin_style_new")
+     * @Route("/admin/version/style/new", name="admin_style_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -44,7 +44,7 @@ class AdminStyleController extends BaseController
     }
 
     /**
-     * @Route("/admin/style/edit/{id}", name="admin_style_edit")
+     * @Route("/admin/version/style/edit/{id}", name="admin_style_edit")
      * @param Request $request
      * @param Style $style
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -67,7 +67,7 @@ class AdminStyleController extends BaseController
     }
 
     /**
-     * @Route("/admin/style/delete/{id}", name="admin_style_delete")
+     * @Route("/admin/version/style/delete/{id}", name="admin_style_delete")
      * @param Style $style
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

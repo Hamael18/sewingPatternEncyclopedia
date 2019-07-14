@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminFabricController extends BaseController
 {
     /**
-     * @Route("/admin/fabric", name="admin_fabric")
+     * @Route("/admin/version/fabric", name="admin_fabric")
      */
     public function index(FabricRepository $repository)
     {
@@ -21,7 +21,7 @@ class AdminFabricController extends BaseController
     }
 
     /**
-     * @Route("/admin/fabric/new", name="admin_fabric_new")
+     * @Route("/admin/version/fabric/new", name="admin_fabric_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -44,7 +44,7 @@ class AdminFabricController extends BaseController
     }
 
     /**
-     * @Route("/admin/fabric/edit/{id}", name="admin_fabric_edit")
+     * @Route("/admin/version/fabric/edit/{id}", name="admin_fabric_edit")
      * @param Request $request
      * @param Fabric $fabric
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -67,7 +67,7 @@ class AdminFabricController extends BaseController
     }
 
     /**
-     * @Route("/admin/fabric/delete/{id}", name="admin_fabric_delete")
+     * @Route("/admin/version/fabric/delete/{id}", name="admin_fabric_delete")
      * @param Fabric $fabric
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

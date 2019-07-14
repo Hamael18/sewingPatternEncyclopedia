@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class Fabric
      * @ORM\Column(type="boolean")
      */
     private $extensible;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="fabric")
+     */
+    private $versions;
+
+    public function __construct()
+    {
+        $this->versions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -63,5 +75,36 @@ class Fabric
     public function canBeDeleted()
     {
         return true;
+    }
+
+    /**
+     * @return Collection|Version[]
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setFabric($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->contains($version)) {
+            $this->versions->removeElement($version);
+            // set the owning side to null (unless already changed)
+            if ($version->getFabric() === $this) {
+                $version->setFabric(null);
+            }
+        }
+
+        return $this;
     }
 }

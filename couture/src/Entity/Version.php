@@ -58,6 +58,16 @@ class Version
      */
     private $level;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fabric", inversedBy="versions")
+     */
+    private $fabric;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Style", inversedBy="versions")
+     */
+    private $style;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,6 +165,30 @@ class Version
     public function setLevel(?Level $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getFabric(): ?Fabric
+    {
+        return $this->fabric;
+    }
+
+    public function setFabric(?Fabric $fabric): self
+    {
+        $this->fabric = $fabric;
+
+        return $this;
+    }
+
+    public function getStyle(): ?Style
+    {
+        return $this->style;
+    }
+
+    public function setStyle(?Style $style): self
+    {
+        $this->style = $style;
 
         return $this;
     }

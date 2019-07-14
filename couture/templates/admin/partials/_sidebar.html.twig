@@ -32,7 +32,7 @@
             </div>
             <div class="col-1"></div>
             <div class="col-3">
-                Patterns
+                Patrons
             </div>
         </div>
     </a>
@@ -47,129 +47,69 @@
                 <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_pattern_new') }}"><i class="fas fa-plus"></i></a>
             </li>
         </ul>
-    </div>
-</div>
-<div>
-    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#gender" role="button" aria-expanded="false" aria-controls="gender">
-        <div class="row">
-            <div class="col-3">
-                <i class="fas fa-folder-open fa-2x"></i>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-                Genres
-            </div>
-        </div>
-    </a>
-    <div class="collapse {% if requete starts with '/admin/gender' %}show{% endif %}" id="gender">
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_gender') }}"><i class="fas fa-list"></i></a>
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_language') }}"><i class="fas fa-language"></i> Langues</a>
             </li>
         </ul>
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_gender_new') }}"><i class="fas fa-plus"></i></a>
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_gender') }}"><i class="fas fa-venus-mars"></i> Genres</a>
             </li>
         </ul>
     </div>
 </div>
 <div>
-    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#language" role="button" aria-expanded="false" aria-controls="language">
+    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#version" role="button" aria-expanded="false" aria-controls="version">
         <div class="row">
             <div class="col-3">
-                <i class="fas fa-language fa-2x"></i>
+                <i class="fas fa-layer-group fa-2x"></i>
             </div>
             <div class="col-1"></div>
             <div class="col-3">
-                Langues
+                Versions
             </div>
         </div>
     </a>
-    <div class="collapse {% if requete starts with '/admin/language' %}show{% endif %}" id="language">
+    <div class="collapse {% if requete starts with '/admin/version' %}show{% endif %}" id="version">
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_language') }}"><i class="fas fa-list"></i></a>
+                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_version') }}"><i class="fas fa-list"></i></a>
             </li>
         </ul>
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_language_new') }}"><i class="fas fa-plus"></i></a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div>
-    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#level" role="button" aria-expanded="false" aria-controls="level">
-        <div class="row">
-            <div class="col-3">
-                <i class="fas fa-star-half-alt fa-2x"></i>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-                Niveaux
-            </div>
-        </div>
-    </a>
-    <div class="collapse {% if requete starts with '/admin/level' %}show{% endif %}" id="level">
-        <ul class="nav flex-column bg-light">
-            <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_level') }}"><i class="fas fa-list"></i></a>
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_level') }}"><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> Difficultés</a>
             </li>
         </ul>
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_level_new') }}"><i class="fas fa-plus"></i></a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div>
-    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#style" role="button" aria-expanded="false" aria-controls="style">
-        <div class="row">
-            <div class="col-3">
-                <i class="fas fa-border-style fa-2x"></i>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-                Styles
-            </div>
-        </div>
-    </a>
-    <div class="collapse {% if requete starts with '/admin/style' %}show{% endif %}" id="style">
-        <ul class="nav flex-column bg-light">
-            <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_style') }}"><i class="fas fa-list"></i></a>
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_length') }}"><i class="fas fa-ruler-combined"></i> Longueurs</a>
             </li>
         </ul>
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_style_new') }}"><i class="fas fa-plus"></i></a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div>
-    <a class="btn btn-secondary w-100" data-toggle="collapse" href="#fabric" role="button" aria-expanded="false" aria-controls="fabric">
-        <div class="row">
-            <div class="col-3">
-                <i class="fas fa-poo fa-2x"></i>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3">
-                Tissus
-            </div>
-        </div>
-    </a>
-    <div class="collapse {% if requete starts with '/admin/fabric' %}show{% endif %}" id="fabric">
-        <ul class="nav flex-column bg-light">
-            <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-primary" href="{{ path('admin_fabric') }}"><i class="fas fa-list"></i></a>
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_size') }}"><i class="fas fa-ruler"></i> Tailles</a>
             </li>
         </ul>
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
-                <a class="nav-link text-center btn btn-outline-success" href="{{ path('admin_fabric_new') }}"><i class="fas fa-plus"></i></a>
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_handle') }}"><i class="fas fa-user-tie"></i> Manches</a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_handle') }}"><i class="fas fa-tshirt"></i> Cols</a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_fabric') }}"><i class="fas fa-toilet-paper"></i> Tissus</a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn btn-dark" href="{{ path('admin_style') }}"><i class="fas fa-remove-format"></i> Styles</a>
             </li>
         </ul>
     </div>

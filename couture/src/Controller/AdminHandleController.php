@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminHandleController extends BaseAdminController
 {
     /**
-     * @Route("/", name="admin_handle")
+     * @Route("/admin/version/handle", name="admin_handle")
      */
     public function listHandles(HandleRepository $repository)
     {
@@ -22,7 +22,7 @@ class AdminHandleController extends BaseAdminController
     }
 
     /**
-     * @Route("/new", name="admin_handle_new")
+     * @Route("/admin/version/handle/new", name="admin_handle_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -45,7 +45,7 @@ class AdminHandleController extends BaseAdminController
     }
 
     /**
-     * @Route("/edit/{id}", name="admin_handle_edit")
+     * @Route("/admin/version/handle/edit/{id}", name="admin_handle_edit")
      * @param Request $request
      * @param Handle $handle
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -68,7 +68,7 @@ class AdminHandleController extends BaseAdminController
     }
 
     /**
-     * @Route("/delete/{id}", name="admin_handle_delete")
+     * @Route("/admin/version/handle/delete/{id}", name="admin_handle_delete")
      * @param Handle $handle
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
