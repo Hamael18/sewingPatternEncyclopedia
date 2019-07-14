@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HandleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LengthRepository")
  */
-class Handle
+class Length
 {
     /**
      * @ORM\Id()
@@ -24,7 +24,7 @@ class Handle
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="handle")
+     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="length")
      */
     private $versions;
 
@@ -36,11 +36,6 @@ class Handle
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 
     public function getName(): ?string
@@ -67,7 +62,7 @@ class Handle
     {
         if (!$this->versions->contains($version)) {
             $this->versions[] = $version;
-            $version->setHandle($this);
+            $version->setLength($this);
         }
 
         return $this;
@@ -78,8 +73,8 @@ class Handle
         if ($this->versions->contains($version)) {
             $this->versions->removeElement($version);
             // set the owning side to null (unless already changed)
-            if ($version->getHandle() === $this) {
-                $version->setHandle(null);
+            if ($version->getLength() === $this) {
+                $version->setLength(null);
             }
         }
 
