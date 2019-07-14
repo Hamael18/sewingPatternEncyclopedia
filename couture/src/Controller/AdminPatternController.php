@@ -10,15 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminPatternController extends BaseController
+class AdminPatternController extends BaseAdminController
 {
-
     /**
      * @Route("/admin/pattern", name="admin_pattern")
      * @param PatternRepository $patternRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(PatternRepository $patternRepository)
+    public function listPatterns(PatternRepository $patternRepository)
     {
         return $this->render('admin/pattern/list.html.twig', [
             'patterns' => $patternRepository->findAll()

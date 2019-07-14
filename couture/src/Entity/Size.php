@@ -44,6 +44,11 @@ class Size
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->libelle;
+    }
+
     public function getLibelle(): ?string
     {
         return $this->libelle;
@@ -116,5 +121,14 @@ class Size
         }
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canBeDeleted()
+    {
+        $canBeDeleted = ($this->getVersionsSizeMax()->count() + $this->getVersionsSizeMin()->count() == 0);
+        return $canBeDeleted;
     }
 }

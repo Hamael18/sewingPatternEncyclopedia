@@ -10,19 +10,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminLanguageController extends BaseController
+class AdminLanguageController extends BaseAdminController
 {
     /**
-     * @Route("admin/language", name="admin_language")
+     * @Route("/admin/pattern/language", name="admin_language")
      */
-    public function index(LanguageRepository $repository)
+    public function listLanguages(LanguageRepository $repository)
     {
         return $this->render('admin/language/index.html.twig', [
             'languages' => $repository->findAll()
         ]);
     }
     /**
-     * @Route("admin/language/new", name="admin_language_new")
+     * @Route("/admin/pattern/language/new", name="admin_language_new")
      */
     public function newLanguage(Request $request)
     {
@@ -42,7 +42,7 @@ class AdminLanguageController extends BaseController
     }
 
     /**
-     * @Route("/admin/language/edit/{id}", name="admin_language_edit")
+     * @Route("/admin/pattern/language/edit/{id}", name="admin_language_edit")
      * @param Request $request
      * @param Language $language
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -64,7 +64,7 @@ class AdminLanguageController extends BaseController
     }
 
     /**
-     * @Route("/admin/language/delete/{id}", name="admin_language_delete")
+     * @Route("/admin/pattern/language/delete/{id}", name="admin_language_delete")
      * @param Language $language
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

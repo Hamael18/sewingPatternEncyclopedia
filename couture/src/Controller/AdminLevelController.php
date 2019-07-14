@@ -8,12 +8,12 @@ use App\Repository\LevelRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminLevelController extends BaseController
+class AdminLevelController extends BaseAdminController
 {
     /**
-     * @Route("/admin/level", name="admin_level")
+     * @Route("/admin/version/level", name="admin_level")
      */
-    public function index(LevelRepository $repository)
+    public function listLevels(LevelRepository $repository)
     {
         return $this->render('admin/level/list.html.twig', [
             'levels' => $repository->findAll()
@@ -21,7 +21,7 @@ class AdminLevelController extends BaseController
     }
 
     /**
-     * @Route("/admin/level/new", name="admin_level_new")
+     * @Route("/admin/version/level/new", name="admin_level_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -44,7 +44,7 @@ class AdminLevelController extends BaseController
     }
 
     /**
-     * @Route("/admin/level/edit/{id}", name="admin_level_edit")
+     * @Route("/admin/version/level/edit/{id}", name="admin_level_edit")
      * @param Request $request
      * @param Level $level
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -67,7 +67,7 @@ class AdminLevelController extends BaseController
     }
 
     /**
-     * @Route("/admin/level/delete/{id}", name="admin_level_delete")
+     * @Route("/admin/version/level/delete/{id}", name="admin_level_delete")
      * @param Level $level
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
