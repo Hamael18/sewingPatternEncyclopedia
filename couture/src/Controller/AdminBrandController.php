@@ -5,19 +5,16 @@ namespace App\Controller;
 use App\Entity\Brand;
 use App\Form\NewBrandType;
 use App\Repository\BrandRepository;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminBrandController extends BaseController
+
+class AdminBrandController extends BaseAdminController
 {
     /**
-     * @Route("admin/brand", name="admin_brand")
-     * @param BrandRepository $brandRepo
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/brand", name="admin_brand")
      */
-    public function index(BrandRepository $brandRepo)
+    public function listBrand(BrandRepository $brandRepo)
     {
         return $this->render('admin/brand/index.html.twig', [
             'brands' => $brandRepo->findAll(),
@@ -25,7 +22,7 @@ class AdminBrandController extends BaseController
     }
 
     /**
-     * @Route("admin/brand/new", name="admin_brand_new")
+     * @Route("/admin/brand/new", name="admin_brand_new")
      */
     public function createBrand(Request $request)
     {

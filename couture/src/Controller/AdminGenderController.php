@@ -8,14 +8,14 @@ use App\Repository\GenderRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminGenderController extends BaseController
+class AdminGenderController extends BaseAdminController
 {
     /**
+     * @Route("/admin/pattern/gender", name="admin_gender")
      * @param GenderRepository $genderRepository
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/admin/gender", name="admin_gender")
      */
-    public function index(GenderRepository $genderRepository)
+    public function listGenders(GenderRepository $genderRepository)
     {
         return $this->render('admin/gender/index.html.twig', [
             'genders' => $genderRepository->findAll(),
@@ -23,7 +23,7 @@ class AdminGenderController extends BaseController
     }
 
     /**
-     * @Route("/admin/gender/new", name="admin_gender_new")
+     * @Route("/admin/pattern/gender/new", name="admin_gender_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -45,7 +45,7 @@ class AdminGenderController extends BaseController
     }
 
     /**
-     * @Route("/admin/gender/edit/{id}", name="admin_gender_edit")
+     * @Route("/admin/pattern/gender/edit/{id}", name="admin_gender_edit")
      * @param Request $request
      * @param Gender $gender
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -67,7 +67,7 @@ class AdminGenderController extends BaseController
     }
 
     /**
-     * @Route("/admin/gender/delete/{id}", name="admin_gender_delete")
+     * @Route("/admin/pattern/gender/delete/{id}", name="admin_gender_delete")
      * @param Gender $gender
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

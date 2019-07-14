@@ -8,12 +8,12 @@ use App\Repository\LengthRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminLengthController extends BaseController
+class AdminLengthController extends BaseAdminController
 {
     /**
-     * @Route("/admin/length", name="admin_length")
+     * @Route("/admin/version/length", name="admin_length")
      */
-    public function index(LengthRepository $repository)
+    public function listLengths(LengthRepository $repository)
     {
         return $this->render('admin/length/index.html.twig', [
             'lengths' => $repository->findAll()
@@ -21,7 +21,7 @@ class AdminLengthController extends BaseController
     }
 
     /**
-     * @Route("/admin/length/new", name="admin_length_new")
+     * @Route("/admin/version/length/new", name="admin_length_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -44,7 +44,7 @@ class AdminLengthController extends BaseController
     }
 
     /**
-     * @Route("/admin/length/edit/{id}", name="admin_length_edit")
+     * @Route("/admin/version/length/edit/{id}", name="admin_length_edit")
      * @param Request $request
      * @param Length $length
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -67,7 +67,7 @@ class AdminLengthController extends BaseController
     }
 
     /**
-     * @Route("/admin/length/delete/{id}", name="admin_length_delete")
+     * @Route("/admin/version/length/delete/{id}", name="admin_length_delete")
      * @param Length $length
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

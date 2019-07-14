@@ -123,14 +123,14 @@ class Version
         return $this;
     }
 
-    public function getSize�Min(): ?Size
+    public function getSizeMin(): ?Size
     {
-        return $this->size�Min;
+        return $this->sizeMin;
     }
 
-    public function setSize�Min(?Size $size�Min): self
+    public function setSizeMin(?Size $sizeMin): self
     {
-        $this->size�Min = $size�Min;
+        $this->sizeMin = $sizeMin;
 
         return $this;
     }

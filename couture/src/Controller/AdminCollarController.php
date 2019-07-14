@@ -8,12 +8,13 @@ use App\Repository\CollarRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminCollarController extends BaseController
+
+class AdminCollarController extends BaseAdminController
 {
     /**
-     * @Route("/admin/collar", name="admin_collar")
+     * @Route("/admin/version/collar", name="admin_collar")
      */
-    public function index(CollarRepository $repository)
+    public function listCollars(CollarRepository $repository)
     {
         return $this->render('admin/collar/index.html.twig', [
             'collars' => $repository->findAll()
@@ -21,7 +22,7 @@ class AdminCollarController extends BaseController
     }
 
     /**
-     * @Route("/admin/collar/new", name="admin_collar_new")
+     * @Route("/admin/version/collar/new", name="admin_collar_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -44,7 +45,7 @@ class AdminCollarController extends BaseController
     }
 
     /**
-     * @Route("/admin/collar/edit/{id}", name="admin_collar_edit")
+     * @Route("/admin/version/collar/edit/{id}", name="admin_collar_edit")
      * @param Request $request
      * @param Collar $collar
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -67,7 +68,7 @@ class AdminCollarController extends BaseController
     }
 
     /**
-     * @Route("/admin/collar/delete/{id}", name="admin_collar_delete")
+     * @Route("/admin/version/collar/delete/{id}", name="admin_collar_delete")
      * @param Collar $collar
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
