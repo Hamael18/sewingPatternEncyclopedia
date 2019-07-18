@@ -9,6 +9,7 @@ use App\Entity\Pattern;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -65,6 +66,11 @@ class PatternType extends AbstractType
                     'multiple' => true,
                     'data-none-selected-text' => 'Choisir un ou plusieurs genre(s)'
                 ]
+            ])
+            ->add('versions', CollectionType::class,[
+                'entry_type'=> EmbedVersionType::class,
+                'allow_add'=> true,
+                'allow_delete'=> true
             ])
         ;
     }

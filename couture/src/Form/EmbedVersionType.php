@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class VersionType extends AbstractType
+class EmbedVersionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -50,7 +50,7 @@ class VersionType extends AbstractType
                 'label' => 'Taille(s)',
                 'class' => Size::class,
                 'multiple' => true,
-                'expanded' => false
+                'expanded' => true
             ])
             ->add('level', EntityType::class, [
                 'label' => 'Difficulté',
