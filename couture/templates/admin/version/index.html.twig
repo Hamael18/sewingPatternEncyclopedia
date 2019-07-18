@@ -19,7 +19,7 @@
                     <td class="align-middle font-weight-bold h5">{{ version.name }}</td>
                     <td class="align-middle">{{ version.pattern }}</td>
                     <td class="align-middle">
-                        <a href="{{ path('admin_version_edit', {'id': version.id, 'pattern': version.pattern.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
+                        <a href="{{ path('admin_version_edit', {'id': version.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
                         {% if version.canBeDeleted %}
                             <a href="{{ path('admin_version_delete', {'id': version.id }) }}"
                                onclick="return confirm('Supprimer cette version ?')"

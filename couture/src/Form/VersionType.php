@@ -13,9 +13,9 @@ use App\Entity\Style;
 use App\Entity\Version;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -23,11 +23,8 @@ class VersionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name', TextType::class, [
-                'label' => false,
-                'attr' => ['placeholder' => 'Libellé de la version']
-            ])
+        $isNew = (!$builder->getData()->getPattern());
+        if ($isNew) $builder
             ->add('pattern', EntityType::class, [
                 'label' => false,
                 'class' => Pattern::class,
@@ -36,6 +33,13 @@ class VersionType extends AbstractType
                     'data-live-search' => true,
                     'data-none-selected-text' => 'Choisir un patron de couture'
                 ]
+            ])
+        ;
+
+        $builder
+            ->add('name', TextType::class, [
+                'label' => false,
+                'attr' => ['placeholder' => 'Libellé de la version']
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => false,

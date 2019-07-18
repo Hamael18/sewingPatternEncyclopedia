@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Pattern;
+use App\Entity\Version;
 use App\Form\PatternType;
+use App\Form\VersionType;
 use App\Repository\PatternRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -86,5 +88,32 @@ class AdminPatternController extends BaseAdminController
         $this->manager->flush();
         $this->addFlash('success', "Patron supprimé avec succès !");
         return $this->redirectToRoute('admin_pattern');
+    }
+
+    /**
+     * @Route("/admin/pattern/add_version/{id}", name="admin_pattern_addVersion")
+     * @param Request $request
+     * @param Pattern $pattern
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function addVersionToPattern(Request $request, Pattern $pattern)
+    {
+        $version = new Version();
+        $form = $this->createForm(VersionType::class, $version);
+        $form->remove('pattern');
+        $version->setPattern($pattern);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->manager->persist($version);
+            $this->manager->flush();
+            $this->addFlash('success', "Version ajoutée avec succès !");
+            return $this->redirectToRoute('admin_version');
+        }
+
+        return $this->render('admin/pattern/_addVersion.html.twig', [
+            'form' => $form->createView(),
+            'pattern' => $pattern
+        ]);
     }
 }

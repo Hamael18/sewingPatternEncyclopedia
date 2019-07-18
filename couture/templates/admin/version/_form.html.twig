@@ -1,19 +1,6 @@
 <div class="my-3">
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {% if not pattern %}
-        {{ form_row(form.pattern) }}
-    {% endif %}
-    {{ form_row(form.imageFile) }}
-    {{ form_row(form.level) }}
-    {{ form_row(form.sizes) }}
-    {{ form_row(form.collar) }}
-    {{ form_row(form.length) }}
-    {{ form_row(form.handle) }}
-    {{ form_row(form.fabric) }}
-    {{ form_row(form.style) }}
+    {{ form_widget(form) }}
     <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary btn-lg">{{ bouton_label }}</button>
     </div>
-    {{ form_end(form) }}
 </div>
