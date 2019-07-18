@@ -98,6 +98,7 @@ class VersionType extends AbstractType
             ->add('sizes', EntityType::class, [
                 'label' => false,
                 'class' => Size::class,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'selectpicker test-control-search',
                     'multiple' => true,

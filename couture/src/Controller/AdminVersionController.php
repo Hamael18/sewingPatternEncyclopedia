@@ -50,13 +50,14 @@ class AdminVersionController extends BaseAdminController
     }
 
     /**
-     * @Route("/admin/version/edit/{id}", name="admin_version_edit")
+     * @Route("/admin/version/edit/{id}/{pattern}", name="admin_version_edit")
      * @param Request $request
      * @param Version $version
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editVersion(Request $request, Version $version)
+    public function editVersion(Request $request, Version $version, PatternRepository $repo, $pattern = null)
     {
+        $patron = $pattern == null ? null : $repo->findOneBy(['id' => $pattern]);
         $form = $this->createForm(VersionType::class, $version);
         $form->handleRequest($request);
 
@@ -68,7 +69,8 @@ class AdminVersionController extends BaseAdminController
 
         return $this->render('admin/version/edit.html.twig', [
             'form' => $form->createView(),
-            'version' => $version
+            'version' => $version,
+            'pattern' => $patron
         ]);
     }
 
