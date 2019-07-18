@@ -1,0 +1,18 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Ajouter une version {% endblock %}
+
+{% block content %}
+
+    <div class="row"><i class="fas fa-plus-circle fa-3x mr-3"></i><h1>Ajouter une version</h1></div>
+    <div class="my-2"><small>{{ pattern }}</small></div>
+    <div class="my-3">
+        {{ form_start(form) }}
+        {{ form_row(form.version) }}
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-primary btn-lg">Ajouter</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

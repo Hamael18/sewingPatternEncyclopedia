@@ -13,7 +13,6 @@
                 </th>
                 <th class="align-middle">Nom</th>
                 <th class="align-middle">Version(s) - min</th>
-                <th class="align-middle">Version(s) - max</th>
                 <th class="col-2 align-middle"></th>
             </tr>
             </thead>
@@ -22,8 +21,7 @@
                 <tr>
                     <td class="align-middle"></td>
                     <td class="align-middle font-weight-bold h5">{{ size }}</td>
-                    <td class="align-middle">{{ size.versionsSizeMin | length }}</td>
-                    <td class="align-middle">{{ size.versionsSizeMax | length }}</td>
+                    <td class="align-middle">{{ size.versions | length }}</td>
                     <td class="align-middle">
                         <a href="{{ path('admin_size_edit', {'id': size.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
                         {% if size.canBeDeleted %}

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Version;
+use App\Form\EmbedVersionType;
 use App\Form\VersionType;
+use App\Repository\PatternRepository;
 use App\Repository\VersionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,12 +25,13 @@ class AdminVersionController extends BaseAdminController
     }
 
     /**
-     * @Route("/admin/version/new", name="admin_version_new")
+     * @Route("/admin/version/new/{pattern}", name="admin_version_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newVersion(Request $request)
+    public function newVersion(Request $request, PatternRepository $repo, $pattern = null)
     {
+        $patron = $pattern == null ? null : $repo->findOneBy(['id' => $pattern]);
         $version = new Version();
         $form = $this->createForm(VersionType::class, $version);
         $form->handleRequest($request);
@@ -41,7 +44,8 @@ class AdminVersionController extends BaseAdminController
         }
 
         return $this->render('admin/version/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pattern' => $patron
         ]);
     }
 

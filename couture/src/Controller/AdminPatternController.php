@@ -36,6 +36,11 @@ class AdminPatternController extends BaseAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($pattern->getVersions() as $version) {
+                $version->setPattern($pattern);
+                $pattern->addVersion($version);
+                $this->manager->persist($version);
+            }
             $this->manager->persist($pattern);
             $this->manager->flush();
             $this->addFlash('success', "Patron créé avec succès !");
