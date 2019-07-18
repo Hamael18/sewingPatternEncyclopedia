@@ -66,7 +66,8 @@ class AdminVersionController extends BaseAdminController
 
         return $this->render('admin/version/edit.html.twig', [
             'form' => $form->createView(),
-            'version' => $version
+            'version' => $version,
+            'pattern' => $version->getPattern()
         ]);
     }
 
