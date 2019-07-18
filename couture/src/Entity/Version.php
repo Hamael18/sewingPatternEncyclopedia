@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -47,16 +49,6 @@ class Version
     private $handle;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Size", inversedBy="versions_size_min")
-     */
-    private $sizeMin;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Size", inversedBy="versions_size_max")
-     */
-    private $sizeMax;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="versions")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -95,6 +87,16 @@ class Version
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Size", inversedBy="versions")
+     */
+    private $sizes;
+
+    public function __construct()
+    {
+        $this->sizes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -166,30 +168,6 @@ class Version
         return $this;
     }
 
-    public function getSizeMin(): ?Size
-    {
-        return $this->sizeMin;
-    }
-
-    public function setSizeMin(?Size $sizeMin): self
-    {
-        $this->sizeMin = $sizeMin;
-
-        return $this;
-    }
-
-    public function getSizeMax(): ?Size
-    {
-        return $this->sizeMax;
-    }
-
-    public function setSizeMax(?Size $sizeMax): self
-    {
-        $this->sizeMax = $sizeMax;
-
-        return $this;
-    }
-
     public function getLevel(): ?Level
     {
         return $this->level;
@@ -256,5 +234,31 @@ class Version
     {
         $canBeDeleted = ($this->getPattern() != null);
         return $canBeDeleted;
+    }
+
+    /**
+     * @return Collection|Size[]
+     */
+    public function getSizes(): Collection
+    {
+        return $this->sizes;
+    }
+
+    public function addSize(Size $size): self
+    {
+        if (!$this->sizes->contains($size)) {
+            $this->sizes[] = $size;
+        }
+
+        return $this;
+    }
+
+    public function removeSize(Size $size): self
+    {
+        if ($this->sizes->contains($size)) {
+            $this->sizes->removeElement($size);
+        }
+
+        return $this;
     }
 }

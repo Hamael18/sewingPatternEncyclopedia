@@ -24,19 +24,13 @@ class Size
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="sizeMin")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Version", mappedBy="sizes")
      */
-    private $versions_size_min;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="sizeMax")
-     */
-    private $versions_size_max;
+    private $versions;
 
     public function __construct()
     {
-        $this->versions_size_min = new ArrayCollection();
-        $this->versions_size_max = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,73 +56,39 @@ class Size
     }
 
     /**
-     * @return Collection|Version[]
-     */
-    public function getVersionsSizeMin(): Collection
-    {
-        return $this->versions_size_min;
-    }
-
-    public function addVersionsSizeMin(Version $versionsSizeMin): self
-    {
-        if (!$this->versions_size_min->contains($versionsSizeMin)) {
-            $this->versions_size_min[] = $versionsSizeMin;
-            $versionsSizeMin->setSize�Min($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVersionsSizeMin(Version $versionsSizeMin): self
-    {
-        if ($this->versions_size_min->contains($versionsSizeMin)) {
-            $this->versions_size_min->removeElement($versionsSizeMin);
-            // set the owning side to null (unless already changed)
-            if ($versionsSizeMin->getSize�Min() === $this) {
-                $versionsSizeMin->setSize�Min(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Version[]
-     */
-    public function getVersionsSizeMax(): Collection
-    {
-        return $this->versions_size_max;
-    }
-
-    public function addVersionsSizeMax(Version $versionsSizeMax): self
-    {
-        if (!$this->versions_size_max->contains($versionsSizeMax)) {
-            $this->versions_size_max[] = $versionsSizeMax;
-            $versionsSizeMax->setSizeMax($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVersionsSizeMax(Version $versionsSizeMax): self
-    {
-        if ($this->versions_size_max->contains($versionsSizeMax)) {
-            $this->versions_size_max->removeElement($versionsSizeMax);
-            // set the owning side to null (unless already changed)
-            if ($versionsSizeMax->getSizeMax() === $this) {
-                $versionsSizeMax->setSizeMax(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return bool
      */
     public function canBeDeleted()
     {
-        $canBeDeleted = ($this->getVersionsSizeMax()->count() + $this->getVersionsSizeMin()->count() == 0);
+        $canBeDeleted = ($this->getVersions()->count() == 0);
         return $canBeDeleted;
+    }
+
+    /**
+     * @return Collection|Version[]
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->addSize($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->contains($version)) {
+            $this->versions->removeElement($version);
+            $version->removeSize($this);
+        }
+
+        return $this;
     }
 }
