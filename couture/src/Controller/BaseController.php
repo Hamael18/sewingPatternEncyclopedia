@@ -14,4 +14,13 @@ class BaseController extends AbstractController
     {
         $this->manager = $manager;
     }
+
+    /**
+     * @Route("accueil", name="accueil")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function accueil()
+    {
+        return $this->render('index.html.twig');
+    }
 }
