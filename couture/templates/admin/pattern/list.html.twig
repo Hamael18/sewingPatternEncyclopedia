@@ -13,7 +13,7 @@
                 <th class="align-middle">Description</th>
                 <th class="align-middle">Lien</th>
                 <th class="align-middle">Marque</th>
-                <th class="col-2 align-middle"></th>
+                <th class="col-3 align-middle"></th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +25,8 @@
                     <td class="align-middle">{{ pattern.lien }}</td>
                     <td class="align-middle">{{ pattern.brand }}</td>
                     <td class="align-middle">
+                        <a href="{{ path('admin_pattern_addVersion', {'id': pattern.id}) }}" class="btn btn-outline-success" title="Ajouter une version à ce patron">
+                            <i class="fas fa-plus"></i></a>
                         <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
                         {% if pattern.canBeDeleted %}
                             <a href="{{ path('admin_pattern_delete', {'id': pattern.id }) }}"
