@@ -38,6 +38,11 @@ class User implements UserInterface
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -77,6 +82,34 @@ class User implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function addRole($role)
+    {
+        if (in_array($role, $this->roles) == true) {
+            return false;
+        } else {
+            // Sauvegarde des rôles actuels dans la variable $roles
+            $roles = $this->roles;
+            // On vide le tableau actuel des roles en passant par setRoles avec un tableau vide
+            $this->setRoles([]);
+            // On ajoute ROLE_MARQUE dans le tableau des roles existants
+            $roles[] = $role;
+            // On repasse par setRoles en lui donnant le tableau des roles actuels + ROLE_MARQUE
+            return $this->setRoles($roles);
+        }
+    }
+
+    public function removeRole($role)
+    {
+        $roles = $this->getRoles();
+        $keyRole = array_search($role,$roles);
+        if ($keyRole !== false) {
+            unset($roles[$keyRole]);
+            return $this->setRoles($roles); // la fin !
+        } else {
+            return false;
+        }
     }
 
     /**
