@@ -52,7 +52,6 @@ class SecurityController extends BaseController
         if($form->isSubmitted() && $form->isValid()){
             $passwordHash = $encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($passwordHash);
-            $user->setRoles(['ROLE_ADMIN']);
             $this->manager->persist($user);
             $this->manager->flush();
             $this->addFlash('success', "Marque créé avec succès !");
