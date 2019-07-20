@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Brand;
+use App\Form\BrandOwnerType;
 use App\Form\NewBrandType;
 use App\Repository\BrandRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,5 +75,24 @@ class AdminBrandController extends BaseAdminController
         $this->manager->flush();
         $this->addFlash('success', "Marque supprimée avec succès !");
         return $this->redirectToRoute('admin_brand');
+    }
+
+    /**
+     * @Route("admin/brand/{id}/add_owner", name="admin_brand_addOwner")
+     */
+    public function addOwner(Request $request, Brand $brand)
+    {
+        $form = $this->createForm(BrandOwnerType::class, $brand);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->manager->flush();
+            $this->addFlash('success', "L'utilisateur a été identifié comme propriétaire de la marque");
+            return $this->redirectToRoute('admin_brand');
+        }
+        return $this->render('admin/brand/addOwner.html.twig', [
+            'form' => $form->createView(),
+            'brand' => $brand
+        ]);
     }
 }
