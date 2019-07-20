@@ -96,4 +96,16 @@ class AdminUserController extends BaseAdminController
             'user' => $user
         ]);
     }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/show/user/{id}", name="admin_user_show")
+     */
+    public function show(User $user)
+    {
+        return $this->render('admin/user/show.html.twig', [
+           'user' => $user
+        ]);
+    }
 }
