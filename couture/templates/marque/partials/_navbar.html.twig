@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('admin_dashboard') }}">
+    <a class="navbar-brand" href="{{ path('marque_dashboard') }}">
         <i class="fas fa-shield-alt text-success fa-2x"></i>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
                     <a href="#"><i class="fas fa-sign-in-alt fa-2x"></i></a>
                 {% endif %}
             </div>
-            <div class="ml-5 text-white h2">Admin Dashboard</div>
+            <div class="ml-5 text-white h2">Dashboard <small> - connecté en tant que {{ app.user }}</small></div>
         </div>
     </div>
 </nav>

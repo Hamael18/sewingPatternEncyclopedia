@@ -18,8 +18,17 @@ class BaseAdminController extends AbstractController
     /**
      * @Route("/admin", name="admin_dashboard")
      */
-    public function index()
+    public function adminIndex()
     {
         return $this->render('admin/dashboard/dashboard.html.twig');
+    }
+
+    /**
+     * @Route("/marque", name="marque_dashboard")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function marqueIndex()
+    {
+        return $this->render('marque/dashboard/dashboard.html.twig');
     }
 }
