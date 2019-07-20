@@ -9,6 +9,7 @@
             <thead class="thead-dark h5">
             <tr>
                 <th class="align-middle">Nom</th>
+                <th class="align-middle">Propriétaire</th>
                 <th class="align-middle">Lien</th>
                 <th class="align-middle">Patrons de couture</th>
                 <th class="col-2 align-middle"></th>
@@ -18,9 +19,11 @@
             {% for brand in brands %}
                 <tr>
                     <td class="align-middle font-weight-bold h5">{{ brand.name }}</td>
+                    <td class="align-middle">{{ brand.owner }}</td>
                     <td class="align-middle">{{ brand.url }}</td>
                     <td class="align-middle">{{ brand.patterns | length }}</td>
                     <td class="align-middle">
+                        <a href="{{ path('admin_brand_addOwner', {'id': brand.id}) }}" class="btn btn-secondary"><i class="fas fa-user-tie"></i></a>
                         <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
                         {% if brand.canBeDeleted %}
                             <a href="{{ path('admin_brand_delete', {'id': brand.id }) }}"

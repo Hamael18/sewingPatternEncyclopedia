@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Brand;
 use App\Entity\User;
+use App\Form\AddBrandsToUserType;
 use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminUserController extends BaseAdminController
@@ -34,7 +37,7 @@ class AdminUserController extends BaseAdminController
     }
 
     /**
-     * @Route("/admin/user/{id}/add_role_marque/{role}", name="admin_user_addRole")
+     * @Route("/admin/user/{id}/add_role/{role}", name="admin_user_addRole")
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -51,19 +54,58 @@ class AdminUserController extends BaseAdminController
     }
 
     /**
-     * @Route("/admin/user/{id}/remove_role_marque/{role}", name="admin_user_removeRole")
+     * @Route("/admin/user/{id}/remove_role/{role}", name="admin_user_removeRole")
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeRoleMarque(User $user, $role)
+    public function removeRole(User $user, $role)
     {
         $remove = $user->removeRole($role);
         if ($remove == false) {
-            $this->addFlash('warning', "Cet utilisateur ne possède pas le ROLE_MARQUE");
+            $this->addFlash('warning', "Cet utilisateur ne possède pas le".$role);
             return $this->redirectToRoute('admin_user');
         }
         $this->manager->flush();
-        $this->addFlash('success', "Utilisateur n'a plus le role de marque");
+        $this->addFlash('success', "Cet utilisateur n'a plus le role".$role);
         return $this->redirectToRoute('admin_user');
+    }
+
+    /**
+     * @Route("/admin/user/{id}/addBrands", name="admin_user_addBrands")
+     */
+    public function addBrands(Request $request, User $user)
+    {
+        $form = $this->createForm(AddBrandsToUserType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($form->getData()['brands'] as $brand) {
+                /** @var Brand $brand */
+                $user->addBrand($brand);
+                $brand->setOwner($user);
+                $this->manager->persist($brand);
+            }
+            $this->manager->persist($user);
+            $this->manager->flush();
+            $this->addFlash('success', "OK vite faut commiter");
+            return $this->redirectToRoute('admin_user');
+        }
+
+        return $this->render('admin/user/addBrands.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/show/user/{id}", name="admin_user_show")
+     */
+    public function show(User $user)
+    {
+        return $this->render('admin/user/show.html.twig', [
+           'user' => $user
+        ]);
     }
 }

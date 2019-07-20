@@ -61,6 +61,11 @@ class Brand
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="brands")
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->patterns = new ArrayCollection();
@@ -161,5 +166,17 @@ class Brand
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
     }
 }
