@@ -79,7 +79,7 @@ class AdminUserController extends BaseAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($form->getData() as $brand) {
+            foreach ($form->getData()['brands'] as $brand) {
                 /** @var Brand $brand */
                 $user->addBrand($brand);
                 $brand->setOwner($user);
