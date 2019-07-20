@@ -6,20 +6,24 @@ use App\Entity\Brand;
 use App\Entity\User;
 use App\Form\AddBrandsToUserType;
 use App\Repository\UserRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminUserController extends BaseAdminController
 {
     /**
-     * @Route("/admin/user", name="admin_user")
+     * @Route("/admin/user/{page<\d+>?1}", name="admin_user")
      * @param UserRepository $repository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listUsers(UserRepository $repository)
+    public function listUsers(Pagination $pagination, $page)
     {
+        $pagination->setEntityClass(User::class)
+                   ->setRoute('admin_user')
+                   ->setPage($page);
         return $this->render('admin/user/index.html.twig', [
-            'users' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

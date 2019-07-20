@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for brand in brands %}
+            {% for brand in pagination.data %}
                 <tr>
                     <td class="align-middle font-weight-bold h5">{{ brand.name }}</td>
                     <td class="align-middle">{{ brand.owner }}</td>
@@ -35,5 +35,6 @@
             {% endfor %}
             </tbody>
         </table>
+        {{ pagination.display }}
     </div>
 {% endblock %}

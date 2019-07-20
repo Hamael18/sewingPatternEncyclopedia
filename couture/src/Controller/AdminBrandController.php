@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Brand;
 use App\Form\BrandOwnerType;
 use App\Form\NewBrandType;
-use App\Repository\BrandRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,12 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminBrandController extends BaseAdminController
 {
     /**
-     * @Route("/admin/brand", name="admin_brand")
+     * @Route("/admin/brand/{page<\d+>?1}", name="admin_brand")
      */
-    public function listBrand(BrandRepository $brandRepo)
+    public function listBrand(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Brand::class)
+                    ->setRoute('admin_brand')
+                    ->setPage($page)
+        ;
         return $this->render('admin/brand/index.html.twig', [
-            'brands' => $brandRepo->findAll(),
+            'pagination' => $pagination
         ]);
     }
 
