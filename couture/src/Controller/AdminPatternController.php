@@ -7,6 +7,7 @@ use App\Entity\Version;
 use App\Form\PatternType;
 use App\Form\VersionType;
 use App\Repository\PatternRepository;
+use App\Service\Pagination;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminPatternController extends BaseAdminController
 {
     /**
-     * @Route("/admin/pattern", name="admin_pattern")
+     * @Route("/admin/pattern/{page<\d+>?1}", name="admin_pattern")
      * @param PatternRepository $patternRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listPatterns(PatternRepository $patternRepository)
+    public function listPatterns(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Pattern::class)
+            ->setRoute('admin_pattern')
+            ->setPage($page)
+        ;
         return $this->render('admin/pattern/list.html.twig', [
-            'patterns' => $patternRepository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

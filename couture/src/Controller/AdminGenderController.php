@@ -5,20 +5,25 @@ namespace App\Controller;
 use App\Entity\Gender;
 use App\Form\NewGenderType;
 use App\Repository\GenderRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminGenderController extends BaseAdminController
 {
     /**
-     * @Route("/admin/pattern/gender", name="admin_gender")
+     * @Route("/admin/pattern/gender/{page<\d+>?1}", name="admin_gender")
      * @param GenderRepository $genderRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listGenders(GenderRepository $genderRepository)
+    public function listGenders(Pagination $pagination, $page)
     {
+        $pagination->setEntityClass(Gender::class)
+            ->setRoute('admin_gender')
+            ->setPage($page)
+            ;
         return $this->render('admin/gender/index.html.twig', [
-            'genders' => $genderRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

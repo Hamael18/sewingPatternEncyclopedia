@@ -5,18 +5,26 @@ namespace App\Controller;
 use App\Entity\Style;
 use App\Form\StyleType;
 use App\Repository\StyleRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminStyleController extends BaseController
 {
     /**
-     * @Route("/admin/version/style", name="admin_style")
+     * @param Pagination $pagination
+     * @param $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/version/style/{page<\d+>?1}", name="admin_style")
      */
-    public function index(StyleRepository $repository)
+    public function index(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Style::class)
+            ->setRoute('admin_style')
+            ->setPage($page)
+        ;
         return $this->render('admin/style/index.html.twig', [
-            'styles' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

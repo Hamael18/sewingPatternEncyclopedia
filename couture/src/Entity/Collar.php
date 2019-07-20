@@ -24,7 +24,7 @@ class Collar
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="collar")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Version", mappedBy="collars")
      */
     private $versions;
 
