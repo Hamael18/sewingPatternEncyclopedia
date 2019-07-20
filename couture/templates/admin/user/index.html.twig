@@ -21,7 +21,7 @@
                     <td class="align-middle">{{ user.brands | length }}</td>
                     <td class="align-middle">
                         {% for role in user.roles %}
-                            {% if role ==git 'ROLE_USER' %}
+                            {% if role == 'ROLE_USER' %}
                             {% else %}
                             <p>{{ role }}</p>{% if loop.last == false %}<br/>{% endif %}
                             {% endif %}
