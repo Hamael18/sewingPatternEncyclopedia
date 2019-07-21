@@ -34,19 +34,19 @@ class Version
     private $pattern;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Collar", inversedBy="versions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Collar", inversedBy="versions")
      */
-    private $collar;
+    private $collars;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Length", inversedBy="versions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Length", inversedBy="versions")
      */
-    private $length;
+    private $lengths;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Handle", inversedBy="versions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Handle", inversedBy="versions")
      */
-    private $handle;
+    private $handles;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="versions")
@@ -55,14 +55,14 @@ class Version
     private $level;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Fabric", inversedBy="versions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Fabric", inversedBy="versions")
      */
-    private $fabric;
+    private $fabrics;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Style", inversedBy="versions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="versions")
      */
-    private $style;
+    private $styles;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -95,7 +95,12 @@ class Version
 
     public function __construct()
     {
+        $this->fabrics = new ArrayCollection();
+        $this->handles = new ArrayCollection();
+        $this->lengths = new ArrayCollection();
+        $this->collars = new ArrayCollection();
         $this->sizes = new ArrayCollection();
+        $this->styles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,42 +137,6 @@ class Version
         return $this;
     }
 
-    public function getCollar(): ?Collar
-    {
-        return $this->collar;
-    }
-
-    public function setCollar(?Collar $collar): self
-    {
-        $this->collar = $collar;
-
-        return $this;
-    }
-
-    public function getLength(): ?Length
-    {
-        return $this->length;
-    }
-
-    public function setLength(?Length $length): self
-    {
-        $this->length = $length;
-
-        return $this;
-    }
-
-    public function getHandle(): ?Handle
-    {
-        return $this->handle;
-    }
-
-    public function setHandle(?Handle $handle): self
-    {
-        $this->handle = $handle;
-
-        return $this;
-    }
-
     public function getLevel(): ?Level
     {
         return $this->level;
@@ -176,30 +145,6 @@ class Version
     public function setLevel(?Level $level): self
     {
         $this->level = $level;
-
-        return $this;
-    }
-
-    public function getFabric(): ?Fabric
-    {
-        return $this->fabric;
-    }
-
-    public function setFabric(?Fabric $fabric): self
-    {
-        $this->fabric = $fabric;
-
-        return $this;
-    }
-
-    public function getStyle(): ?Style
-    {
-        return $this->style;
-    }
-
-    public function setStyle(?Style $style): self
-    {
-        $this->style = $style;
 
         return $this;
     }
@@ -235,6 +180,109 @@ class Version
         $canBeDeleted = ($this->getPattern() != null);
         return $canBeDeleted;
     }
+    /**
+     * @return Collection|Collar[]
+     */
+    public function getCollars(): Collection
+    {
+        return $this->collars;
+    }
+
+    public function addCollar(Collar $collar): self
+    {
+        if (!$this->collars->contains($collar)) {
+            $this->collars[] = $collar;
+        }
+
+        return $this;
+    }
+
+    public function removeCollar(Collar $collar): self
+    {
+        if ($this->collars->contains($collar)) {
+            $this->collars->removeElement($collar);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Fabric[]
+     */
+    public function getFabrics(): Collection
+    {
+        return $this->fabrics;
+    }
+
+    public function addFabric(Fabric $fabric): self
+    {
+        if (!$this->fabrics->contains($fabric)) {
+            $this->fabrics[] = $fabric;
+        }
+
+        return $this;
+    }
+
+    public function removeFabric(Fabric $fabric): self
+    {
+        if ($this->fabrics->contains($fabric)) {
+            $this->fabrics->removeElement($fabric);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Handle[]
+     */
+    public function getHandles(): Collection
+    {
+        return $this->handles;
+    }
+
+    public function addHandle(Handle $handle): self
+    {
+        if (!$this->handles->contains($handle)) {
+            $this->handles[] = $handle;
+        }
+
+        return $this;
+    }
+
+    public function removeHandle(Handle $handle): self
+    {
+        if ($this->handles->contains($handle)) {
+            $this->handles->removeElement($handle);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Length[]
+     */
+    public function getLengths(): Collection
+    {
+        return $this->lengths;
+    }
+
+    public function addLength(Length $length): self
+    {
+        if (!$this->lengths->contains($length)) {
+            $this->lengths[] = $length;
+        }
+
+        return $this;
+    }
+
+    public function removeLength(Length $length): self
+    {
+        if ($this->lengths->contains($length)) {
+            $this->lengths->removeElement($length);
+        }
+
+        return $this;
+    }
 
     /**
      * @return Collection|Size[]
@@ -257,6 +305,32 @@ class Version
     {
         if ($this->sizes->contains($size)) {
             $this->sizes->removeElement($size);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Style[]
+     */
+    public function getStyles(): Collection
+    {
+        return $this->styles;
+    }
+
+    public function addStyle(Style $style): self
+    {
+        if (!$this->styles->contains($style)) {
+            $this->styles[] = $style;
+        }
+
+        return $this;
+    }
+
+    public function removeStyle(Style $style): self
+    {
+        if ($this->styles->contains($style)) {
+            $this->styles->removeElement($style);
         }
 
         return $this;

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Handle;
 use App\Form\HandleType;
 use App\Repository\HandleRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,12 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminHandleController extends BaseAdminController
 {
     /**
-     * @Route("/admin/version/handle", name="admin_handle")
+     * @Route("/admin/version/handle/{page<\d+>?1}", name="admin_handle")
      */
-    public function listHandles(HandleRepository $repository)
+    public function listHandles(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Handle::class)
+            ->setRoute('admin_handle')
+            ->setPage($page)
+        ;
         return $this->render('admin/handle/index.html.twig', [
-            'handles' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

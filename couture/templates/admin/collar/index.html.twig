@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for collar in collars %}
+            {% for collar in pagination.data %}
                 <tr>
                     <td class="align-middle"></td>
                     <td class="align-middle font-weight-bold h5">{{ collar }}</td>
@@ -34,5 +34,6 @@
             {% endfor %}
             </tbody>
         </table>
+        {{ pagination.display }}
     </div>
 {% endblock %}

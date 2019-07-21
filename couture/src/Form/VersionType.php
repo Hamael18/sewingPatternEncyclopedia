@@ -45,29 +45,35 @@ class VersionType extends AbstractType
                 'label' => false,
                 'attr' => ['placeholder' => 'Sélectionnez une image']
             ])
-            ->add('collar', EntityType::class, [
+            ->add('collars', EntityType::class, [
                 'label' => false,
                 'class' => Collar::class,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'selectpicker',
+                    'multiple' => true,
                     'data-live-search' => true,
                     'data-none-selected-text' => 'Choisir un type de col'
                 ]
             ])
-            ->add('length', EntityType::class, [
+            ->add('lengths', EntityType::class, [
                 'label' => false,
                 'class' => Length::class,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'selectpicker',
+                    'multiple' => true,
                     'data-live-search' => true,
                     'data-none-selected-text' => 'Choisir une longueur'
                 ]
             ])
-            ->add('handle', EntityType::class, [
+            ->add('handles', EntityType::class, [
                 'label' => false,
                 'class' => Handle::class,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'selectpicker',
+                    'multiple' => true,
                     'data-live-search' => true,
                     'data-none-selected-text' => 'Choisir un type de manches'
                 ]
@@ -81,20 +87,24 @@ class VersionType extends AbstractType
                     'data-none-selected-text' => 'Choisir une difficulté'
                 ]
             ])
-            ->add('fabric', EntityType::class, [
+            ->add('fabrics', EntityType::class, [
                 'label' => false,
                 'class' => Fabric::class,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'selectpicker',
+                    'multiple' => true,
                     'data-live-search' => true,
                     'data-none-selected-text' => 'Choisir un tissu'
                 ]
             ])
-            ->add('style', EntityType::class, [
+            ->add('styles', EntityType::class, [
                 'label' => false,
                 'class' => Style::class,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'selectpicker',
+                    'multiple' => true,
                     'data-live-search' => true,
                     'data-none-selected-text' => 'Choisir un style'
                 ]

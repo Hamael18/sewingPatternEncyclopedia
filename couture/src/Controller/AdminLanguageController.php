@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Language;
 use App\Form\NewLanguageType;
 use App\Repository\LanguageRepository;
+use App\Service\Pagination;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,12 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminLanguageController extends BaseAdminController
 {
     /**
-     * @Route("/admin/pattern/language", name="admin_language")
+     * @Route("/admin/pattern/language/{page<\d+>?1}", name="admin_language")
      */
-    public function listLanguages(LanguageRepository $repository)
+    public function listLanguages(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Language::class)
+            ->setRoute('admin_language')
+            ->setPage($page)
+        ;
         return $this->render('admin/language/index.html.twig', [
-            'languages' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
     /**

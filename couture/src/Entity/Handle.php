@@ -24,7 +24,7 @@ class Handle
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="handle")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Version", mappedBy="handles")
      */
     private $versions;
 

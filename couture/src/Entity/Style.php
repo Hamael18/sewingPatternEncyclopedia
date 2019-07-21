@@ -24,7 +24,7 @@ class Style
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="style")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Version", mappedBy="styles")
      */
     private $versions;
 

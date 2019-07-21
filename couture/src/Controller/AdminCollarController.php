@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Collar;
 use App\Form\CollarType;
 use App\Repository\CollarRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,12 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminCollarController extends BaseAdminController
 {
     /**
-     * @Route("/admin/version/collar", name="admin_collar")
+     * @Route("/admin/version/collar/{page<\d+>?1}", name="admin_collar")
      */
-    public function listCollars(CollarRepository $repository)
+    public function listCollars(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Collar::class)
+                    ->setRoute('admin_collar')
+                    ->setPage($page)
+            ;
         return $this->render('admin/collar/index.html.twig', [
-            'collars' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

@@ -7,20 +7,25 @@ use App\Form\EmbedVersionType;
 use App\Form\VersionType;
 use App\Repository\PatternRepository;
 use App\Repository\VersionRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminVersionController extends BaseAdminController
 {
     /**
-     * @Route("/admin/version", name="admin_version")
+     * @Route("/admin/version/{page<\d+>?1}", name="admin_version")
      * @param VersionRepository $repository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listVersions(VersionRepository $repository)
+    public function listVersions(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Version::class)
+            ->setRoute('admin_brand')
+            ->setPage($page)
+        ;
         return $this->render('admin/version/index.html.twig', [
-            'versions' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 
@@ -44,6 +49,18 @@ class AdminVersionController extends BaseAdminController
 
         return $this->render('admin/version/new.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param Version $version
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/version/show/{id}", name="admin_version_show")
+     */
+    public function showVersion(Version $version)
+    {
+        return $this->render('admin/version/show.html.twig', [
+            'version' => $version
         ]);
     }
 

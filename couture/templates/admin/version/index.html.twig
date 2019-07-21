@@ -14,9 +14,9 @@
             </tr>
             </thead>
             <tbody>
-            {% for version in versions %}
+            {% for version in pagination.data %}
                 <tr>
-                    <td class="align-middle font-weight-bold h5">{{ version.name }}</td>
+                    <td class="align-middle font-weight-bold h5"><a href="{{ path('admin_version_show', {'id': version.id}) }}">{{ version.name }}</a></td>
                     <td class="align-middle">{{ version.pattern }}</td>
                     <td class="align-middle">
                         <a href="{{ path('admin_version_edit', {'id': version.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
@@ -30,5 +30,6 @@
             {% endfor %}
             </tbody>
         </table>
+        {{ pagination.display }}
     </div>
 {% endblock %}

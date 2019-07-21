@@ -5,20 +5,25 @@ namespace App\Controller;
 use App\Entity\Size;
 use App\Form\SizeType;
 use App\Repository\SizeRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminSizeController extends BaseAdminController
 {
     /**
-     * @Route("/admin/version/size", name="admin_size")
+     * @Route("/admin/version/size/{page<\d+>?1}", name="admin_size")
      * @param SizeRepository $repository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listSizes(SizeRepository $repository)
+    public function listSizes(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Size::class)
+            ->setRoute('admin_size')
+            ->setPage($page)
+        ;
         return $this->render('admin/size/index.html.twig', [
-            'sizes' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

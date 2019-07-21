@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for pattern in patterns %}
+            {% for pattern in pagination.data %}
                 <tr>
                     <td class="align-middle font-weight-bold h5">{{ pattern.name }}</td>
                     <td class="align-middle">{{ pattern.price }}</td>
@@ -38,5 +38,6 @@
             {% endfor %}
             </tbody>
         </table>
+        {{ pagination.display }}
     </div>
 {% endblock %}

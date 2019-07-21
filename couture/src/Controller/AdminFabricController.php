@@ -5,18 +5,23 @@ namespace App\Controller;
 use App\Entity\Fabric;
 use App\Form\FabricType;
 use App\Repository\FabricRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminFabricController extends BaseController
 {
     /**
-     * @Route("/admin/version/fabric", name="admin_fabric")
+     * @Route("/admin/version/fabric/{page<\d+>?1}", name="admin_fabric")
      */
-    public function index(FabricRepository $repository)
+    public function index(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Fabric::class)
+                    ->setRoute('admin_fabric')
+                    ->setPage($page);
+
         return $this->render('admin/fabric/index.html.twig', [
-            'fabrics' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

@@ -5,18 +5,23 @@ namespace App\Controller;
 use App\Entity\Level;
 use App\Form\NewLevelType;
 use App\Repository\LevelRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLevelController extends BaseAdminController
 {
     /**
-     * @Route("/admin/version/level", name="admin_level")
+     * @Route("/admin/version/level/{page<\d+>?1}", name="admin_level")
      */
-    public function listLevels(LevelRepository $repository)
+    public function listLevels(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Level::class)
+            ->setRoute('admin_level')
+            ->setPage($page)
+        ;
         return $this->render('admin/level/list.html.twig', [
-            'levels' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 

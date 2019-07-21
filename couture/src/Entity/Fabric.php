@@ -29,7 +29,7 @@ class Fabric
     private $extensible;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="fabric")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Version", mappedBy="fabrics")
      */
     private $versions;
 

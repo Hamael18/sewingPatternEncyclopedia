@@ -24,7 +24,7 @@ class Length
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Version", mappedBy="length")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Version", mappedBy="lengths")
      */
     private $versions;
 

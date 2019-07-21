@@ -5,18 +5,23 @@ namespace App\Controller;
 use App\Entity\Length;
 use App\Form\LengthType;
 use App\Repository\LengthRepository;
+use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLengthController extends BaseAdminController
 {
     /**
-     * @Route("/admin/version/length", name="admin_length")
+     * @Route("/admin/version/length/{page<\d+>?1}", name="admin_length")
      */
-    public function listLengths(LengthRepository $repository)
+    public function listLengths(Pagination $pagination, $page)
     {
+        $pagination ->setEntityClass(Length::class)
+            ->setRoute('admin_length')
+            ->setPage($page)
+        ;
         return $this->render('admin/length/index.html.twig', [
-            'lengths' => $repository->findAll()
+            'pagination' => $pagination
         ]);
     }
 
