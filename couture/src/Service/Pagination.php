@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
@@ -15,6 +16,8 @@ class Pagination
     private $twig;
     private $route;
     private $templatePath;
+    private $criteres = [];
+    private $order = [];
 
     /**
      * Pagination constructor.
@@ -98,7 +101,7 @@ class Pagination
         }
         $offset = $this->currentPage * $this->limit - $this->limit;
         $repo = $this->manager->getRepository($this->entityClass);
-        $data = $repo->findBy([], [], $this->limit, $offset);
+        $data = $repo->findBy($this->criteres, $this->order, $this->limit, $offset);
 
         return $data;
     }
@@ -133,6 +136,30 @@ class Pagination
     public function setPage($page)
     {
         $this->currentPage = $page;
+
+        return $this;
+    }
+
+    public function getCriteres()
+    {
+        return $this->criteres;
+    }
+
+    public function setCriteres(array $criteres)
+    {
+        $this->criteres = $criteres;
+
+        return $this;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder(array $order)
+    {
+        $this->order = $order;
 
         return $this;
     }
