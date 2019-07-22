@@ -1,0 +1,38 @@
+{% extends 'marque/layout.html.twig' %}
+
+{% block title %}Liste de vos marques{% endblock %}
+
+{% block content %}
+    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste de vos marques de couture</h1></div>
+    <div class="my-3">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark h5">
+            <tr>
+                <th class="align-middle">Nom</th>
+                <th class="align-middle">Lien</th>
+                <th class="align-middle">Patrons de couture</th>
+                <th class="col-2 align-middle"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for brand in pagination.data %}
+                <tr>
+                    <td class="align-middle font-weight-bold h5">{{ brand.name }}</td>
+                    <td class="align-middle">{{ brand.url }}</td>
+                    <td class="align-middle">{{ brand.patterns | length }}</td>
+                    <td class="align-middle">
+{#                        <a href="{{ path('admin_brand_addOwner', {'id': brand.id}) }}" class="btn btn-secondary"><i class="fas fa-user-tie"></i></a>#}
+{#                        <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>#}
+{#                        {% if brand.canBeDeleted %}#}
+{#                            <a href="{{ path('admin_brand_delete', {'id': brand.id }) }}"#}
+{#                               onclick="return confirm('Supprimer cette marque ?')"#}
+{#                               class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>#}
+{#                        {% endif %}#}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination.display }}
+    </div>
+{% endblock %}
