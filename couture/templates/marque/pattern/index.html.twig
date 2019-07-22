@@ -1,0 +1,43 @@
+{% extends 'marque/layout.html.twig' %}
+
+{% block title %}Patterns - Liste{% endblock %}
+
+{% block content %}
+    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des patterns</h1></div>
+    <div class="my-3">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark h5">
+            <tr>
+                <th class="align-middle">Nom</th>
+                <th class="align-middle">Prix</th>
+                <th class="align-middle">Description</th>
+                <th class="align-middle">Lien</th>
+                <th class="align-middle">Marque</th>
+                <th class="col-3 align-middle"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pattern in pagination.data %}
+                <tr>
+                    <td class="align-middle font-weight-bold h5">{{ pattern.name }}</td>
+                    <td class="align-middle">{{ pattern.price }}</td>
+                    <td class="align-middle">{{ pattern.description | raw }}</td>
+                    <td class="align-middle">{{ pattern.lien }}</td>
+                    <td class="align-middle">{{ pattern.brand }}</td>
+                    <td class="align-middle">
+                        <a href="{{ path('admin_pattern_addVersion', {'id': pattern.id}) }}" class="btn btn-outline-success" title="Ajouter une version à ce patron">
+                            <i class="fas fa-plus"></i></a>
+                        <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary"><i class="fas fa-wrench"></i></a>
+                        {% if pattern.canBeDeleted %}
+                            <a href="{{ path('admin_pattern_delete', {'id': pattern.id }) }}"
+                               onclick="return confirm('Supprimer ce pattern ?')"
+                               class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination.display }}
+    </div>
+{% endblock %}
