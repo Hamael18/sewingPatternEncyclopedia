@@ -16,7 +16,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * @Route("accueil", name="accueil")
+     * @Route("/", name="homepage")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function accueil()

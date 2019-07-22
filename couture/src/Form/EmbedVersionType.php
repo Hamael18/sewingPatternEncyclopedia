@@ -31,18 +31,21 @@ class EmbedVersionType extends AbstractType
                 'required' => false,
                 'attr' => ['placeholder' => 'Sélectionnez une image']
             ])
-            ->add('collar', EntityType::class, [
+            ->add('collars', EntityType::class, [
                 'label' => 'Type de col',
+                'multiple'=> true,
                 'class' => Collar::class,
                 'required' => false
             ])
-            ->add('length', EntityType::class, [
+            ->add('lengths', EntityType::class, [
                 'label' => 'Longueur',
+                'multiple'=> true,
                 'class' => Length::class,
                 'required' => false
             ])
-            ->add('handle', EntityType::class, [
+            ->add('handles', EntityType::class, [
                 'label' => 'Type de manches',
+                'multiple'=> true,
                 'class' => Handle::class,
                 'required' => false
             ])
@@ -56,13 +59,15 @@ class EmbedVersionType extends AbstractType
                 'label' => 'Difficulté',
                 'class' => Level::class
             ])
-            ->add('fabric', EntityType::class, [
+            ->add('fabrics', EntityType::class, [
                 'label' => 'Tissu',
+                'multiple'=> true,
                 'class' => Fabric::class,
                 'required' => false
             ])
-            ->add('style', EntityType::class, [
+            ->add('styles', EntityType::class, [
                 'label' => 'Style',
+                'multiple'=> true,
                 'class' => Style::class,
                 'required' => false
             ])

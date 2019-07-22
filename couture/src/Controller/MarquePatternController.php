@@ -15,17 +15,20 @@ class MarquePatternController extends BaseAdminController
      */
     public function listPatterns(Pagination $pagination, $page)
     {
+        // On récupère les id des marques appartenant au user connecté
         $idBrandsOfUser = [];
         foreach ($this->getUser()->getBrands() as $brand) {
             /** @var Brand $brand */
             $idBrandsOfUser[] = $brand->getId();
         }
 
+        // On set notre critère dans la requete (setCriteres)
         $pagination ->setEntityClass(Pattern::class)
                     ->setRoute('marque_pattern')
                     ->setPage($page)
                     ->setCriteres(['brand' => $idBrandsOfUser])
         ;
+
 
         return $this->render('marque/pattern/index.html.twig', [
             'pagination' => $pagination
