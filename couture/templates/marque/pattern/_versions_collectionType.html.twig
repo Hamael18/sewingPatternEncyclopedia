@@ -1,0 +1,40 @@
+{% block _pattern_versions_widget %}
+    {{ form_widget(form) }}
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-version" class="btn btn-secondary">Ajouter une version</button>
+    </div>
+{% endblock %}
+
+{% block _pattern_versions_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _pattern_versions_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+        <div class="row">
+            <div class="col-md-10">
+                {{ form_row(form.name) }}
+                {{ form_row(form.imageFile) }}
+                {{ form_row(form.level) }}
+                {{ form_row(form.sizes) }}
+                {{ form_row(form.collars) }}
+                {{ form_row(form.lengths) }}
+                {{ form_row(form.handles) }}
+                {{ form_row(form.fabrics) }}
+                {{ form_row(form.styles) }}
+            </div>
+            <div class="col-md-2">
+                <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('bootstrap-select-css') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('bootstrap-select-js') }}
+{% endblock %}
