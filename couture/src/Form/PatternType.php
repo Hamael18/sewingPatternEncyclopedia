@@ -23,7 +23,7 @@ class PatternType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Libellé du pattern']
+                'attr' => ['placeholder' => 'Nom du patron']
             ])
             ->add('price', MoneyType::class, [
                 'label' => false
@@ -66,11 +66,6 @@ class PatternType extends AbstractType
                     'multiple' => true,
                     'data-none-selected-text' => 'Choisir un ou plusieurs genre(s)'
                 ]
-            ])
-            ->add('versions', CollectionType::class,[
-                'entry_type'=> EmbedVersionType::class,
-                'allow_add'=> true,
-                'allow_delete'=> true
             ])
         ;
     }

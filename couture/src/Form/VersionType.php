@@ -35,13 +35,13 @@ class VersionType extends AbstractType
                 ]
             ])
         ;
-
         $builder
             ->add('name', TextType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Libellé de la version']
+                'attr' => ['placeholder' => 'Nom de la version']
             ])
             ->add('imageFile', VichImageType::class, [
+                'required'=>false,
                 'label' => false,
                 'attr' => ['placeholder' => 'Sélectionnez une image']
             ])
@@ -49,6 +49,7 @@ class VersionType extends AbstractType
                 'label' => false,
                 'class' => Collar::class,
                 'multiple' => true,
+                'required'=>false,
                 'attr' => [
                     'class' => 'selectpicker',
                     'multiple' => true,
@@ -60,6 +61,7 @@ class VersionType extends AbstractType
                 'label' => false,
                 'class' => Length::class,
                 'multiple' => true,
+                'required'=>false,
                 'attr' => [
                     'class' => 'selectpicker',
                     'multiple' => true,
@@ -71,6 +73,7 @@ class VersionType extends AbstractType
                 'label' => false,
                 'class' => Handle::class,
                 'multiple' => true,
+                'required'=>false,
                 'attr' => [
                     'class' => 'selectpicker',
                     'multiple' => true,
@@ -84,13 +87,14 @@ class VersionType extends AbstractType
                 'attr' => [
                     'class' => 'selectpicker',
                     'data-live-search' => true,
-                    'data-none-selected-text' => 'Choisir une difficulté'
+                    'data-none-selected-text' => 'Choisir une difficulté*'
                 ]
             ])
             ->add('fabrics', EntityType::class, [
                 'label' => false,
                 'class' => Fabric::class,
                 'multiple' => true,
+                'required'=>false,
                 'attr' => [
                     'class' => 'selectpicker',
                     'multiple' => true,
@@ -102,6 +106,7 @@ class VersionType extends AbstractType
                 'label' => false,
                 'class' => Style::class,
                 'multiple' => true,
+                'required'=>false,
                 'attr' => [
                     'class' => 'selectpicker',
                     'multiple' => true,
@@ -113,6 +118,7 @@ class VersionType extends AbstractType
                 'label' => false,
                 'class' => Size::class,
                 'multiple' => true,
+                'required'=>false,
                 'attr' => [
                     'class' => 'selectpicker test-control-search',
                     'multiple' => true,
