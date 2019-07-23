@@ -6,7 +6,7 @@
     <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Vos marques de couture</h1></div>
     {% for brand in pagination.data %}
         <div class="row p-3 text-center text-light bg-primary h4">{{ brand }}</div>
-        <div class="row m-2">
+        <div class="row my-2 mx-auto">
             <div class="card text-center mx-2 p-0 col-3">
                 <div class="card-header bg-dark"></div>
                 <div class="card-body">
@@ -22,6 +22,20 @@
                 <div class="card-header">
                     <img src="/uploads/brand_images/{{ brand.image }}" alt="{{ brand }}-image" class="img-fluid" />
                 </div>
+            </div>
+            <div class="col-2 d-flex flex-column">
+                <a href="{{ path('marque_brand_edit', {'id': brand.id }) }}" class="btn btn-outline-primary">
+                    <div class="row">
+                        <div class="col-2 offset-1"><i class="fas fa-edit"></i></div>
+                        <div class="col-4 offset-1">Editer</div>
+                    </div>
+                </a>
+                <a href="{{ path('marque_brand_delete', {'id': brand.id }) }}" class="btn btn-outline-danger">
+                    <div class="row">
+                        <div class="col-2 offset-1"><i class="fas fa-trash"></i></div>
+                        <div class="col-4 offset-1">Supprimer</div>
+                    </div>
+                </a>
             </div>
         </div>
     {% endfor %}

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Brand;
 use App\Form\BrandOwnerType;
-use App\Form\NewBrandType;
+use App\Form\BrandType;
 use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +32,7 @@ class AdminBrandController extends BaseAdminController
     public function createBrand(Request $request)
     {
         $brand = new Brand();
-        $form = $this->createForm(NewBrandType::class, $brand);
+        $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,7 +54,7 @@ class AdminBrandController extends BaseAdminController
      */
     public function editBrand(Request $request, Brand $brand)
     {
-        $form = $this->createForm(NewBrandType::class, $brand);
+        $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
