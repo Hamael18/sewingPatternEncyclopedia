@@ -32,7 +32,7 @@
                                 Versions : {{ pattern.versions | length }}
                             </a>
                         {% endif %}
-                        <a href="{{ path('admin_pattern_addVersion', {'id': pattern.id }) }}" title="Ajouter une version au patron {{ pattern }}"
+                        <a href="{{ path('marque_pattern_addVersion', {'id': pattern.id }) }}" title="Ajouter une version au patron {{ pattern }}"
                            class="btn btn-success col-2 offset-1"><i class="fas fa-plus"></i></a>
                     </div>
                     </p>
@@ -41,7 +41,7 @@
                             <ul class="list-group">
                                 {% for version in pattern.versions %}
                                     <li class="list-group-item">
-                                        <a href="{{ path('admin_version_show', {'id': version.id }) }}">{{ version }}</a>
+                                        <a href="{{ path('marque_version_show', {'id': version.id }) }}">{{ version }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -50,12 +50,10 @@
                 </div>
                 <div class="card-footer">
                     <div class="row d-flex justify-content-center">
-                        <a href="{{ path('admin_pattern_addVersion', {'id': pattern.id}) }}" class="btn btn-outline-success mx-2" title="Ajouter une version à ce patron">
-                            <i class="fas fa-plus"></i></a>
-                        <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary mx-2" title="Editer le patron {{ pattern }}">
+                        <a href="{{ path('marque_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary mx-2" title="Editer le patron {{ pattern }}">
                             <i class="fas fa-wrench"></i></a>
                         {% if pattern.canBeDeleted %}
-                            <a href="{{ path('admin_pattern_delete', {'id': pattern.id }) }}"
+                            <a href="{{ path('marque_pattern_delete', {'id': pattern.id }) }}"
                                onclick="return confirm('Supprimer ce pattern ?')" title="Supprimer le patron {{ pattern }}"
                                class="btn btn-outline-danger mx-2"><i class="fa fa-trash"></i></a>
                         {% endif %}

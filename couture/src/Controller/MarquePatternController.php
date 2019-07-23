@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Brand;
 use App\Entity\Pattern;
+use App\Entity\Version;
 use App\Form\PatternMarqueType;
+use App\Form\VersionType;
 use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,5 +59,68 @@ class MarquePatternController extends BaseAdminController
         return $this->render('marque/pattern/new.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/marque/pattern/add_version/{id}", name="marque_pattern_addVersion")
+     * @param Request $request
+     * @param Pattern $pattern
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function addVersionPattern(Request $request, Pattern $pattern)
+    {
+        $version = new Version();
+        $form = $this->createForm(VersionType::class, $version);
+        $form->remove('pattern');
+        $version->setPattern($pattern);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->manager->persist($version);
+            $this->manager->flush();
+            $this->addFlash('success', "Version ajoutée avec succès !");
+            return $this->redirectToRoute('marque_pattern');
+        }
+
+        return $this->render('_admin_marque/pattern/_addVersion.html.twig', [
+            'form' => $form->createView(),
+            'pattern' => $pattern
+        ]);
+    }
+
+    /**
+     * @Route("/marque/pattern/edit/{id}", name="marque_pattern_edit")
+     * @param Request $request
+     * @param Pattern $pattern
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editPattern(Request $request, Pattern $pattern)
+    {
+        $form = $this->createForm(PatternMarqueType::class, $pattern);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->manager->flush();
+            $this->addFlash('success', "Patron de couture créé avec succès !");
+            return $this->redirectToRoute('marque_pattern');
+        }
+
+        return $this->render('marque/pattern/new.html.twig', [
+            'form' => $form->createView(),
+            'pattern' => $pattern
+        ]);
+    }
+
+    /**
+     * @Route("/marque/pattern/delete/{id}", name="marque_pattern_delete")
+     * @param Pattern $pattern
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deletePattern(Pattern $pattern)
+    {
+        $this->manager->remove($pattern);
+        $this->manager->flush();
+        $this->addFlash('success', "Patron de couture supprimé avec succès !");
+        return $this->redirectToRoute('marque_pattern');
     }
 }

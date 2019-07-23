@@ -50,8 +50,6 @@
                 </div>
                 <div class="card-footer">
                     <div class="row d-flex justify-content-center">
-                        <a href="{{ path('admin_pattern_addVersion', {'id': pattern.id}) }}" class="btn btn-outline-success mx-2" title="Ajouter une version à ce patron">
-                            <i class="fas fa-plus"></i></a>
                         <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary mx-2" title="Editer le patron {{ pattern }}">
                             <i class="fas fa-wrench"></i></a>
                         {% if pattern.canBeDeleted %}
