@@ -1,12 +1,10 @@
 {% extends 'admin/layout.html.twig' %}
 
-{% block title %}Nouveau pattern{% endblock %}
+{% block title %}Nouveau patron{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('bootstrap-select-css') }}
 {% endblock %}
-
-{% form_theme form 'admin/pattern/_versions_collectionType.html.twig' %}
 
 {% block content %}
     <div class="row"><i class="fas fa-plus-circle fa-3x mr-3"></i><h1>Créer un pattern</h1></div>
@@ -15,5 +13,4 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('bootstrap-select-js') }}
-    {{ encore_entry_script_tags('collectionVersion') }}
 {% endblock %}

@@ -51,7 +51,7 @@ class AdminPatternController extends BaseAdminController
             $this->manager->persist($pattern);
             $this->manager->flush();
             $this->addFlash('success', "Patron créé avec succès !");
-            return $this->redirectToRoute('admin_pattern');
+            return $this->redirectToRoute('admin_pattern_addVersion', ['id'=>$pattern->getId()]);
         }
 
         return $this->render('admin/pattern/new.html.twig', [
@@ -118,6 +118,18 @@ class AdminPatternController extends BaseAdminController
 
         return $this->render('admin/pattern/_addVersion.html.twig', [
             'form' => $form->createView(),
+            'pattern' => $pattern
+        ]);
+    }
+
+    /**
+     * @Route("/admin/pattern/show/{id}", name="admin_pattern_show")
+     * @param Pattern $pattern
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showPattern(Pattern $pattern)
+    {
+        return $this->render('admin/pattern/show.html.twig', [
             'pattern' => $pattern
         ]);
     }

@@ -30,7 +30,7 @@ class PatternMarqueType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Libellé du pattern']
+                'attr' => ['placeholder' => 'Nom du patron']
             ])
             ->add('price', MoneyType::class, [
                 'label' => false

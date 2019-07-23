@@ -19,7 +19,14 @@
             <tbody>
             {% for pattern in pagination.data %}
                 <tr>
-                    <td class="align-middle font-weight-bold h5">{{ pattern.name }}</td>
+                    <a data-toggle="collapse" href="#{{ pattern.id }}" aria-expanded="false" aria-controls="{{ pattern.id }}"><td class="align-middle font-weight-bold h5">
+                        <a href="{{ path('admin_pattern_show', {'id': pattern.id}) }}">{{ pattern.name }}</a>
+                        <div class="collapse" id="{{ pattern.id }}">
+                        {% for version in pattern.versions %}
+                            <p>{{ version }}</p>
+                        {% endfor %}
+                        </div>
+                    </td></a>
                     <td class="align-middle">{{ pattern.price }}</td>
                     <td class="align-middle">{{ pattern.description | raw }}</td>
                     <td class="align-middle">{{ pattern.lien }}</td>
