@@ -38,6 +38,11 @@ class MarquePatternController extends BaseAdminController
         ]);
     }
 
+    public function listPatternsByBrand(Pagination $pagination, $page)
+    {
+
+    }
+
     /**
      * @Route("/marque/pattern/new", name="marque_pattern_new")
      * @param Request $request
