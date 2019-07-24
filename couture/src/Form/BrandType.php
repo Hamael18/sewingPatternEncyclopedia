@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class NewBrandType extends AbstractType
+class BrandType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
