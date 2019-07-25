@@ -39,6 +39,24 @@ class MarquePatternController extends BaseAdminController
     }
 
     /**
+     * @Route("/marque/pattern/{{brand}}/{page<\d+>?1}", name="marque_pattern_brand")
+     * @param Pagination $pagination
+     * @param $page
+     * @param Brand $brand
+     */
+    public function listPatternsByBrand(Pagination $pagination, $page, Brand $brand)
+    {
+        $pagination ->setEntityClass(Pattern::class)
+            ->setRoute('marque_pattern')
+            ->setPage($page)
+            ->setCriteres(['brand' => $brand])
+        ;
+        return $this->render('marque/pattern/index.html.twig', [
+            'pagination' => $pagination
+        ]);
+    }
+
+    /**
      * @Route("/marque/pattern/new", name="marque_pattern_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
