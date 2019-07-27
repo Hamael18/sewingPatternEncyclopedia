@@ -2,8 +2,20 @@
 
 {% block title %}Patterns - Liste{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('bootstrap-select-css') }}
+{% endblock %}
+
 {% block content %}
     <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des patterns</h1></div>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-3">{{ form_row(form.brand) }}</div>
+        <button type="submit" class="btn btn-outline-primary">Rechercher</button>
+    </div>
+    {{ form_end(form) }}
+
     <div class="row my-3">
         {% for pattern in pagination.data %}
             <div class="card col-lg-3 m-2 p-0">
@@ -63,4 +75,8 @@
         {% endfor %}
     </div>
     {{ pagination.display }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('bootstrap-select-js') }}
 {% endblock %}

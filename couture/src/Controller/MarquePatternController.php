@@ -6,6 +6,7 @@ use App\Entity\Brand;
 use App\Entity\Pattern;
 use App\Entity\Version;
 use App\Form\PatternMarqueType;
+use App\Form\SearchPatternType;
 use App\Form\VersionType;
 use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,7 @@ class MarquePatternController extends BaseAdminController
     /**
      * @Route("/marque/pattern/{page<\d+>?1}", name="marque_pattern")
      */
-    public function listPatterns(Pagination $pagination, $page)
+    public function listPatterns(Pagination $pagination, $page, Request $request)
     {
         // On récupère les id des marques appartenant au user connecté
         $idBrandsOfUser = [];
@@ -32,9 +33,13 @@ class MarquePatternController extends BaseAdminController
                     ->setCriteres(['brand' => $idBrandsOfUser])
         ;
 
+        // Filtre
+        $form = $this->createForm(SearchPatternType::class);
+        $form->handleRequest($request);
 
         return $this->render('marque/pattern/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ]);
     }
 
