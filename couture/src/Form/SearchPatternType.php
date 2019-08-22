@@ -26,8 +26,9 @@ class SearchPatternType extends AbstractType
         $builder
             ->add('brand', EntityType::class, [
                 'label' => false,
-                'required' => false,
+                'required' => true,
                 'class' => Brand::class,
+                'multiple' => true,
                 'query_builder' => function (BrandRepository $br) {
                     return $br->createQueryBuilder('b')
                         ->andWhere('b.owner = :user')
@@ -35,7 +36,8 @@ class SearchPatternType extends AbstractType
                 },
                 'attr' => [
                     'class' => 'selectpicker col-6',
-                    'data-live-search' => true
+                    'data-live-search' => true,
+                    'multiple' => true
                 ]
             ])
         ;
