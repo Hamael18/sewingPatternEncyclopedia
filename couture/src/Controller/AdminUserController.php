@@ -5,32 +5,45 @@ namespace App\Controller;
 use App\Entity\Brand;
 use App\Entity\User;
 use App\Form\AddBrandsToUserType;
-use App\Repository\UserRepository;
+use App\Form\AdminSearchUserType;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminUserController extends BaseAdminController
 {
     /**
      * @Route("/admin/user/{page<\d+>?1}", name="admin_user")
-     * @param UserRepository $repository
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @param Pagination $pagination
+     * @param $page
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function listUsers(Pagination $pagination, $page)
+    public function listUsers(Pagination $pagination, $page, Request $request)
     {
         $pagination->setEntityClass(User::class)
                    ->setRoute('admin_user')
                    ->setPage($page);
+
+        $form = $this->createForm(AdminSearchUserType::class);
+        $form->handleRequest($request);
+
         return $this->render('admin/user/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/admin/user/delete/{id}", name="admin_user_delete")
+     *
      * @param User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteUser(User $user)
     {
@@ -42,8 +55,11 @@ class AdminUserController extends BaseAdminController
 
     /**
      * @Route("/admin/user/{id}/add_role/{role}", name="admin_user_addRole")
+     *
      * @param User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param $role
+     *
+     * @return RedirectResponse
      */
     public function addRole(User $user, $role)
     {
@@ -59,8 +75,11 @@ class AdminUserController extends BaseAdminController
 
     /**
      * @Route("/admin/user/{id}/remove_role/{role}", name="admin_user_removeRole")
+     *
      * @param User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param $role
+     *
+     * @return RedirectResponse
      */
     public function removeRole(User $user, $role)
     {
@@ -76,6 +95,11 @@ class AdminUserController extends BaseAdminController
 
     /**
      * @Route("/admin/user/{id}/addBrands", name="admin_user_addBrands")
+     *
+     * @param Request $request
+     * @param User $user
+     *
+     * @return RedirectResponse|Response
      */
     public function addBrands(Request $request, User $user)
     {
@@ -102,9 +126,11 @@ class AdminUserController extends BaseAdminController
     }
 
     /**
-     * @param User $user
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/admin/show/user/{id}", name="admin_user_show")
+     *
+     * @param User $user
+     *
+     * @return Response
      */
     public function showUser(User $user)
     {
