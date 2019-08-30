@@ -196,4 +196,18 @@ class Brand
 
         return $this;
     }
+
+    /**
+     * Setter uniquement pour le test unitaire
+     *
+     * @param $id
+     *
+     * @return Brand
+     */
+    public function setId($id): Brand
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 }

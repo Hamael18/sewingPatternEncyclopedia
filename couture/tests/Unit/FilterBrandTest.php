@@ -28,7 +28,7 @@ class FilterBrandTest extends TestCase
         $user->addBrand($brand2);
         $result = $filter->getIdsBrand($user);
 
-        $this->assertSame($result[0], 123456);
-        $this->assertSame($result[1], 789456);
+        $this->assertSame($result['brand'][0], 123456);
+        $this->assertSame($result['brand'][1], 789456);
     }
 }
