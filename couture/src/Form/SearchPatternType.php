@@ -30,9 +30,7 @@ class SearchPatternType extends AbstractType
                 'class' => Brand::class,
                 'multiple' => true,
                 'query_builder' => function (BrandRepository $br) {
-                    return $br->createQueryBuilder('b')
-                        ->andWhere('b.owner = :user')
-                        ->setParameter('user', $this->user);
+                    return $br->getBrandsOfBrand($this->user);
                 },
                 'attr' => [
                     'class' => 'selectpicker col-6',

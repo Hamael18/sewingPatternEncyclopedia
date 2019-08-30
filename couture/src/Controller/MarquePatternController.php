@@ -8,6 +8,7 @@ use App\Entity\Version;
 use App\Form\PatternMarqueType;
 use App\Form\SearchPatternType;
 use App\Form\VersionType;
+use App\Service\FilterObjectsBrand;
 use App\Service\Pagination;
 use App\Service\setFilterCriteres;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,24 +20,29 @@ class MarquePatternController extends BaseAdminController
 {
     /**
      * @Route("/marque/pattern/{page<\d+>?1}", name="marque_pattern")
+     *
      * @param Pagination $pagination
      * @param $page
      * @param Request $request
      * @param setFilterCriteres $filterCriteres
+     * @param FilterObjectsBrand $filterObjectsBrand
+     *
      * @return Response
      */
-    public function listPatterns(Pagination $pagination, $page, Request $request, setFilterCriteres $filterCriteres)
+    public function listPatterns(
+        Pagination $pagination,
+        $page,
+        Request $request,
+        setFilterCriteres $filterCriteres,
+        FilterObjectsBrand $filterObjectsBrand)
     {
-        $idBrandsOfUser = [];
-        foreach ($this->getUser()->getBrands() as $brand) {
-            /** @var Brand $brand */
-            $idBrandsOfUser[] = $brand->getId();
-        }
+        $idBrandsOfUser = $filterObjectsBrand->getIdsBrand($this->getUser());
 
         $pagination ->setEntityClass(Pattern::class)
                     ->setRoute('marque_pattern')
                     ->setPage($page)
                     ->setCriteres(['brand' => $idBrandsOfUser])
+                    ->setOrder(['brand' => 'DESC'])
         ;
 
         $form = $this->createForm(SearchPatternType::class);
