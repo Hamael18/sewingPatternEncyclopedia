@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Brand;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,8 +21,24 @@ class BrandRepository extends ServiceEntityRepository
         parent::__construct($registry, Brand::class);
     }
 
+    /**
+     * @return Brand[]
+     */
     public function getBrandsWithoutOwner()
     {
         return $this->findBy(['owner' => null]);
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return QueryBuilder
+     */
+    public function getBrandsOfBrand(User $user)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.owner = :user')
+            ->setParameter('user', $user)
+            ->orderBy('b.name');
     }
 }

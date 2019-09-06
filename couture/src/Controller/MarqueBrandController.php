@@ -6,15 +6,28 @@ use App\Entity\Brand;
 use App\Form\BrandType;
 use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MarqueBrandController extends BaseAdminController
 {
     /**
+     * @Route("/marque/brand/{name}", name="marque_brand_homepage")
+     * @param Brand $brand
+     * @return Response
+     */
+    public function showBrand(Brand $brand)
+    {
+        return $this->render('marque/brand/show.html.twig', [
+            'brand' => $brand
+        ]);
+    }
+
+    /**
      * @Route("/marque/brand/{page<\d+>?1}", name="marque_brand")
      * @param Pagination $pagination
      * @param $page
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function listBrands(Pagination $pagination, $page)
     {
@@ -33,7 +46,7 @@ class MarqueBrandController extends BaseAdminController
      * @Route("/marque/brand/edit/{id}", name="marque_brand_edit")
      * @param Request $request
      * @param Brand $brand
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function editBrand(Request $request, Brand $brand)
     {

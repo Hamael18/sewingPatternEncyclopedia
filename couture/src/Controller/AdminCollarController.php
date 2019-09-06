@@ -6,7 +6,9 @@ use App\Entity\Collar;
 use App\Form\CollarType;
 use App\Repository\CollarRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -14,6 +16,9 @@ class AdminCollarController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/collar/{page<\d+>?1}", name="admin_collar")
+     * @param Pagination $pagination
+     * @param $page
+     * @return Response
      */
     public function listCollars(Pagination $pagination, $page)
     {
@@ -29,7 +34,7 @@ class AdminCollarController extends BaseAdminController
     /**
      * @Route("/admin/version/collar/new", name="admin_collar_new")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function newCollar(Request $request)
     {
@@ -53,7 +58,7 @@ class AdminCollarController extends BaseAdminController
      * @Route("/admin/version/collar/edit/{id}", name="admin_collar_edit")
      * @param Request $request
      * @param Collar $collar
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function editStyle(Request $request, Collar $collar)
     {
@@ -75,7 +80,7 @@ class AdminCollarController extends BaseAdminController
     /**
      * @Route("/admin/version/collar/delete/{id}", name="admin_collar_delete")
      * @param Collar $collar
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteStyle(Collar $collar)
     {

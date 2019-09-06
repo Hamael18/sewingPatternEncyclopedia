@@ -2,10 +2,14 @@
 
 namespace App\Service;
 
-use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
+use Exception;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class Pagination
 {
@@ -18,6 +22,8 @@ class Pagination
     private $templatePath;
     private $criteres = [];
     private $order = [];
+    private $user;
+    private $filter;
 
     /**
      * Pagination constructor.
@@ -25,13 +31,16 @@ class Pagination
      * @param Environment $twig
      * @param RequestStack $request
      * @param $templatePath
+     * @param Security $security
      */
-    public function __construct(ObjectManager $manager, Environment $twig, RequestStack $request, $templatePath)
+    public function __construct(ObjectManager $manager, Environment $twig, RequestStack $request, $templatePath, Security $security, FilterObjectsBrand $filter)
     {
         $this->route = $request->getCurrentRequest()->attributes->get('_route');
         $this->manager = $manager;
         $this->twig = $twig;
         $this->templatePath = $templatePath;
+        $this->user = $security->getUser();
+        $this->filter = $filter;
     }
 
     /**
@@ -65,11 +74,13 @@ class Pagination
     }
 
     /**
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
      */
-    public function display() {
+    public function display()
+    {
         $this->twig->display($this->templatePath, [
             'page' => $this->currentPage,
             'pages' => $this->getPages(),
@@ -79,24 +90,53 @@ class Pagination
 
     /**
      * @return float|int
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getPages() {
+    public function getPages()
+    {
         if (empty($this->entityClass)) {
-            throw new \Exception("Vous n'avez pas spécifié l'entité sur laquelle nous devons paginer ! 
+            throw new Exception("Vous n'avez pas spécifié l'entité sur laquelle nous devons paginer ! 
             Utilisez la méthode setEntityClass() de votre objet Pagination");
         }
+
+        if (in_array('ROLE_MARQUE', $this->user->getRoles())) {
+            return $this->getPagesByBrand($this->filter);
+        } else {
+            return $this->getPagesFindAll();
+        }
+    }
+
+    private function getPagesFindAll()
+    {
         $repo = $this->manager->getRepository($this->entityClass);
-        $total = count($repo->findAll());
+        $list = $repo->findAll();
+        return $this->countPages($list);
+    }
 
+    private function getPagesByBrand(FilterObjectsBrand $filter)
+    {
+        $filter->setEntityClass($this->entityClass);
+        $filter_list = $filter->getFilterList();
+        $repo = $this->manager->getRepository($this->entityClass);
+        $list = $repo->findBy($filter_list);
+        return $this->countPages($list);
+    }
+
+    private function countPages($listObjects)
+    {
+        $total = count($listObjects);
         $pages = $total > 0 ? $pages = ceil($total / $this->limit) : 1;
-
         return $pages;
     }
 
-    public function getData() {
+    /**
+     * @return object[]
+     * @throws Exception
+     */
+    public function getData()
+    {
         if (empty($this->entityClass)) {
-            throw new \Exception("Vous n'avez pas spécifié l'entité sur laquelle nous devons paginer ! 
+            throw new Exception("Vous n'avez pas spécifié l'entité sur laquelle nous devons paginer ! 
             Utilisez la méthode setEntityClass() de votre objet Pagination");
         }
         $offset = $this->currentPage * $this->limit - $this->limit;

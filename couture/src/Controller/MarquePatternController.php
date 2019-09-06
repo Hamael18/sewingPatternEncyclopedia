@@ -2,46 +2,70 @@
 
 namespace App\Controller;
 
-use App\Entity\Brand;
 use App\Entity\Pattern;
 use App\Entity\Version;
 use App\Form\PatternMarqueType;
+use App\Form\SearchPatternType;
 use App\Form\VersionType;
+use App\Service\FilterObjectsBrand;
 use App\Service\Pagination;
+use App\Service\setFilterCriteres;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MarquePatternController extends BaseAdminController
 {
     /**
      * @Route("/marque/pattern/{page<\d+>?1}", name="marque_pattern")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     * @param Request $request
+     * @param setFilterCriteres $filterCriteres
+     * @param FilterObjectsBrand $filterObjectsBrand
+     *
+     * @return Response
      */
-    public function listPatterns(Pagination $pagination, $page)
+    public function listPatterns(
+        Pagination $pagination,
+        $page,
+        Request $request,
+        setFilterCriteres $filterCriteres,
+        FilterObjectsBrand $filterObjectsBrand)
     {
-        // On récupère les id des marques appartenant au user connecté
-        $idBrandsOfUser = [];
-        foreach ($this->getUser()->getBrands() as $brand) {
-            /** @var Brand $brand */
-            $idBrandsOfUser[] = $brand->getId();
-        }
+        $filter = $filterObjectsBrand->getFilterForPattern($this->getUser());
 
-        // On set notre critère dans la requete (setCriteres)
         $pagination ->setEntityClass(Pattern::class)
                     ->setRoute('marque_pattern')
                     ->setPage($page)
-                    ->setCriteres(['brand' => $idBrandsOfUser])
+                    ->setCriteres($filter)
+                    ->setOrder(['brand' => 'DESC'])
         ;
 
+        $form = $this->createForm(SearchPatternType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pagination = $filterCriteres->setFilter($form->getViewData(), $request);
+            return $this->render('marque/pattern/index.html.twig', [
+                'pagination' => $pagination,
+                'form' => $form->createView()
+            ]);
+        }
+        $this->session->remove('Filter');
+        dump($_SESSION);
 
         return $this->render('marque/pattern/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/marque/pattern/new", name="marque_pattern_new")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function newPattern(Request $request)
     {
@@ -65,7 +89,7 @@ class MarquePatternController extends BaseAdminController
      * @Route("/marque/pattern/add_version/{id}", name="marque_pattern_addVersion")
      * @param Request $request
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function addVersionPattern(Request $request, Pattern $pattern)
     {
@@ -92,7 +116,7 @@ class MarquePatternController extends BaseAdminController
      * @Route("/marque/pattern/edit/{id}", name="marque_pattern_edit")
      * @param Request $request
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function editPattern(Request $request, Pattern $pattern)
     {
@@ -114,7 +138,7 @@ class MarquePatternController extends BaseAdminController
     /**
      * @Route("/marque/pattern/delete/{id}", name="marque_pattern_delete")
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deletePattern(Pattern $pattern)
     {
