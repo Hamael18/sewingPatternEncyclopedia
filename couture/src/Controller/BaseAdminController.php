@@ -4,15 +4,18 @@ namespace App\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BaseAdminController extends AbstractController
 {
     protected $manager;
+    protected $session;
 
-    public function __construct(ObjectManager $manager)
+    public function __construct(ObjectManager $manager, SessionInterface $session)
     {
         $this->manager = $manager;
+        $this->session = $session;
     }
 
     /**

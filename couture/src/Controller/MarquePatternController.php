@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Brand;
 use App\Entity\Pattern;
 use App\Entity\Version;
 use App\Form\PatternMarqueType;
@@ -36,12 +35,12 @@ class MarquePatternController extends BaseAdminController
         setFilterCriteres $filterCriteres,
         FilterObjectsBrand $filterObjectsBrand)
     {
-        $idBrandsOfUser = $filterObjectsBrand->getIdsBrand($this->getUser());
+        $filter = $filterObjectsBrand->getFilterForPattern($this->getUser());
 
         $pagination ->setEntityClass(Pattern::class)
                     ->setRoute('marque_pattern')
                     ->setPage($page)
-                    ->setCriteres(['brand' => $idBrandsOfUser])
+                    ->setCriteres($filter)
                     ->setOrder(['brand' => 'DESC'])
         ;
 
@@ -54,6 +53,8 @@ class MarquePatternController extends BaseAdminController
                 'form' => $form->createView()
             ]);
         }
+        $this->session->remove('Filter');
+        dump($_SESSION);
 
         return $this->render('marque/pattern/index.html.twig', [
             'pagination' => $pagination,

@@ -35,7 +35,8 @@ class SearchPatternType extends AbstractType
                 'attr' => [
                     'class' => 'selectpicker col-6',
                     'data-live-search' => true,
-                    'multiple' => true
+                    'multiple' => true,
+                    'data-none-selected-text' => 'Filtrer par marque'
                 ]
             ])
         ;

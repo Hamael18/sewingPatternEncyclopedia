@@ -23,8 +23,6 @@ class setFilterCriteres
                 $criteres['brand'][] = $brand->getId();
         }
 
-        $this->setPaginationService($criteres, $request);
-
         return $this->setPaginationService($criteres, $request);
     }
 
