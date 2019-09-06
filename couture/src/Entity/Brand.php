@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
  * @Vich\Uploadable()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Brand
 {
@@ -71,9 +72,20 @@ class Brand
      */
     private $description;
 
+    private $slug;
+
     public function __construct()
     {
         $this->patterns = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function initializeSlug()
+    {
+
     }
 
     public function getId(): ?int
