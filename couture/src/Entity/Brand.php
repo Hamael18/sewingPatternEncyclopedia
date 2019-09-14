@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
+ * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable()
- * @ORM\HasLifecycleCallbacks()
  */
 class Brand
 {
@@ -72,20 +72,15 @@ class Brand
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
     private $slug;
 
     public function __construct()
     {
         $this->patterns = new ArrayCollection();
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function initializeSlug()
-    {
-
     }
 
     public function getId(): ?int
@@ -96,6 +91,33 @@ class Brand
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function initializeSlug()
+    {
+        if (empty($this->slug)) {
+            $slug = strtolower(str_replace('.', '', str_replace(' ', '_', trim($this->getName()))));
+            $this->slug = $slug;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getName(): ?string
