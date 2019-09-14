@@ -196,12 +196,13 @@ class AppFixtures extends Fixture
         foreach ($userMarques as $userMarque) {
             $m = $faker->randomElement([2, 3, 5]);
             for ($n = 1; $n <= $m; $n++) {
+                $image = $faker->image('/home/etienne/Documents/Projets/Perso/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
                 $marque = new Brand();
                 $marque ->setName($faker->company)
                     ->setDescription($faker->text(300))
                     ->setUrl($faker->url)
                     ->setOwner($userMarque)
-                    ->setImage($faker->imageUrl(600, 400));
+                    ->setImage($image);
                 $marques[] = $marque;
                 $manager->persist($marque);
             }
@@ -209,11 +210,12 @@ class AppFixtures extends Fixture
 
         // 10 marques sans propriétaires
         for ($j = 1; $j <= 10; $j++) {
+            $image = $faker->image('/home/etienne/Documents/Projets/Perso/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
             $marque = new Brand();
             $marque ->setName($faker->company)
                 ->setDescription($faker->text(300))
                 ->setUrl($faker->url)
-                ->setImage($faker->imageUrl(600, 400));
+                ->setImage($image);
             $manager->persist($marque);
         }
 
