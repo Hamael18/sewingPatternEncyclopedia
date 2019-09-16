@@ -106,7 +106,7 @@ class MarquePatternController extends BaseAdminController
             return $this->redirectToRoute('marque_pattern');
         }
 
-        return $this->render('_admin_marque/pattern/_addVersion.html.twig', [
+        return $this->render('marque/version/new.html.twig', [
             'form' => $form->createView(),
             'pattern' => $pattern
         ]);
