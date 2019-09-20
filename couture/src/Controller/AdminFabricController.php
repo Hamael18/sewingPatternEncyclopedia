@@ -17,15 +17,15 @@ class AdminFabricController extends BaseController
      * @Route("/admin/version/fabric/{page<\d+>?1}", name="admin_fabric")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
     public function index(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Fabric::class)
-                    ->setRoute('admin_fabric')
-                    ->setPage($page);
+        $pagination->setEntityClass(Fabric::class)
+            ->setRoute('admin_fabric')
+            ->setPage($page);
 
         return $this->render('admin/fabric/index.html.twig', [
             'pagination' => $pagination
@@ -61,7 +61,7 @@ class AdminFabricController extends BaseController
      * @Route("/admin/version/fabric/edit/{id}", name="admin_fabric_edit")
      *
      * @param Request $request
-     * @param Fabric $fabric
+     * @param Fabric  $fabric
      *
      * @return RedirectResponse|Response
      */

@@ -21,16 +21,15 @@ class AdminPatternController extends BaseAdminController
      * @Route("/admin/pattern/{page<\d+>?1}", name="admin_pattern")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
     public function listPatterns(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Pattern::class)
+        $pagination->setEntityClass(Pattern::class)
             ->setRoute('admin_pattern')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/pattern/list.html.twig', [
             'pagination' => $pagination
         ]);
@@ -58,7 +57,7 @@ class AdminPatternController extends BaseAdminController
             $this->manager->persist($pattern);
             $this->manager->flush();
             $this->addFlash('success', "Patron créé avec succès !");
-            return $this->redirectToRoute('admin_pattern_addVersion', ['id'=>$pattern->getId()]);
+            return $this->redirectToRoute('admin_pattern_addVersion', ['id' => $pattern->getId()]);
         }
 
         return $this->render('admin/pattern/new.html.twig', [

@@ -17,16 +17,15 @@ class AdminLengthController extends BaseAdminController
      * @Route("/admin/version/length/{page<\d+>?1}", name="admin_length")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
     public function listLengths(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Length::class)
+        $pagination->setEntityClass(Length::class)
             ->setRoute('admin_length')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/length/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -61,7 +60,7 @@ class AdminLengthController extends BaseAdminController
      * @Route("/admin/version/length/edit/{id}", name="admin_length_edit")
      *
      * @param Request $request
-     * @param Length $length
+     * @param Length  $length
      *
      * @return RedirectResponse|Response
      */

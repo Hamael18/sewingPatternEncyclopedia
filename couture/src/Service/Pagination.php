@@ -69,7 +69,8 @@ class Pagination
         return $this;
     }
 
-    public function getRoute() {
+    public function getRoute()
+    {
         return $this->route;
     }
 

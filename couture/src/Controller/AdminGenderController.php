@@ -17,7 +17,7 @@ class AdminGenderController extends BaseAdminController
      * @Route("/admin/pattern/gender/{page<\d+>?1}", name="admin_gender")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
@@ -25,8 +25,7 @@ class AdminGenderController extends BaseAdminController
     {
         $pagination->setEntityClass(Gender::class)
             ->setRoute('admin_gender')
-            ->setPage($page)
-            ;
+            ->setPage($page);
         return $this->render('admin/gender/index.html.twig', [
             'pagination' => $pagination,
         ]);
@@ -60,7 +59,7 @@ class AdminGenderController extends BaseAdminController
      * @Route("/admin/pattern/gender/edit/{id}", name="admin_gender_edit")
      *
      * @param Request $request
-     * @param Gender $gender
+     * @param Gender  $gender
      *
      * @return RedirectResponse|Response
      */

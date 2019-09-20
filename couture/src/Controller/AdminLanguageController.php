@@ -19,16 +19,15 @@ class AdminLanguageController extends BaseAdminController
      * @Route("/admin/pattern/language/{page<\d+>?1}", name="admin_language")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
     public function listLanguages(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Language::class)
+        $pagination->setEntityClass(Language::class)
             ->setRoute('admin_language')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/language/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -61,7 +60,7 @@ class AdminLanguageController extends BaseAdminController
     /**
      * @Route("/admin/pattern/language/edit/{id}", name="admin_language_edit")
      *
-     * @param Request $request
+     * @param Request  $request
      * @param Language $language
      *
      * @return RedirectResponse|Response

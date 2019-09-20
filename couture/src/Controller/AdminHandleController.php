@@ -11,23 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class AdminHandleController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/handle/{page<\d+>?1}", name="admin_handle")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
     public function listHandles(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Handle::class)
+        $pagination->setEntityClass(Handle::class)
             ->setRoute('admin_handle')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/handle/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -62,7 +60,7 @@ class AdminHandleController extends BaseAdminController
      * @Route("/admin/version/handle/edit/{id}", name="admin_handle_edit")
      *
      * @param Request $request
-     * @param Handle $handle
+     * @param Handle  $handle
      *
      * @return RedirectResponse|Response
      */
@@ -97,5 +95,4 @@ class AdminHandleController extends BaseAdminController
         $this->addFlash('success', "Manches supprimées avec succès !");
         return $this->redirectToRoute('admin_handle');
     }
-
 }

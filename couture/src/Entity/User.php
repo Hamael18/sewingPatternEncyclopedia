@@ -115,7 +115,7 @@ class User implements UserInterface
     public function removeRole($role)
     {
         $roles = $this->getRoles();
-        $keyRole = array_search($role,$roles);
+        $keyRole = array_search($role, $roles);
         if ($keyRole !== false) {
             unset($roles[$keyRole]);
             return $this->setRoles($roles); // la fin !

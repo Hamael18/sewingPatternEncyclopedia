@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Brand;
 use App\Entity\Pattern;
 use App\Entity\User;

@@ -20,7 +20,6 @@ class AdminStyleController extends BaseController
      * @param            $page
      *
      * @return Response
-
      */
     public function index(Pagination $pagination, $page)
     {

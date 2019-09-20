@@ -33,7 +33,8 @@ class MarquePatternController extends BaseAdminController
         $page,
         Request $request,
         setFilterCriteres $filterCriteres,
-        FilterObjectsBrand $filterObjectsBrand)
+        FilterObjectsBrand $filterObjectsBrand
+    )
     {
         $filter = $filterObjectsBrand->getFilterForPattern($this->getUser());
 

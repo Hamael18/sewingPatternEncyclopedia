@@ -64,7 +64,7 @@ class AdminVersionController extends BaseAdminController
      * @param Version $version
      *
      * @return Response
- */
+     */
     public function showVersion(Version $version)
     {
         return $this->render('admin/version/show.html.twig', [

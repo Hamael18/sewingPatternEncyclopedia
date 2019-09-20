@@ -3,7 +3,6 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Brand;
 use App\Entity\Collar;
 use App\Entity\Fabric;
@@ -135,7 +134,7 @@ class AppFixtures extends Fixture
         $longProvider = ['S2', 'N4', 'L2', 'N6', 'S4', 'L6', 'S6', 'L4', 'N2'];
         $longueurs = [];
 
-        foreach($longProvider as $long) {
+        foreach ($longProvider as $long) {
             $longueur = new Length();
             $longueur   ->setName($long);
             $longueurs[] = $longueur;
@@ -146,7 +145,7 @@ class AppFixtures extends Fixture
         $tailleProvider = [32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56];
         $tailles = [];
 
-        foreach($tailleProvider as $tai) {
+        foreach ($tailleProvider as $tai) {
             $taille = new Size();
             $taille ->setLibelle($tai);
             $tailles[] = $taille;
@@ -157,7 +156,7 @@ class AppFixtures extends Fixture
         $manchesProvider = ['Manches courtes', 'Manches longues'];
         $manches = [];
 
-        foreach($manchesProvider as $man) {
+        foreach ($manchesProvider as $man) {
             $manche = new Handle();
             $manche ->setName($man);
             $manches[] = $manche;
@@ -168,7 +167,7 @@ class AppFixtures extends Fixture
         $tissusProvider = ['Soie', 'Toile', 'Lycra', 'Dentelle', 'Velours'];
         $tissus = [];
 
-        foreach($tissusProvider as $tis) {
+        foreach ($tissusProvider as $tis) {
             $tissu = new Fabric();
             $tissu  ->setName($tis)
                 ->setExtensible($faker->boolean);
@@ -180,7 +179,7 @@ class AppFixtures extends Fixture
         $stylesProvider = ['Décontracté', 'Hiver', 'Automne', 'Plage', 'Montagne', 'Grosse tempête'];
         $styles = [];
 
-        foreach($stylesProvider as $sty) {
+        foreach ($stylesProvider as $sty) {
             $style = new Style();
             $style ->setName($sty);
             $styles[] = $style;

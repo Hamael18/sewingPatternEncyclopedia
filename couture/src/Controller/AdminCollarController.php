@@ -11,23 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class AdminCollarController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/collar/{page<\d+>?1}", name="admin_collar")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
     public function listCollars(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Collar::class)
-                    ->setRoute('admin_collar')
-                    ->setPage($page)
-            ;
+        $pagination->setEntityClass(Collar::class)
+            ->setRoute('admin_collar')
+            ->setPage($page);
         return $this->render('admin/collar/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -62,7 +60,7 @@ class AdminCollarController extends BaseAdminController
      * @Route("/admin/version/collar/edit/{id}", name="admin_collar_edit")
      *
      * @param Request $request
-     * @param Collar $collar
+     * @param Collar  $collar
      *
      * @return RedirectResponse|Response
      */

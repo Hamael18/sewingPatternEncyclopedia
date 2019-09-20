@@ -11,14 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class AdminBrandController extends BaseAdminController
 {
     /**
      * @Route("/admin/brand/{page<\d+>?1}", name="admin_brand")
      *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
      *
      * @return Response
      */
@@ -51,6 +50,7 @@ class AdminBrandController extends BaseAdminController
             $this->addFlash('success', "Marque créé avec succès !");
             return $this->redirectToRoute('admin_brand');
         }
+
         return $this->render('admin/brand/new.html.twig', [
             'form' => $form->createView()
         ]);
@@ -60,7 +60,7 @@ class AdminBrandController extends BaseAdminController
      * @Route("/admin/brand/edit/{id}", name="admin_brand_edit")
      *
      * @param Request $request
-     * @param Brand $brand
+     * @param Brand   $brand
      *
      * @return RedirectResponse|Response
      */
@@ -74,6 +74,7 @@ class AdminBrandController extends BaseAdminController
             $this->addFlash('success', "Marque modifiée avec succès !");
             return $this->redirectToRoute('admin_brand');
         }
+
         return $this->render('admin/brand/edit.html.twig', [
             'form' => $form->createView(),
             'brand' => $brand
@@ -92,6 +93,7 @@ class AdminBrandController extends BaseAdminController
         $this->manager->remove($brand);
         $this->manager->flush();
         $this->addFlash('success', "Marque supprimée avec succès !");
+
         return $this->redirectToRoute('admin_brand');
     }
 
@@ -99,7 +101,7 @@ class AdminBrandController extends BaseAdminController
      * @Route("admin/brand/{id}/add_owner", name="admin_brand_addOwner")
      *
      * @param Request $request
-     * @param Brand $brand
+     * @param Brand   $brand
      *
      * @return RedirectResponse|Response
      */
@@ -111,8 +113,10 @@ class AdminBrandController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
             $this->addFlash('success', "L'utilisateur a été identifié comme propriétaire de la marque");
+
             return $this->redirectToRoute('admin_brand');
         }
+
         return $this->render('admin/brand/addOwner.html.twig', [
             'form' => $form->createView(),
             'brand' => $brand

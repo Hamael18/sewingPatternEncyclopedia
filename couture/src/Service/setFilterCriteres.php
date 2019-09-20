@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Pattern;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,7 +19,7 @@ class setFilterCriteres
     {
         $criteres = [];
         foreach ($dataForm['brand'] as $brand) {
-                $criteres['brand'][] = $brand->getId();
+            $criteres['brand'][] = $brand->getId();
         }
 
         return $this->setPaginationService($criteres, $request);
