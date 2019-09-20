@@ -6,13 +6,20 @@ use App\Entity\Length;
 use App\Form\LengthType;
 use App\Repository\LengthRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLengthController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/length/{page<\d+>?1}", name="admin_length")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function listLengths(Pagination $pagination, $page)
     {
@@ -27,8 +34,10 @@ class AdminLengthController extends BaseAdminController
 
     /**
      * @Route("/admin/version/length/new", name="admin_length_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newCollar(Request $request)
     {
@@ -50,9 +59,11 @@ class AdminLengthController extends BaseAdminController
 
     /**
      * @Route("/admin/version/length/edit/{id}", name="admin_length_edit")
+     *
      * @param Request $request
      * @param Length $length
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editStyle(Request $request, Length $length)
     {
@@ -73,8 +84,10 @@ class AdminLengthController extends BaseAdminController
 
     /**
      * @Route("/admin/version/length/delete/{id}", name="admin_length_delete")
+     *
      * @param Length $length
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteStyle(Length $length)
     {

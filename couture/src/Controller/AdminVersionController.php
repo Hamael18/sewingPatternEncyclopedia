@@ -8,22 +8,26 @@ use App\Form\VersionType;
 use App\Repository\PatternRepository;
 use App\Repository\VersionRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminVersionController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/{page<\d+>?1}", name="admin_version")
-     * @param VersionRepository $repository
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @param Pagination $pagination
+     * @param            $page
+     *
+     * @return Response
      */
     public function listVersions(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Version::class)
+        $pagination->setEntityClass(Version::class)
             ->setRoute('admin_brand')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/version/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -31,8 +35,10 @@ class AdminVersionController extends BaseAdminController
 
     /**
      * @Route("/admin/version/new", name="admin_version_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newVersion(Request $request)
     {
@@ -53,10 +59,12 @@ class AdminVersionController extends BaseAdminController
     }
 
     /**
-     * @param Version $version
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/admin/version/show/{id}", name="admin_version_show")
-     */
+     *
+     * @param Version $version
+     *
+     * @return Response
+ */
     public function showVersion(Version $version)
     {
         return $this->render('admin/version/show.html.twig', [
@@ -66,9 +74,11 @@ class AdminVersionController extends BaseAdminController
 
     /**
      * @Route("/admin/version/edit/{id}", name="admin_version_edit")
+     *
      * @param Request $request
      * @param Version $version
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editVersion(Request $request, Version $version)
     {
@@ -90,8 +100,10 @@ class AdminVersionController extends BaseAdminController
 
     /**
      * @Route("/admin/version/delete/{id}", name="admin_version_delete")
+     *
      * @param Version $version
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteVersion(Version $version)
     {

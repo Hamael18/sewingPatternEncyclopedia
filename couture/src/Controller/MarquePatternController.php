@@ -20,10 +20,10 @@ class MarquePatternController extends BaseAdminController
     /**
      * @Route("/marque/pattern/{page<\d+>?1}", name="marque_pattern")
      *
-     * @param Pagination $pagination
-     * @param $page
-     * @param Request $request
-     * @param setFilterCriteres $filterCriteres
+     * @param Pagination         $pagination
+     * @param                    $page
+     * @param Request            $request
+     * @param setFilterCriteres  $filterCriteres
      * @param FilterObjectsBrand $filterObjectsBrand
      *
      * @return Response
@@ -37,12 +37,11 @@ class MarquePatternController extends BaseAdminController
     {
         $filter = $filterObjectsBrand->getFilterForPattern($this->getUser());
 
-        $pagination ->setEntityClass(Pattern::class)
-                    ->setRoute('marque_pattern')
-                    ->setPage($page)
-                    ->setCriteres($filter)
-                    ->setOrder(['brand' => 'DESC'])
-        ;
+        $pagination->setEntityClass(Pattern::class)
+            ->setRoute('marque_pattern')
+            ->setPage($page)
+            ->setCriteres($filter)
+            ->setOrder(['brand' => 'DESC']);
 
         $form = $this->createForm(SearchPatternType::class);
         $form->handleRequest($request);
@@ -64,7 +63,9 @@ class MarquePatternController extends BaseAdminController
 
     /**
      * @Route("/marque/pattern/new", name="marque_pattern_new")
+     *
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function newPattern(Request $request)
@@ -87,8 +88,10 @@ class MarquePatternController extends BaseAdminController
 
     /**
      * @Route("/marque/pattern/add_version/{id}", name="marque_pattern_addVersion")
+     *
      * @param Request $request
      * @param Pattern $pattern
+     *
      * @return RedirectResponse|Response
      */
     public function addVersionPattern(Request $request, Pattern $pattern)
@@ -114,8 +117,10 @@ class MarquePatternController extends BaseAdminController
 
     /**
      * @Route("/marque/pattern/edit/{id}", name="marque_pattern_edit")
+     *
      * @param Request $request
      * @param Pattern $pattern
+     *
      * @return RedirectResponse|Response
      */
     public function editPattern(Request $request, Pattern $pattern)
@@ -137,7 +142,9 @@ class MarquePatternController extends BaseAdminController
 
     /**
      * @Route("/marque/pattern/delete/{id}", name="marque_pattern_delete")
+     *
      * @param Pattern $pattern
+     *
      * @return RedirectResponse
      */
     public function deletePattern(Pattern $pattern)

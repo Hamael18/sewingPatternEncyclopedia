@@ -6,7 +6,9 @@ use App\Entity\Handle;
 use App\Form\HandleType;
 use App\Repository\HandleRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -14,6 +16,11 @@ class AdminHandleController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/handle/{page<\d+>?1}", name="admin_handle")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function listHandles(Pagination $pagination, $page)
     {
@@ -28,8 +35,10 @@ class AdminHandleController extends BaseAdminController
 
     /**
      * @Route("/admin/version/handle/new", name="admin_handle_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newCollar(Request $request)
     {
@@ -51,9 +60,11 @@ class AdminHandleController extends BaseAdminController
 
     /**
      * @Route("/admin/version/handle/edit/{id}", name="admin_handle_edit")
+     *
      * @param Request $request
      * @param Handle $handle
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editStyle(Request $request, Handle $handle)
     {
@@ -74,8 +85,10 @@ class AdminHandleController extends BaseAdminController
 
     /**
      * @Route("/admin/version/handle/delete/{id}", name="admin_handle_delete")
+     *
      * @param Handle $handle
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteStyle(Handle $handle)
     {

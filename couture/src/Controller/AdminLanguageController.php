@@ -8,13 +8,20 @@ use App\Repository\LanguageRepository;
 use App\Service\Pagination;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLanguageController extends BaseAdminController
 {
     /**
      * @Route("/admin/pattern/language/{page<\d+>?1}", name="admin_language")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function listLanguages(Pagination $pagination, $page)
     {
@@ -26,8 +33,13 @@ class AdminLanguageController extends BaseAdminController
             'pagination' => $pagination
         ]);
     }
+
     /**
      * @Route("/admin/pattern/language/new", name="admin_language_new")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function newLanguage(Request $request)
     {
@@ -48,9 +60,11 @@ class AdminLanguageController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/language/edit/{id}", name="admin_language_edit")
+     *
      * @param Request $request
      * @param Language $language
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editLanguage(Request $request, Language $language)
     {
@@ -70,8 +84,10 @@ class AdminLanguageController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/language/delete/{id}", name="admin_language_delete")
+     *
      * @param Language $language
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteLanguage(Language $language)
     {

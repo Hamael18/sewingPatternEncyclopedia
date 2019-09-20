@@ -18,16 +18,16 @@ class AdminUserController extends BaseAdminController
      * @Route("/admin/user/{page<\d+>?1}", name="admin_user")
      *
      * @param Pagination $pagination
-     * @param $page
-     * @param Request $request
+     * @param            $page
+     * @param Request    $request
      *
      * @return Response
      */
     public function listUsers(Pagination $pagination, $page, Request $request)
     {
         $pagination->setEntityClass(User::class)
-                   ->setRoute('admin_user')
-                   ->setPage($page);
+            ->setRoute('admin_user')
+            ->setPage($page);
 
         $form = $this->createForm(AdminSearchUserType::class);
         $form->handleRequest($request);
@@ -57,7 +57,7 @@ class AdminUserController extends BaseAdminController
      * @Route("/admin/user/{id}/add_role/{role}", name="admin_user_addRole")
      *
      * @param User $user
-     * @param $role
+     * @param      $role
      *
      * @return RedirectResponse
      */
@@ -65,11 +65,11 @@ class AdminUserController extends BaseAdminController
     {
         $add = $user->addRole($role);
         if ($add == false) {
-            $this->addFlash('warning', "Cet utilisateur dispose déjà du droit ".$role);
+            $this->addFlash('warning', "Cet utilisateur dispose déjà du droit " . $role);
             return $this->redirectToRoute('admin_user');
         }
         $this->manager->flush();
-        $this->addFlash('success', "Utilisateur pourvu du ".$role);
+        $this->addFlash('success', "Utilisateur pourvu du " . $role);
         return $this->redirectToRoute('admin_user');
     }
 
@@ -77,7 +77,7 @@ class AdminUserController extends BaseAdminController
      * @Route("/admin/user/{id}/remove_role/{role}", name="admin_user_removeRole")
      *
      * @param User $user
-     * @param $role
+     * @param      $role
      *
      * @return RedirectResponse
      */
@@ -85,11 +85,11 @@ class AdminUserController extends BaseAdminController
     {
         $remove = $user->removeRole($role);
         if ($remove == false) {
-            $this->addFlash('warning', "Cet utilisateur ne possède pas le".$role);
+            $this->addFlash('warning', "Cet utilisateur ne possède pas le" . $role);
             return $this->redirectToRoute('admin_user');
         }
         $this->manager->flush();
-        $this->addFlash('success', "Cet utilisateur n'a plus le role".$role);
+        $this->addFlash('success', "Cet utilisateur n'a plus le role" . $role);
         return $this->redirectToRoute('admin_user');
     }
 
@@ -97,7 +97,7 @@ class AdminUserController extends BaseAdminController
      * @Route("/admin/user/{id}/addBrands", name="admin_user_addBrands")
      *
      * @param Request $request
-     * @param User $user
+     * @param User    $user
      *
      * @return RedirectResponse|Response
      */
@@ -135,7 +135,7 @@ class AdminUserController extends BaseAdminController
     public function showUser(User $user)
     {
         return $this->render('admin/user/show.html.twig', [
-           'user' => $user
+            'user' => $user
         ]);
     }
 }

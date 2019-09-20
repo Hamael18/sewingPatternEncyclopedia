@@ -6,13 +6,20 @@ use App\Entity\Level;
 use App\Form\NewLevelType;
 use App\Repository\LevelRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLevelController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/level/{page<\d+>?1}", name="admin_level")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function listLevels(Pagination $pagination, $page)
     {
@@ -27,8 +34,10 @@ class AdminLevelController extends BaseAdminController
 
     /**
      * @Route("/admin/version/level/new", name="admin_level_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newLevel(Request $request)
     {
@@ -50,9 +59,11 @@ class AdminLevelController extends BaseAdminController
 
     /**
      * @Route("/admin/version/level/edit/{id}", name="admin_level_edit")
+     *
      * @param Request $request
      * @param Level $level
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editLevel(Request $request, Level $level)
     {
@@ -73,8 +84,10 @@ class AdminLevelController extends BaseAdminController
 
     /**
      * @Route("/admin/version/level/delete/{id}", name="admin_level_delete")
+     *
      * @param Level $level
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteLevel(Level $level)
     {

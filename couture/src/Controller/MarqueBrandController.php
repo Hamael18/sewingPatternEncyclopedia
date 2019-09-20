@@ -14,7 +14,9 @@ class MarqueBrandController extends BaseAdminController
 {
     /**
      * @Route("/marque/brand/{slug}", name="marque_brand_homepage")
+     *
      * @param Brand $brand
+     *
      * @return Response
      */
     public function showBrand(Brand $brand)
@@ -26,17 +28,18 @@ class MarqueBrandController extends BaseAdminController
 
     /**
      * @Route("/marque/brand/{page<\d+>?1}", name="marque_brand")
+     *
      * @param Pagination $pagination
-     * @param $page
+     * @param            $page
+     *
      * @return Response
      */
     public function listBrands(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Brand::class)
-                    ->setRoute('marque_brand')
-                    ->setPage($page)
-                    ->setCriteres(['owner' => $this->getUser()->getId()])
-        ;
+        $pagination->setEntityClass(Brand::class)
+            ->setRoute('marque_brand')
+            ->setPage($page)
+            ->setCriteres(['owner' => $this->getUser()->getId()]);
 
         return $this->render('marque/brand/index.html.twig', [
             'pagination' => $pagination
@@ -45,8 +48,10 @@ class MarqueBrandController extends BaseAdminController
 
     /**
      * @Route("/marque/brand/edit/{id}", name="marque_brand_edit")
+     *
      * @param Request $request
-     * @param Brand $brand
+     * @param Brand   $brand
+     *
      * @return RedirectResponse|Response
      */
     public function editBrand(Request $request, Brand $brand)
@@ -68,7 +73,9 @@ class MarqueBrandController extends BaseAdminController
 
     /**
      * @Route("/marque/brand/delete/{id}", name="marque_brand_delete")
+     *
      * @param Brand $brand
+     *
      * @return RedirectResponse
      */
     public function deleteBrand(Brand $brand)

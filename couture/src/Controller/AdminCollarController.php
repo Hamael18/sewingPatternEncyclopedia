@@ -16,8 +16,10 @@ class AdminCollarController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/collar/{page<\d+>?1}", name="admin_collar")
+     *
      * @param Pagination $pagination
      * @param $page
+     *
      * @return Response
      */
     public function listCollars(Pagination $pagination, $page)
@@ -33,7 +35,9 @@ class AdminCollarController extends BaseAdminController
 
     /**
      * @Route("/admin/version/collar/new", name="admin_collar_new")
+     *
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function newCollar(Request $request)
@@ -56,8 +60,10 @@ class AdminCollarController extends BaseAdminController
 
     /**
      * @Route("/admin/version/collar/edit/{id}", name="admin_collar_edit")
+     *
      * @param Request $request
      * @param Collar $collar
+     *
      * @return RedirectResponse|Response
      */
     public function editStyle(Request $request, Collar $collar)
@@ -79,7 +85,9 @@ class AdminCollarController extends BaseAdminController
 
     /**
      * @Route("/admin/version/collar/delete/{id}", name="admin_collar_delete")
+     *
      * @param Collar $collar
+     *
      * @return RedirectResponse
      */
     public function deleteStyle(Collar $collar)

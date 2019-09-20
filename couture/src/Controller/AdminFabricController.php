@@ -6,13 +6,20 @@ use App\Entity\Fabric;
 use App\Form\FabricType;
 use App\Repository\FabricRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminFabricController extends BaseController
 {
     /**
      * @Route("/admin/version/fabric/{page<\d+>?1}", name="admin_fabric")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function index(Pagination $pagination, $page)
     {
@@ -27,8 +34,10 @@ class AdminFabricController extends BaseController
 
     /**
      * @Route("/admin/version/fabric/new", name="admin_fabric_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newFabric(Request $request)
     {
@@ -50,9 +59,11 @@ class AdminFabricController extends BaseController
 
     /**
      * @Route("/admin/version/fabric/edit/{id}", name="admin_fabric_edit")
+     *
      * @param Request $request
      * @param Fabric $fabric
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editFabric(Request $request, Fabric $fabric)
     {
@@ -73,8 +84,10 @@ class AdminFabricController extends BaseController
 
     /**
      * @Route("/admin/version/fabric/delete/{id}", name="admin_fabric_delete")
+     *
      * @param Fabric $fabric
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteFabric(Fabric $fabric)
     {

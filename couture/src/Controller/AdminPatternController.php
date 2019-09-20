@@ -10,15 +10,20 @@ use App\Repository\PatternRepository;
 use App\Service\Pagination;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminPatternController extends BaseAdminController
 {
     /**
      * @Route("/admin/pattern/{page<\d+>?1}", name="admin_pattern")
-     * @param PatternRepository $patternRepository
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function listPatterns(Pagination $pagination, $page)
     {
@@ -33,8 +38,10 @@ class AdminPatternController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/new", name="admin_pattern_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newPattern(Request $request)
     {
@@ -61,9 +68,11 @@ class AdminPatternController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/edit/{id}", name="admin_pattern_edit")
+     *
      * @param Request $request
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editPattern(Request $request, Pattern $pattern)
     {
@@ -84,8 +93,10 @@ class AdminPatternController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/delete/{id}", name="admin_pattern_delete")
+     *
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deletePattern(Pattern $pattern)
     {
@@ -97,9 +108,11 @@ class AdminPatternController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/add_version/{id}", name="admin_pattern_addVersion")
+     *
      * @param Request $request
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function addVersionToPattern(Request $request, Pattern $pattern)
     {
@@ -124,8 +137,10 @@ class AdminPatternController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/show/{id}", name="admin_pattern_show")
+     *
      * @param Pattern $pattern
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function showPattern(Pattern $pattern)
     {

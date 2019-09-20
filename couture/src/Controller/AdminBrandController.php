@@ -6,7 +6,9 @@ use App\Entity\Brand;
 use App\Form\BrandOwnerType;
 use App\Form\BrandType;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -14,13 +16,17 @@ class AdminBrandController extends BaseAdminController
 {
     /**
      * @Route("/admin/brand/{page<\d+>?1}", name="admin_brand")
+     *
+     * @param Pagination $pagination
+     * @param $page
+     *
+     * @return Response
      */
     public function listBrand(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Brand::class)
-                    ->setRoute('admin_brand')
-                    ->setPage($page)
-        ;
+        $pagination->setEntityClass(Brand::class)
+            ->setRoute('admin_brand')
+            ->setPage($page);
         return $this->render('admin/brand/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -28,6 +34,10 @@ class AdminBrandController extends BaseAdminController
 
     /**
      * @Route("/admin/brand/new", name="admin_brand_new")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function createBrand(Request $request)
     {
@@ -48,9 +58,11 @@ class AdminBrandController extends BaseAdminController
 
     /**
      * @Route("/admin/brand/edit/{id}", name="admin_brand_edit")
+     *
      * @param Request $request
      * @param Brand $brand
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function editBrand(Request $request, Brand $brand)
     {
@@ -70,8 +82,10 @@ class AdminBrandController extends BaseAdminController
 
     /**
      * @Route("/admin/brand/delete/{id}", name="admin_brand_delete")
+     *
      * @param Brand $brand
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteBrand(Brand $brand)
     {
@@ -83,6 +97,11 @@ class AdminBrandController extends BaseAdminController
 
     /**
      * @Route("admin/brand/{id}/add_owner", name="admin_brand_addOwner")
+     *
+     * @param Request $request
+     * @param Brand $brand
+     *
+     * @return RedirectResponse|Response
      */
     public function addOwner(Request $request, Brand $brand)
     {
