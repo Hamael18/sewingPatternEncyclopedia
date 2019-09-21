@@ -6,20 +6,26 @@ use App\Entity\Level;
 use App\Form\NewLevelType;
 use App\Repository\LevelRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLevelController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/level/{page<\d+>?1}", name="admin_level")
+     *
+     * @param Pagination $pagination
+     * @param            $page
+     *
+     * @return Response
      */
     public function listLevels(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Level::class)
+        $pagination->setEntityClass(Level::class)
             ->setRoute('admin_level')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/level/list.html.twig', [
             'pagination' => $pagination
         ]);
@@ -27,13 +33,15 @@ class AdminLevelController extends BaseAdminController
 
     /**
      * @Route("/admin/version/level/new", name="admin_level_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newLevel(Request $request)
     {
         $level = new Level();
-        $form= $this->createForm(NewLevelType::class, $level);
+        $form = $this->createForm(NewLevelType::class, $level);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -50,13 +58,15 @@ class AdminLevelController extends BaseAdminController
 
     /**
      * @Route("/admin/version/level/edit/{id}", name="admin_level_edit")
+     *
      * @param Request $request
-     * @param Level $level
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Level   $level
+     *
+     * @return RedirectResponse|Response
      */
     public function editLevel(Request $request, Level $level)
     {
-        $form= $this->createForm(NewLevelType::class, $level);
+        $form = $this->createForm(NewLevelType::class, $level);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,8 +83,10 @@ class AdminLevelController extends BaseAdminController
 
     /**
      * @Route("/admin/version/level/delete/{id}", name="admin_level_delete")
+     *
      * @param Level $level
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteLevel(Level $level)
     {

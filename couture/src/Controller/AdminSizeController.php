@@ -6,22 +6,26 @@ use App\Entity\Size;
 use App\Form\SizeType;
 use App\Repository\SizeRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminSizeController extends BaseAdminController
 {
     /**
      * @Route("/admin/version/size/{page<\d+>?1}", name="admin_size")
-     * @param SizeRepository $repository
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @param Pagination $pagination
+     * @param            $page
+     *
+     * @return Response
      */
     public function listSizes(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Size::class)
+        $pagination->setEntityClass(Size::class)
             ->setRoute('admin_size')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/size/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -29,13 +33,15 @@ class AdminSizeController extends BaseAdminController
 
     /**
      * @Route("/admin/version/size/new", name="admin_size_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newSize(Request $request)
     {
         $size = new Size();
-        $form= $this->createForm(SizeType::class, $size);
+        $form = $this->createForm(SizeType::class, $size);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,13 +58,15 @@ class AdminSizeController extends BaseAdminController
 
     /**
      * @Route("/admin/version/size/edit/{id}", name="admin_size_edit")
+     *
      * @param Request $request
-     * @param Size $size
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Size    $size
+     *
+     * @return RedirectResponse|Response
      */
     public function editSize(Request $request, Size $size)
     {
-        $form= $this->createForm(SizeType::class, $size);
+        $form = $this->createForm(SizeType::class, $size);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,8 +83,10 @@ class AdminSizeController extends BaseAdminController
 
     /**
      * @Route("/admin/version/size/delete/{id}", name="admin_size_delete")
+     *
      * @param Size $size
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteSize(Size $size)
     {

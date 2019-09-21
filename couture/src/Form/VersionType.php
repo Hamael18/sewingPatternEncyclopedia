@@ -23,7 +23,8 @@ class VersionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $isNew = (!$builder->getData()->getPattern());
-        if ($isNew) $builder
+        if ($isNew) {
+            $builder
             ->add('pattern', EntityType::class, [
                 'label' => false,
                 'class' => Pattern::class,
@@ -34,6 +35,7 @@ class VersionType extends AbstractType
                 ]
             ])
         ;
+        }
         $builder
             ->add('name', TextType::class, [
                 'label' => false,

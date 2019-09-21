@@ -3,7 +3,6 @@
 
 namespace App\Form;
 
-
 use App\Entity\Brand;
 use App\Repository\BrandRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

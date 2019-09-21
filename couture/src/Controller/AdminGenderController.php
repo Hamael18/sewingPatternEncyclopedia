@@ -6,22 +6,26 @@ use App\Entity\Gender;
 use App\Form\NewGenderType;
 use App\Repository\GenderRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminGenderController extends BaseAdminController
 {
     /**
      * @Route("/admin/pattern/gender/{page<\d+>?1}", name="admin_gender")
-     * @param GenderRepository $genderRepository
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @param Pagination $pagination
+     * @param            $page
+     *
+     * @return Response
      */
     public function listGenders(Pagination $pagination, $page)
     {
         $pagination->setEntityClass(Gender::class)
             ->setRoute('admin_gender')
-            ->setPage($page)
-            ;
+            ->setPage($page);
         return $this->render('admin/gender/index.html.twig', [
             'pagination' => $pagination,
         ]);
@@ -29,8 +33,10 @@ class AdminGenderController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/gender/new", name="admin_gender_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newGender(Request $request)
     {
@@ -51,9 +57,11 @@ class AdminGenderController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/gender/edit/{id}", name="admin_gender_edit")
+     *
      * @param Request $request
-     * @param Gender $gender
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Gender  $gender
+     *
+     * @return RedirectResponse|Response
      */
     public function editBrand(Request $request, Gender $gender)
     {
@@ -73,8 +81,10 @@ class AdminGenderController extends BaseAdminController
 
     /**
      * @Route("/admin/pattern/gender/delete/{id}", name="admin_gender_delete")
+     *
      * @param Gender $gender
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteBrand(Gender $gender)
     {

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BaseController extends AbstractController
@@ -17,7 +18,8 @@ class BaseController extends AbstractController
 
     /**
      * @Route("/", name="homepage")
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function accueil()
     {

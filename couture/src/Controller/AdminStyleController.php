@@ -6,23 +6,26 @@ use App\Entity\Style;
 use App\Form\StyleType;
 use App\Repository\StyleRepository;
 use App\Service\Pagination;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminStyleController extends BaseController
 {
     /**
-     * @param Pagination $pagination
-     * @param $page
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/admin/version/style/{page<\d+>?1}", name="admin_style")
+     *
+     * @param Pagination $pagination
+     * @param            $page
+     *
+     * @return Response
      */
     public function index(Pagination $pagination, $page)
     {
-        $pagination ->setEntityClass(Style::class)
+        $pagination->setEntityClass(Style::class)
             ->setRoute('admin_style')
-            ->setPage($page)
-        ;
+            ->setPage($page);
         return $this->render('admin/style/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -30,8 +33,10 @@ class AdminStyleController extends BaseController
 
     /**
      * @Route("/admin/version/style/new", name="admin_style_new")
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return RedirectResponse|Response
      */
     public function newStyle(Request $request)
     {
@@ -53,9 +58,11 @@ class AdminStyleController extends BaseController
 
     /**
      * @Route("/admin/version/style/edit/{id}", name="admin_style_edit")
+     *
      * @param Request $request
-     * @param Style $style
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Style   $style
+     *
+     * @return RedirectResponse|Response
      */
     public function editStyle(Request $request, Style $style)
     {
@@ -76,8 +83,10 @@ class AdminStyleController extends BaseController
 
     /**
      * @Route("/admin/version/style/delete/{id}", name="admin_style_delete")
+     *
      * @param Style $style
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @return RedirectResponse
      */
     public function deleteStyle(Style $style)
     {

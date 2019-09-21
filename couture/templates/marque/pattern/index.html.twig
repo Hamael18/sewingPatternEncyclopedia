@@ -1,13 +1,13 @@
 {% extends 'marque/layout.html.twig' %}
 
-{% block title %}Patterns - Liste{% endblock %}
+{% block title %}Liste des patrons de couture{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('bootstrap-select-css') }}
 {% endblock %}
 
 {% block content %}
-    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des patterns</h1></div>
+    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des patrons de couture</h1></div>
 
     {{ form_start(form) }}
     <div class="row">
@@ -17,7 +17,7 @@
     </div>
     {{ form_end(form) }}
 
-    <div class="row my-3">
+    <div class="row my-3 ml-5">
         {% for pattern in pagination.data %}
             <div class="card col-lg-3 m-2 p-0">
                 <div class="card-header bg-dark text-center">
@@ -40,13 +40,15 @@
                             <a class="btn btn-primary col-9" data-toggle="collapse" href="#collapse-{{ pattern.id }}" role="button" aria-expanded="false" aria-controls="collapse-{{ pattern.id }}">
                                 Versions : {{ pattern.versions | length }}
                             </a>
+                            <a href="{{ path('marque_pattern_addVersion', {'id': pattern.id }) }}" title="Ajouter une version au patron {{ pattern }}"
+                               class="btn btn-dark offset-1 col-2"><i class="fas fa-plus"></i></a>
                         {% else %}
                             <a class="btn btn-primary col-9" data-toggle="collapse">
                                 Versions : {{ pattern.versions | length }}
                             </a>
+                            <a href="{{ path('marque_pattern_addVersion', {'id': pattern.id }) }}" title="Ajouter une version au patron {{ pattern }}"
+                               class="btn btn-dark offset-1 col-2"><i class="fas fa-plus"></i></a>
                         {% endif %}
-                        <a href="{{ path('marque_pattern_addVersion', {'id': pattern.id }) }}" title="Ajouter une version au patron {{ pattern }}"
-                           class="btn btn-success col-2 offset-1"><i class="fas fa-plus"></i></a>
                     </div>
                     </p>
                     <div class="collapse" id="collapse-{{ pattern.id }}">
@@ -60,15 +62,13 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <div class="row d-flex justify-content-center">
-                        <a href="{{ path('marque_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary mx-2" title="Editer le patron {{ pattern }}">
+                    <div class="row my-2 card-body justify-content-around">
+                        <a href="{{ path('marque_pattern_edit', {'id': pattern.id}) }}" class="btn btn-light col-3" title="Editer le patron {{ pattern }}">
                             <i class="fas fa-wrench"></i></a>
                         {% if pattern.canBeDeleted %}
                             <a href="{{ path('marque_pattern_delete', {'id': pattern.id }) }}"
                                onclick="return confirm('Supprimer ce pattern ?')" title="Supprimer le patron {{ pattern }}"
-                               class="btn btn-outline-danger mx-2"><i class="fa fa-trash"></i></a>
+                               class="btn btn-light col-3"><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </div>
                 </div>
