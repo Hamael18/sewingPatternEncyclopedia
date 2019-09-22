@@ -54,7 +54,6 @@ class MarquePatternController extends BaseAdminController
             ]);
         }
         $this->session->remove('Filter');
-        dump($_SESSION);
 
         return $this->render('marque/pattern/index.html.twig', [
             'pagination' => $pagination,
