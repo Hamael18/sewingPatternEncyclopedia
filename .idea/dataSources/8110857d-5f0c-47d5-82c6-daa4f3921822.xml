@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="MySQL - sewingPatternEncyclopedia@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.15">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.16">
     <root id="1">
-      <ServerVersion>5.7.24</ServerVersion>
+      <ServerVersion>5.7.27</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <DefaultCasing>lower/lower</DefaultCasing>
+      <DefaultCasing>exact</DefaultCasing>
     </root>
     <schema id="2" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
@@ -16,9 +16,8 @@
     <schema id="4" parent="1" name="performance_schema">
       <Collation>utf8_general_ci</Collation>
     </schema>
-    <schema id="5" parent="1" name="sewingpatternencyclopedia">
+    <schema id="5" parent="1" name="sewingPatternEncyclopedia">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>latin1_swedish_ci</Collation>
     </schema>
     <schema id="6" parent="1" name="sys">
@@ -915,80 +914,756 @@
     <table id="229" parent="5" name="brand">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="230" parent="5" name="migration_versions">
+    <table id="230" parent="5" name="collar">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <table id="231" parent="5" name="pattern">
+    <table id="231" parent="5" name="fabric">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <column id="232" parent="229" name="id">
+    <table id="232" parent="5" name="gender">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="233" parent="5" name="handle">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="234" parent="5" name="language">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="235" parent="5" name="length">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="236" parent="5" name="level">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="237" parent="5" name="migration_versions">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="238" parent="5" name="pattern">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="239" parent="5" name="pattern_gender">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="240" parent="5" name="pattern_language">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="241" parent="5" name="size">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="242" parent="5" name="style">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="243" parent="5" name="user">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="244" parent="5" name="version">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="245" parent="5" name="version_collar">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="246" parent="5" name="version_fabric">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="247" parent="5" name="version_handle">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="248" parent="5" name="version_length">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="249" parent="5" name="version_size">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="250" parent="5" name="version_style">
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <column id="251" parent="229" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="233" parent="229" name="name">
+    <column id="252" parent="229" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="234" parent="229" name="PRIMARY">
+    <column id="253" parent="229" name="url">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="254" parent="229" name="image">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="255" parent="229" name="updated_at">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="256" parent="229" name="owner_id">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="257" parent="229" name="description">
+      <Position>7</Position>
+      <DataType>longtext|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="258" parent="229" name="IDX_1C52F9587E3C61F9">
+      <ColNames>owner_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="259" parent="229" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="235" parent="230" name="version">
+    <foreign-key id="260" parent="229" name="FK_1C52F9587E3C61F9">
+      <ColNames>owner_id</ColNames>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="261" parent="230" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="262" parent="230" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="263" parent="230" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="264" parent="231" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="265" parent="231" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="266" parent="231" name="extensible">
+      <Position>3</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="267" parent="231" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="268" parent="232" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="269" parent="232" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="270" parent="232" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="271" parent="233" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="272" parent="233" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="273" parent="233" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="274" parent="234" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="275" parent="234" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="276" parent="234" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="277" parent="235" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="278" parent="235" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="279" parent="235" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="280" parent="236" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="281" parent="236" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="282" parent="236" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="283" parent="237" name="version">
       <Position>1</Position>
       <DataType>varchar(14)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="236" parent="230" name="executed_at">
+    <column id="284" parent="237" name="executed_at">
       <Position>2</Position>
       <Comment>(DC2Type:datetime_immutable)</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="237" parent="230" name="PRIMARY">
+    <key id="285" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>version</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="238" parent="231" name="id">
+    <column id="286" parent="238" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="231" name="name">
+    <column id="287" parent="238" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="231" name="price">
+    <column id="288" parent="238" name="price">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="241" parent="231" name="description">
+    <column id="289" parent="238" name="description">
       <Position>4</Position>
       <DataType>longtext|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="231" name="lien">
+    <column id="290" parent="238" name="lien">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="243" parent="231" name="PRIMARY">
+    <column id="291" parent="238" name="brand_id">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="292" parent="238" name="IDX_A3BCFC8E44F5D008">
+      <ColNames>brand_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="293" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="294" parent="238" name="FK_A3BCFC8E44F5D008">
+      <ColNames>brand_id</ColNames>
+      <RefTableName>brand</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="295" parent="239" name="pattern_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="296" parent="239" name="gender_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="297" parent="239" name="IDX_EE4F6F2F734A20F">
+      <ColNames>pattern_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="298" parent="239" name="IDX_EE4F6F2708A0E0">
+      <ColNames>gender_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="299" parent="239" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>pattern_id
+gender_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="300" parent="239" name="FK_EE4F6F2F734A20F">
+      <ColNames>pattern_id</ColNames>
+      <RefTableName>pattern</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="301" parent="239" name="FK_EE4F6F2708A0E0">
+      <ColNames>gender_id</ColNames>
+      <RefTableName>gender</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="302" parent="240" name="pattern_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="303" parent="240" name="language_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="304" parent="240" name="IDX_8415A899F734A20F">
+      <ColNames>pattern_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="305" parent="240" name="IDX_8415A89982F1BAF4">
+      <ColNames>language_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="306" parent="240" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>pattern_id
+language_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="307" parent="240" name="FK_8415A899F734A20F">
+      <ColNames>pattern_id</ColNames>
+      <RefTableName>pattern</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="308" parent="240" name="FK_8415A89982F1BAF4">
+      <ColNames>language_id</ColNames>
+      <RefTableName>language</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="309" parent="241" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="310" parent="241" name="libelle">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="311" parent="241" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="312" parent="242" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="313" parent="242" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="314" parent="242" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="315" parent="243" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="316" parent="243" name="email">
+      <Position>2</Position>
+      <DataType>varchar(180)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="317" parent="243" name="roles">
+      <Position>3</Position>
+      <DataType>json|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="318" parent="243" name="password">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="319" parent="243" name="UNIQ_8D93D649E7927C74">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="320" parent="243" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="321" parent="243" name="UNIQ_8D93D649E7927C74">
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>UNIQ_8D93D649E7927C74</UnderlyingIndexName>
+    </key>
+    <column id="322" parent="244" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="323" parent="244" name="pattern_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="324" parent="244" name="level_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="325" parent="244" name="name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="326" parent="244" name="image">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="327" parent="244" name="updated_at">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="328" parent="244" name="IDX_BF1CD3C3F734A20F">
+      <ColNames>pattern_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="329" parent="244" name="IDX_BF1CD3C35FB14BA7">
+      <ColNames>level_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="330" parent="244" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="331" parent="244" name="FK_BF1CD3C3F734A20F">
+      <ColNames>pattern_id</ColNames>
+      <RefTableName>pattern</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="332" parent="244" name="FK_BF1CD3C35FB14BA7">
+      <ColNames>level_id</ColNames>
+      <RefTableName>level</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="333" parent="245" name="version_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="334" parent="245" name="collar_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="335" parent="245" name="IDX_A67D24994BBC2705">
+      <ColNames>version_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="336" parent="245" name="IDX_A67D24994568D8A0">
+      <ColNames>collar_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="337" parent="245" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_id
+collar_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="338" parent="245" name="FK_A67D24994BBC2705">
+      <ColNames>version_id</ColNames>
+      <RefTableName>version</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="339" parent="245" name="FK_A67D24994568D8A0">
+      <ColNames>collar_id</ColNames>
+      <RefTableName>collar</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="340" parent="246" name="version_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="341" parent="246" name="fabric_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="342" parent="246" name="IDX_1D8E58F84BBC2705">
+      <ColNames>version_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="343" parent="246" name="IDX_1D8E58F8AB43EC50">
+      <ColNames>fabric_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="344" parent="246" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_id
+fabric_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="345" parent="246" name="FK_1D8E58F84BBC2705">
+      <ColNames>version_id</ColNames>
+      <RefTableName>version</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="346" parent="246" name="FK_1D8E58F8AB43EC50">
+      <ColNames>fabric_id</ColNames>
+      <RefTableName>fabric</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="347" parent="247" name="version_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="348" parent="247" name="handle_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="349" parent="247" name="IDX_E1ED08824BBC2705">
+      <ColNames>version_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="350" parent="247" name="IDX_E1ED08829C256C9C">
+      <ColNames>handle_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="351" parent="247" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_id
+handle_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="352" parent="247" name="FK_E1ED08824BBC2705">
+      <ColNames>version_id</ColNames>
+      <RefTableName>version</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="353" parent="247" name="FK_E1ED08829C256C9C">
+      <ColNames>handle_id</ColNames>
+      <RefTableName>handle</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="354" parent="248" name="version_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="355" parent="248" name="length_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="356" parent="248" name="IDX_7110B6E94BBC2705">
+      <ColNames>version_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="357" parent="248" name="IDX_7110B6E961ED455A">
+      <ColNames>length_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="358" parent="248" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_id
+length_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="359" parent="248" name="FK_7110B6E94BBC2705">
+      <ColNames>version_id</ColNames>
+      <RefTableName>version</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="360" parent="248" name="FK_7110B6E961ED455A">
+      <ColNames>length_id</ColNames>
+      <RefTableName>length</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="361" parent="249" name="version_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="362" parent="249" name="size_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="363" parent="249" name="IDX_46D0386E4BBC2705">
+      <ColNames>version_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="364" parent="249" name="IDX_46D0386E498DA827">
+      <ColNames>size_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="365" parent="249" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_id
+size_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="366" parent="249" name="FK_46D0386E4BBC2705">
+      <ColNames>version_id</ColNames>
+      <RefTableName>version</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="367" parent="249" name="FK_46D0386E498DA827">
+      <ColNames>size_id</ColNames>
+      <RefTableName>size</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="368" parent="250" name="version_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="369" parent="250" name="style_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="370" parent="250" name="IDX_34616C6F4BBC2705">
+      <ColNames>version_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="371" parent="250" name="IDX_34616C6FBACD6074">
+      <ColNames>style_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="372" parent="250" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_id
+style_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="373" parent="250" name="FK_34616C6F4BBC2705">
+      <ColNames>version_id</ColNames>
+      <RefTableName>version</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="374" parent="250" name="FK_34616C6FBACD6074">
+      <ColNames>style_id</ColNames>
+      <RefTableName>style</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
   </database-model>
 </dataSource>
