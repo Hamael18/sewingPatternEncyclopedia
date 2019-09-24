@@ -1,0 +1,20 @@
+{% block javascripts %}
+    {{ encore_entry_script_tags('search') }}
+{% endblock %}
+
+{% block main %}
+    <form action="{{ path('searchTest') }}" method="get">
+        <div class="form-group">
+            <input name="q"
+                   class="form-control search-field"
+                   placeholder="{{ 'post.search_for'|trans }}"
+                   autocomplete="off"
+                   autofocus
+                   data-no-results-message="{{ 'post.search_no_results'|trans }}"
+            >
+        </div>
+    </form>
+
+    <div id="results" class="border-info">
+    </div>
+{% endblock %}

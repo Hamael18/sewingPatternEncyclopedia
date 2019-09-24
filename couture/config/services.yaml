@@ -16,3 +16,8 @@ services:
     App\Service\Pagination:
         arguments:
             $templatePath: 'partials/_pagination.html.twig'
+
+    Elastica\Client:
+        $config:
+            host: 'localhost'
+            port: 9200
