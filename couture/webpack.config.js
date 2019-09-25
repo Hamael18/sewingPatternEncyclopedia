@@ -7,11 +7,13 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('popper', './assets/js/popper.min.js')
     .addEntry('bootstrap', './assets/js/bootstrap.min.js')
+    .addEntry('materializeJs', './assets/js/materialize.js')
     .addEntry('bootstrap-select-js', './assets/js/bootstrap-select.js')
     .addEntry('upload', './assets/js/upload.js')
     .addEntry('search', './assets/js/search.js')
 
     .addStyleEntry('materia', './assets/css/materia.min.css')
+    .addStyleEntry('materialize', './assets/css/materialize.css')
     .addStyleEntry('bootstrap-select-css', './assets/css/bootstrap-select.css')
 
     .cleanupOutputBeforeBuild()
