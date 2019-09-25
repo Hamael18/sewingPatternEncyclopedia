@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3aebb49-cfea-4117-aac3-32ce12c10c93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/couture.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/couture.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8110857d-5f0c-47d5-82c6-daa4f3921822.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8110857d-5f0c-47d5-82c6-daa4f3921822.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/couture/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/couture/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/couture/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/couture/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/couture/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/couture/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/couture/assets/css/materialize.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/couture/assets/js/jquery.instantSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/couture/assets/js/jquery.instantSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/couture/assets/js/materialize.min.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,8 +46,22 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="sewingPatternEncyclopedia: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - sewingPatternEncyclopedia@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sewingPatternEncyclopedia: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="brand: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -85,6 +91,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/couture/var/log/dev.log&#10;/home/julie/PhpstormProjects/sewingPatternEncyclopedia/couture/public/build/materialize.css" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/couture/templates/user/partials" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -93,15 +100,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/couture/src/Service" />
+      <recent name="$PROJECT_DIR$/couture/templates/marque" />
+      <recent name="$PROJECT_DIR$/couture/templates/user" />
+      <recent name="$PROJECT_DIR$/couture/assets/js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/couture/templates/user/partials" />
       <recent name="$PROJECT_DIR$/couture/templates/user" />
       <recent name="$PROJECT_DIR$/couture" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/couture/templates/marque" />
-      <recent name="$PROJECT_DIR$/couture/templates/user" />
-      <recent name="$PROJECT_DIR$/couture/assets/js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -145,7 +153,8 @@
       <workItem from="1568967633561" duration="4146000" />
       <workItem from="1568979309936" duration="13133000" />
       <workItem from="1569178403649" duration="2230000" />
-      <workItem from="1569235329281" duration="8070000" />
+      <workItem from="1569235329281" duration="18656000" />
+      <workItem from="1569337259486" duration="4278000" />
     </task>
     <servers />
   </component>

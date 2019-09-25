@@ -33,9 +33,6 @@
         itemTemplate: '\
                 <brand class="post">\
                     <h2>{{ name }}</h2>\
-                    <p class="post-metadata">\
-                       <span class="metadata"><i class="fa fa-user"></i> {{ owner.email }}</span>\
-                    </p>\
                     <p>{{ description }}</p>\
                 </brand>'
     };
