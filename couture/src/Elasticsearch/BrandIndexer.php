@@ -31,15 +31,21 @@ class BrandIndexer
 
     public function buildDocument(Brand $brand)
     {
+        $owner = ($brand->getOwner()) ?  $brand->getOwner()->getUsername() : "";
+        $patterns = $brand->getPatterns();
+        $patternsName = [];
+        foreach ($patterns as $pattern) {
+            $patternsName = [$pattern->getName()];
+        }
         return new Document(
             $brand->getId(), // Manually defined ID
             [
-                'id' => $brand->getId(),
                 'name' => $brand->getName(),
                 'description' => $brand->getDescription(),
+                'patterns'=> $patternsName,
 
                 // Not indexed but needed for display
-                'owner' => $brand->getOwner(),
+                'owner' => $owner
             ]
         );
     }
@@ -53,7 +59,7 @@ class BrandIndexer
         foreach ($allBrands as $brand) {
             $documents[] = $this->buildDocument($brand);
         }
-
+dump($documents);
         $index->addDocuments($documents);
         $index->refresh();
     }

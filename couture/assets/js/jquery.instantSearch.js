@@ -34,6 +34,8 @@
                 <brand class="post">\
                     <h2>{{ name }}</h2>\
                     <p>{{ description }}</p>\
+                    </br>\
+                    <p>{{ patterns }} </p>\
                 </brand>'
     };
 

@@ -2,6 +2,7 @@
 namespace App\Command;
 
 use App\Elasticsearch\BrandIndexer;
+use App\Elasticsearch\PatternIndexer;
 use App\Service\IndexBuilder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,11 +20,14 @@ class ElasticReindexCommand extends Command
 
     private $indexBuilder;
     private $brandIndexer;
+    private $patternIndexer;
 
-    public function __construct(IndexBuilder $indexBuilder, BrandIndexer $brandIndexer)
+    public function __construct(IndexBuilder $indexBuilder, BrandIndexer $brandIndexer, PatternIndexer $patternIndexer)
     {
         $this->indexBuilder = $indexBuilder;
         $this->brandIndexer = $brandIndexer;
+        $this->patternIndexer = $patternIndexer;
+
 
         parent::__construct();
     }
@@ -39,11 +43,13 @@ class ElasticReindexCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $index = $this->indexBuilder->create();
+        $index = $this->indexBuilder->createBrand();
+        $index = $this->indexBuilder->createPattern();
 
         $io->success('Index created!');
 
         $this->brandIndexer->indexAllDocuments($index->getName());
+        $this->patternIndexer->indexAllDocuments($index->getName());
 
         $io->success('Index populated and ready!');
     }
