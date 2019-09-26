@@ -21,8 +21,8 @@ class BrandOwnerType extends AbstractType
                     'attr' => [
                         'class' => 'selectpicker',
                         'data-live-search' => true,
-                        'data-none-selected-text' => 'Choisir une marque de couture'
-                    ]
+                        'data-none-selected-text' => 'Choisir une marque de couture',
+                    ],
             ])
             ->add('Ajouter', SubmitType::class)
         ;
