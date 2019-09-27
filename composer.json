@@ -7,5 +7,7 @@
             "email": "hamael18@hotmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "ext-zip": "^1.15"
+    }
 }
