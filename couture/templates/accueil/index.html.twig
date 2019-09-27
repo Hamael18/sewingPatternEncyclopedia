@@ -1,0 +1,29 @@
+{% extends 'fo_partials/base.html.twig' %}
+
+{% block title %}Acceuil enSewClopedia{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form action="{{ path('searchTest') }}" method="get">
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="form-group input-field col s10">
+                            <i class="material-icons prefix">search</i>
+                            <input type="text"
+                                   id="autocomplete-input"
+                                   name="q"
+                                   class="form-control search-field autocomplete"
+                                   placeholder="marque, patron, 'blouse manche courte col claudine'"
+                            >
+                        </div>
+                        <div>
+                            <input type="submit" name="Rechercher" class="btn-flat teal lighten-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

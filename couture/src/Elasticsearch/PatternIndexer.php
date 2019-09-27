@@ -18,7 +18,7 @@ class PatternIndexer
 {
     private $client;
 
-    private $brandRepository;
+    private $patternRepository;
 
     private $router;
 
