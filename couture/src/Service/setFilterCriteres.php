@@ -48,7 +48,6 @@ class setFilterCriteres
     public function setFilterCustomFromUserFilter($dataForm, Request $request)
     {
         $dataRepo = $this->userRepo->getDataFilterFromAdminBo($dataForm);
-        dd($dataRepo);
 
         $pagination = $this->pagination->setEntityClass(User::class)
                                         ->setRoute($request->attributes->get('_route'))
