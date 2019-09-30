@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\DataFixtures;
 
 use App\Entity\Brand;
@@ -42,24 +41,24 @@ class AppFixtures extends Fixture
         $userMarques = [];
         // Compte admin, mdp: password
         $userAdmin = new User();
-        $userAdmin  ->setEmail('admin@demo.fr')
+        $userAdmin->setEmail('admin@demo.fr')
             ->setPassword($this->encoder->encodePassword($userAdmin, 'password'))
             ->setRoles($roleAdmin);
         $manager->persist($userAdmin);
 
         // Comptes Marque, mdp: password
         $userMarque1 = new User();
-        $userMarque1  ->setEmail('marqueJulie@demo.fr')
+        $userMarque1->setEmail('marqueJulie@demo.fr')
             ->setPassword($this->encoder->encodePassword($userMarque1, 'password'))
             ->setRoles($roleMarque);
         $userMarques[] = $userMarque1;
         $userMarque2 = new User();
-        $userMarque2  ->setEmail('marqueEtienne@demo.fr')
+        $userMarque2->setEmail('marqueEtienne@demo.fr')
             ->setPassword($this->encoder->encodePassword($userMarque2, 'password'))
             ->setRoles($roleMarque);
         $userMarques[] = $userMarque2;
         $userMarque3 = new User();
-        $userMarque3    ->setEmail('marqueDemo@demo.fr')
+        $userMarque3->setEmail('marqueDemo@demo.fr')
             ->setPassword($this->encoder->encodePassword($userMarque3, 'password'))
             ->setRoles($roleMarque);
         $userMarques[] = $userMarque3;
@@ -71,7 +70,7 @@ class AppFixtures extends Fixture
         // ---> Attributs marque
         // Languages
         $languages = [];
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 20; ++$i) {
             $language = new Language();
             $language->setName($faker->country);
             $languages[] = $language;
@@ -81,13 +80,13 @@ class AppFixtures extends Fixture
         // Genres
         $genres = [];
         $genre1 = new Gender();
-        $genre1 ->setName('Homme');
+        $genre1->setName('Homme');
         $genres[] = $genre1;
         $genre2 = new Gender();
-        $genre2 ->setName('Femme');
+        $genre2->setName('Femme');
         $genres[] = $genre2;
         $genre3 = new Gender();
-        $genre3 ->setName('Enfant');
+        $genre3->setName('Enfant');
         $genres[] = $genre3;
 
         foreach ($genres as $genre) {
@@ -98,16 +97,16 @@ class AppFixtures extends Fixture
         // Cols
         $cols = [];
         $col1 = new Collar();
-        $col1   ->setName('Col en V');
+        $col1->setName('Col en V');
         $cols[] = $col1;
         $col2 = new Collar();
-        $col2   ->setName('Col roulé');
+        $col2->setName('Col roulé');
         $cols[] = $col2;
         $col3 = new Collar();
-        $col3   ->setName('Col claudine');
+        $col3->setName('Col claudine');
         $cols[] = $col3;
         $col4 = new Collar();
-        $col4 ->setName('Col rond');
+        $col4->setName('Col rond');
         $cols[] = $col4;
 
         foreach ($cols as $col) {
@@ -117,13 +116,13 @@ class AppFixtures extends Fixture
         // Difficultés
         $difficultes = [];
         $facile = new Level();
-        $facile ->setName('Facile');
+        $facile->setName('Facile');
         $difficultes[] = $facile;
         $inter = new Level();
-        $inter  ->setName('Intermédiaire');
+        $inter->setName('Intermédiaire');
         $difficultes[] = $inter;
         $diff = new Level();
-        $diff   ->setName('Difficile');
+        $diff->setName('Difficile');
         $difficultes[] = $diff;
 
         foreach ($difficultes as $difficulte) {
@@ -136,7 +135,7 @@ class AppFixtures extends Fixture
 
         foreach ($longProvider as $long) {
             $longueur = new Length();
-            $longueur   ->setName($long);
+            $longueur->setName($long);
             $longueurs[] = $longueur;
             $manager->persist($longueur);
         }
@@ -147,7 +146,7 @@ class AppFixtures extends Fixture
 
         foreach ($tailleProvider as $tai) {
             $taille = new Size();
-            $taille ->setLibelle($tai);
+            $taille->setLibelle($tai);
             $tailles[] = $taille;
             $manager->persist($taille);
         }
@@ -158,7 +157,7 @@ class AppFixtures extends Fixture
 
         foreach ($manchesProvider as $man) {
             $manche = new Handle();
-            $manche ->setName($man);
+            $manche->setName($man);
             $manches[] = $manche;
             $manager->persist($manche);
         }
@@ -169,7 +168,7 @@ class AppFixtures extends Fixture
 
         foreach ($tissusProvider as $tis) {
             $tissu = new Fabric();
-            $tissu  ->setName($tis)
+            $tissu->setName($tis)
                 ->setExtensible($faker->boolean);
             $tissus[] = $tissu;
             $manager->persist($tissu);
@@ -181,7 +180,7 @@ class AppFixtures extends Fixture
 
         foreach ($stylesProvider as $sty) {
             $style = new Style();
-            $style ->setName($sty);
+            $style->setName($sty);
             $styles[] = $style;
             $manager->persist($style);
         }
@@ -194,10 +193,10 @@ class AppFixtures extends Fixture
         // Marques avec propriétaires
         foreach ($userMarques as $userMarque) {
             $m = $faker->randomElement([2, 3, 5]);
-            for ($n = 1; $n <= $m; $n++) {
-                $image = $faker->image('/home/etienne/Documents/Projets/Perso/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
+            for ($n = 1; $n <= $m; ++$n) {
+                $image = $faker->image('/var/www/html/public/uploads/brand_images', 1000, 400, 'cats', false);
                 $marque = new Brand();
-                $marque ->setName($faker->company)
+                $marque->setName($faker->company)
                     ->setDescription($faker->text(300))
                     ->setUrl($faker->url)
                     ->setOwner($userMarque)
@@ -208,10 +207,10 @@ class AppFixtures extends Fixture
         }
 
         // 10 marques sans propriétaires
-        for ($j = 1; $j <= 10; $j++) {
-            $image = $faker->image('/home/etienne/Documents/Projets/Perso/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
+        for ($j = 1; $j <= 10; ++$j) {
+            $image = $faker->image('/var/www/html/public/uploads/brand_images', 1000, 400, 'cats', false);
             $marque = new Brand();
-            $marque ->setName($faker->company)
+            $marque->setName($faker->company)
                 ->setDescription($faker->text(300))
                 ->setUrl($faker->url)
                 ->setImage($image);
@@ -226,9 +225,9 @@ class AppFixtures extends Fixture
 
         foreach ($marques as $marque) {
             $nbPatrons = $faker->randomElement([2, 3, 5]);
-            for ($pa = 1; $pa <= $nbPatrons; $pa++) {
+            for ($pa = 1; $pa <= $nbPatrons; ++$pa) {
                 $patron = new Pattern();
-                $patron ->setName($faker->company . ' ' . $faker->numberBetween(2000, 8000))
+                $patron->setName($faker->company.' '.$faker->numberBetween(2000, 8000))
                     ->setDescription($faker->text(150))
                     ->setPrice($faker->randomFloat(2, 10, 50))
                     ->setLien($faker->url)
@@ -236,53 +235,53 @@ class AppFixtures extends Fixture
 
                 // Ajout d'un nombre aléatoire de genres (max : nombre de genres dans $genres)
                 $nbGenres = count($genres);
-                for ($nbg = 1; $nbg <= $faker->numberBetween(1, $nbGenres); $nbg++) {
-                    $patron ->addGenre($faker->randomElement($genres));
+                for ($nbg = 1; $nbg <= $faker->numberBetween(1, $nbGenres); ++$nbg) {
+                    $patron->addGenre($faker->randomElement($genres));
                 }
 
                 // Ajout d'un nombre aléatoire de langues (max: nombre de langues dans $languages)
                 $nbLang = count($languages);
-                for ($nbl = 1; $nbl <= $faker->numberBetween(1, $nbLang); $nbl++) {
-                    $patron ->addLanguage($faker->randomElement($languages));
+                for ($nbl = 1; $nbl <= $faker->numberBetween(1, $nbLang); ++$nbl) {
+                    $patron->addLanguage($faker->randomElement($languages));
                 }
 
                 // Ajout de versions (1 à 3) par patron
                 $p = $faker->randomElement([1, 2, 3]);
-                for ($q = 1; $q <= $p; $q++) {
+                for ($q = 1; $q <= $p; ++$q) {
                     $version = new Version();
-                    $version    ->setName($faker->randomElement($versionsNameProvider))
+                    $version->setName($faker->randomElement($versionsNameProvider))
                         ->setLevel($faker->randomElement($difficultes))
                         ->setPattern($patron)
                         ->setImage($faker->imageUrl(300, 200));
                     // Ajout des attributs
 
                     $nbCol = count($cols);
-                    for ($nbc = 1; $nbc <= $faker->numberBetween(0, $nbCol); $nbc++) {
+                    for ($nbc = 1; $nbc <= $faker->numberBetween(0, $nbCol); ++$nbc) {
                         $version->addCollar($faker->randomElement($cols));
                     }
 
                     $nbLen = count($longueurs);
-                    for ($nblo = 1; $nblo <= $faker->numberBetween(0, $nbLen); $nblo++) {
+                    for ($nblo = 1; $nblo <= $faker->numberBetween(0, $nbLen); ++$nblo) {
                         $version->addLength($faker->randomElement($longueurs));
                     }
 
                     $nbHan = count($manches);
-                    for ($nbh = 1; $nbh <= $faker->numberBetween(0, $nbHan); $nbh++) {
+                    for ($nbh = 1; $nbh <= $faker->numberBetween(0, $nbHan); ++$nbh) {
                         $version->addHandle($faker->randomElement($manches));
                     }
 
                     $nbTis = count($tissus);
-                    for ($nbt = 1; $nbt <= $faker->numberBetween(0, $nbTis); $nbt++) {
+                    for ($nbt = 1; $nbt <= $faker->numberBetween(0, $nbTis); ++$nbt) {
                         $version->addFabric($faker->randomElement($tissus));
                     }
 
                     $nbSty = count($styles);
-                    for ($nbst = 1; $nbst <= $faker->numberBetween(0, $nbSty); $nbst++) {
+                    for ($nbst = 1; $nbst <= $faker->numberBetween(0, $nbSty); ++$nbst) {
                         $version->addStyle($faker->randomElement($styles));
                     }
 
                     $nbSiz = count($tailles);
-                    for ($nbsi = 1; $nbsi <= $faker->numberBetween(0, $nbSiz); $nbsi++) {
+                    for ($nbsi = 1; $nbsi <= $faker->numberBetween(0, $nbSiz); ++$nbsi) {
                         $version->addSize($faker->randomElement($tailles));
                     }
 

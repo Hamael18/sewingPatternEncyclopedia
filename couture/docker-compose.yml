@@ -1,0 +1,30 @@
+version: '3.2'
+
+services:
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: sewingPatternEncyclopedia
+    volumes:
+      - database:/var/lib/mysql
+
+  symfony:
+    build: .
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html/
+    links:
+      - database
+    ports:
+      - 127.0.0.1:8909:80
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - database:db
+    ports:
+      - 8919:80
+
+volumes:
+  database: ~
