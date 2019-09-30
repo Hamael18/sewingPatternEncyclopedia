@@ -1,11 +1,13 @@
-body {
-
-}
-
 /*.vich-image a {*/
 /*    display: none;*/
 /*}*/
 
 .vich-image .form-check {
     display: none;
+}
+
+ul#menuMarques {
+    columns: 4;
+    -webkit-columns: 4;
+    -moz-columns: 4;
 }
