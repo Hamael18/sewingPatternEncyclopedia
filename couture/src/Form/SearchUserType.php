@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,21 +10,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class AdminSearchUserType extends AbstractType
+class SearchUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, [
-                'label' => false,
-                'required' => false,
-                'constraints' => [new Length(['min' => 3]), new NotBlank([])]
-            ])
-            ->add('role', ChoiceType::class, [
+            ->add('roles', ChoiceType::class, [
                 'label' => false,
                 'required' => false,
                 'multiple' => true,
-                'choices' => ['ADMIN' => 'ROLE_ADMIN', 'MARQUE' => 'ROLE_MARQUE', 'USER' => 'ROLE_USER']
+                'choices' => ['Admin' => 'ROLE_ADMIN', 'Marque' => 'ROLE_MARQUE', 'User' => 'ROLE_USER'],
+            ])
+            ->add('email', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => ['placeholder' => 'Email'],
+                'constraints' => [new Length(['min' => 3])],
             ])
         ;
     }
@@ -33,7 +33,7 @@ class AdminSearchUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => null
+            'data_class' => null,
         ]);
     }
 }

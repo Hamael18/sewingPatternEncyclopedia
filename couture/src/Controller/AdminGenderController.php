@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Gender;
 use App\Form\NewGenderType;
-use App\Repository\GenderRepository;
 use App\Service\Pagination;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,14 +20,18 @@ class AdminGenderController extends BaseAdminController
      * @param            $page
      *
      * @return Response
+     *
+     * @throws Exception
      */
     public function listGenders(Pagination $pagination, $page)
     {
         $pagination->setEntityClass(Gender::class)
             ->setRoute('admin_gender')
             ->setPage($page);
+
         return $this->render('admin/gender/index.html.twig', [
             'pagination' => $pagination,
+            'data' => $pagination->getData(),
         ]);
     }
 
@@ -47,11 +51,13 @@ class AdminGenderController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($gender);
             $this->manager->flush();
-            $this->addFlash('success', "Nouveu genre ajouté avec succès !");
+            $this->addFlash('success', 'Nouveu genre ajouté avec succès !');
+
             return $this->redirectToRoute('admin_gender');
         }
+
         return $this->render('admin/gender/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -70,12 +76,14 @@ class AdminGenderController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Genre modifiée avec succès !");
+            $this->addFlash('success', 'Genre modifiée avec succès !');
+
             return $this->redirectToRoute('admin_gender');
         }
+
         return $this->render('admin/gender/edit.html.twig', [
             'form' => $form->createView(),
-            'gender' => $gender
+            'gender' => $gender,
         ]);
     }
 
@@ -90,7 +98,8 @@ class AdminGenderController extends BaseAdminController
     {
         $this->manager->remove($gender);
         $this->manager->flush();
-        $this->addFlash('success', "Genre supprimé avec succès !");
+        $this->addFlash('success', 'Genre supprimé avec succès !');
+
         return $this->redirectToRoute('admin_gender');
     }
 }

@@ -19,32 +19,19 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getDataFilterFromAdminBo($filterData)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this->createQueryBuilder('u');
+        if ($filterData['email']) {
+            $query->andWhere('u.email LIKE :email')
+                ->setParameter('email', '%'.$filterData['email'].'%');
+        }
+        if ($filterData['roles']) {
+            $query->andWhere('u.roles in (:roles)')
+                ->setParameter('roles', $filterData['roles']);
+        }
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getQuery()
+            ->execute();
     }
-    */
 }

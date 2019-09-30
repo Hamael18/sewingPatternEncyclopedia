@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Form;
 
 use App\Entity\Brand;
@@ -35,8 +34,8 @@ class SearchPatternType extends AbstractType
                     'class' => 'selectpicker col-6',
                     'data-live-search' => true,
                     'multiple' => true,
-                    'data-none-selected-text' => 'Filtrer par marque'
-                ]
+                    'data-none-selected-text' => 'Filtrer par marque',
+                ],
             ])
         ;
     }
@@ -44,7 +43,7 @@ class SearchPatternType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => null
+            'data_class' => null,
         ]);
     }
 }

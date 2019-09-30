@@ -34,8 +34,7 @@ class MarquePatternController extends BaseAdminController
         Request $request,
         setFilterCriteres $filterCriteres,
         FilterObjectsBrand $filterObjectsBrand
-    )
-    {
+    ) {
         $filter = $filterObjectsBrand->getFilterForPattern($this->getUser());
 
         $pagination->setEntityClass(Pattern::class)
@@ -47,17 +46,18 @@ class MarquePatternController extends BaseAdminController
         $form = $this->createForm(SearchPatternType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $pagination = $filterCriteres->setFilter($form->getViewData(), $request);
+            $pagination = $filterCriteres->setFilterBrand($form->getViewData(), $request);
+
             return $this->render('marque/pattern/index.html.twig', [
                 'pagination' => $pagination,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]);
         }
         $this->session->remove('Filter');
 
         return $this->render('marque/pattern/index.html.twig', [
             'pagination' => $pagination,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -77,12 +77,13 @@ class MarquePatternController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($pattern);
             $this->manager->flush();
-            $this->addFlash('success', "Patron de couture créé avec succès !");
+            $this->addFlash('success', 'Patron de couture créé avec succès !');
+
             return $this->redirectToRoute('marque_pattern');
         }
 
         return $this->render('marque/pattern/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -105,13 +106,14 @@ class MarquePatternController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($version);
             $this->manager->flush();
-            $this->addFlash('success', "Version ajoutée avec succès !");
+            $this->addFlash('success', 'Version ajoutée avec succès !');
+
             return $this->redirectToRoute('marque_pattern');
         }
 
         return $this->render('marque/version/new.html.twig', [
             'form' => $form->createView(),
-            'pattern' => $pattern
+            'pattern' => $pattern,
         ]);
     }
 
@@ -130,13 +132,14 @@ class MarquePatternController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Patron de couture créé avec succès !");
+            $this->addFlash('success', 'Patron de couture créé avec succès !');
+
             return $this->redirectToRoute('marque_pattern');
         }
 
         return $this->render('marque/pattern/edit.html.twig', [
             'form' => $form->createView(),
-            'pattern' => $pattern
+            'pattern' => $pattern,
         ]);
     }
 
@@ -151,7 +154,8 @@ class MarquePatternController extends BaseAdminController
     {
         $this->manager->remove($pattern);
         $this->manager->flush();
-        $this->addFlash('success', "Patron de couture supprimé avec succès !");
+        $this->addFlash('success', 'Patron de couture supprimé avec succès !');
+
         return $this->redirectToRoute('marque_pattern');
     }
 }

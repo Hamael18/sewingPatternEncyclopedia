@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Collar;
 use App\Form\CollarType;
-use App\Repository\CollarRepository;
 use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +19,17 @@ class AdminCollarController extends BaseAdminController
      * @param            $page
      *
      * @return Response
+     * @throws \Exception
      */
     public function listCollars(Pagination $pagination, $page)
     {
         $pagination->setEntityClass(Collar::class)
             ->setRoute('admin_collar')
             ->setPage($page);
+
         return $this->render('admin/collar/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'data' => $pagination->getData(),
         ]);
     }
 
@@ -47,12 +49,13 @@ class AdminCollarController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($collar);
             $this->manager->flush();
-            $this->addFlash('success', "Col ajouté avec succès !");
+            $this->addFlash('success', 'Col ajouté avec succès !');
+
             return $this->redirectToRoute('admin_collar');
         }
 
         return $this->render('admin/collar/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,13 +74,14 @@ class AdminCollarController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Col modifié avec succès !");
+            $this->addFlash('success', 'Col modifié avec succès !');
+
             return $this->redirectToRoute('admin_collar');
         }
 
         return $this->render('admin/collar/edit.html.twig', [
             'form' => $form->createView(),
-            'collar' => $collar
+            'collar' => $collar,
         ]);
     }
 
@@ -92,7 +96,8 @@ class AdminCollarController extends BaseAdminController
     {
         $this->manager->remove($collar);
         $this->manager->flush();
-        $this->addFlash('success', "Col supprimé avec succès !");
+        $this->addFlash('success', 'Col supprimé avec succès !');
+
         return $this->redirectToRoute('admin_collar');
     }
 }

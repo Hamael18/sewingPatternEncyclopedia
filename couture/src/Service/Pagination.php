@@ -24,12 +24,15 @@ class Pagination
     private $order = [];
     private $user;
     private $filter;
+    private $fromFilter;
+    private $dataFromRepo;
 
     /**
      * Pagination constructor.
+     *
      * @param ObjectManager $manager
-     * @param Environment $twig
-     * @param RequestStack $request
+     * @param Environment   $twig
+     * @param RequestStack  $request
      * @param $templatePath
      * @param Security $security
      */
@@ -41,6 +44,7 @@ class Pagination
         $this->templatePath = $templatePath;
         $this->user = $security->getUser();
         $this->filter = $filter;
+        $this->fromFilter = false;
     }
 
     /**
@@ -53,6 +57,7 @@ class Pagination
 
     /**
      * @param $templatePath
+     *
      * @return $this
      */
     public function setTemplatePath($templatePath)
@@ -85,12 +90,13 @@ class Pagination
         $this->twig->display($this->templatePath, [
             'page' => $this->currentPage,
             'pages' => $this->getPages(),
-            'route' => $this->route
+            'route' => $this->route,
         ]);
     }
 
     /**
      * @return float|int
+     *
      * @throws Exception
      */
     public function getPages()
@@ -111,6 +117,7 @@ class Pagination
     {
         $repo = $this->manager->getRepository($this->entityClass);
         $list = $repo->findAll();
+
         return $this->countPages($list);
     }
 
@@ -120,6 +127,7 @@ class Pagination
         $filter_list = $filter->getFilterList();
         $repo = $this->manager->getRepository($this->entityClass);
         $list = $repo->findBy($filter_list);
+
         return $this->countPages($list);
     }
 
@@ -127,11 +135,13 @@ class Pagination
     {
         $total = count($listObjects);
         $pages = $total > 0 ? $pages = ceil($total / $this->limit) : 1;
+
         return $pages;
     }
 
     /**
      * @return object[]
+     *
      * @throws Exception
      */
     public function getData()
@@ -142,7 +152,12 @@ class Pagination
         }
         $offset = $this->currentPage * $this->limit - $this->limit;
         $repo = $this->manager->getRepository($this->entityClass);
-        $data = $repo->findBy($this->criteres, $this->order, $this->limit, $offset);
+
+        if (false == $this->fromFilter) {
+            $data = $repo->findBy($this->criteres, $this->order, $this->limit, $offset);
+        } else {
+            return $this->dataFromRepo;
+        }
 
         return $data;
     }
@@ -201,6 +216,30 @@ class Pagination
     public function setOrder(array $order)
     {
         $this->order = $order;
+
+        return $this;
+    }
+
+    public function getFromFilter()
+    {
+        return $this->fromFilter;
+    }
+
+    public function setFromFilter(bool $fromFilter)
+    {
+        $this->fromFilter = $fromFilter;
+
+        return $this;
+    }
+
+    public function getDataFromRepo()
+    {
+        return $this->dataFromRepo;
+    }
+
+    public function setDataFromRepo($dataFromRepo)
+    {
+        $this->dataFromRepo = $dataFromRepo;
 
         return $this;
     }
