@@ -64,6 +64,7 @@ ul#menuMarques {
 .hs:after {
     content: '';
     width: 10px;
+}
 
 .dropzone {
     border: 2px dashed #0087F7;
