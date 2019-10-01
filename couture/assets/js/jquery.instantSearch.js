@@ -32,10 +32,14 @@
         noResultsMessage: 'No results found',
         itemTemplate: '\
                 <brand class="post">\
+                \<img class="fit-picture"\
+     src="{{ image }}"\
+     alt="image de la marque {{ name }}">\
                     <h2>{{ name }}</h2>\
                     <p>{{ description }}</p>\
                     </br>\
-                    <p>{{ patterns }} </p>\
+                    <p> {{ image }}</p>\
+                    <p>{{ patterns }}</p>\
                 </brand>'
     };
 
