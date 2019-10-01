@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Version;
-use App\Form\EmbedVersionType;
 use App\Form\VersionType;
-use App\Repository\PatternRepository;
-use App\Repository\VersionRepository;
 use App\Service\Pagination;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +25,9 @@ class AdminVersionController extends BaseAdminController
         $pagination->setEntityClass(Version::class)
             ->setRoute('admin_brand')
             ->setPage($page);
+
         return $this->render('admin/version/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
         ]);
     }
 
@@ -49,12 +47,13 @@ class AdminVersionController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($version);
             $this->manager->flush();
-            $this->addFlash('success', "Version ajoutée avec succès !");
+            $this->addFlash('success', 'Version ajoutée avec succès !');
+
             return $this->redirectToRoute('admin_version');
         }
 
         return $this->render('admin/version/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -68,7 +67,7 @@ class AdminVersionController extends BaseAdminController
     public function showVersion(Version $version)
     {
         return $this->render('admin/version/show.html.twig', [
-            'version' => $version
+            'version' => $version,
         ]);
     }
 
@@ -87,14 +86,15 @@ class AdminVersionController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Version modifiée avec succès !");
+            $this->addFlash('success', 'Version modifiée avec succès !');
+
             return $this->redirectToRoute('admin_version');
         }
 
         return $this->render('admin/version/edit.html.twig', [
             'form' => $form->createView(),
             'version' => $version,
-            'pattern' => $version->getPattern()
+            'pattern' => $version->getPattern(),
         ]);
     }
 
@@ -109,7 +109,8 @@ class AdminVersionController extends BaseAdminController
     {
         $this->manager->remove($version);
         $this->manager->flush();
-        $this->addFlash('success', "Version supprimée avec succès !");
+        $this->addFlash('success', 'Version supprimée avec succès !');
+
         return $this->redirectToRoute('admin_version');
     }
 }

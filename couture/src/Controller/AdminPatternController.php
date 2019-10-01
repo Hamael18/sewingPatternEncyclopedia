@@ -6,10 +6,7 @@ use App\Entity\Pattern;
 use App\Entity\Version;
 use App\Form\PatternType;
 use App\Form\VersionType;
-use App\Repository\PatternRepository;
 use App\Service\Pagination;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,8 +27,9 @@ class AdminPatternController extends BaseAdminController
         $pagination->setEntityClass(Pattern::class)
             ->setRoute('admin_pattern')
             ->setPage($page);
+
         return $this->render('admin/pattern/list.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
         ]);
     }
 
@@ -56,12 +54,13 @@ class AdminPatternController extends BaseAdminController
             }
             $this->manager->persist($pattern);
             $this->manager->flush();
-            $this->addFlash('success', "Patron créé avec succès !");
+            $this->addFlash('success', 'Patron créé avec succès !');
+
             return $this->redirectToRoute('admin_pattern_addVersion', ['id' => $pattern->getId()]);
         }
 
         return $this->render('admin/pattern/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -80,13 +79,14 @@ class AdminPatternController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Patron modifié avec succès !");
+            $this->addFlash('success', 'Patron modifié avec succès !');
+
             return $this->redirectToRoute('admin_pattern');
         }
 
         return $this->render('admin/pattern/edit.html.twig', [
             'form' => $form->createView(),
-            'pattern' => $pattern
+            'pattern' => $pattern,
         ]);
     }
 
@@ -101,7 +101,8 @@ class AdminPatternController extends BaseAdminController
     {
         $this->manager->remove($pattern);
         $this->manager->flush();
-        $this->addFlash('success', "Patron supprimé avec succès !");
+        $this->addFlash('success', 'Patron supprimé avec succès !');
+
         return $this->redirectToRoute('admin_pattern');
     }
 
@@ -124,13 +125,14 @@ class AdminPatternController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($version);
             $this->manager->flush();
-            $this->addFlash('success', "Version ajoutée avec succès !");
+            $this->addFlash('success', 'Version ajoutée avec succès !');
+
             return $this->redirectToRoute('admin_version');
         }
 
-        return $this->render('_admin_marque/pattern/_addVersion.html.twig', [
+        return $this->render('bo_partials/_addVersion.html.twig', [
             'form' => $form->createView(),
-            'pattern' => $pattern
+            'pattern' => $pattern,
         ]);
     }
 
@@ -144,7 +146,7 @@ class AdminPatternController extends BaseAdminController
     public function showPattern(Pattern $pattern)
     {
         return $this->render('admin/pattern/show.html.twig', [
-            'pattern' => $pattern
+            'pattern' => $pattern,
         ]);
     }
 }

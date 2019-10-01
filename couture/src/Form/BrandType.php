@@ -17,16 +17,16 @@ class BrandType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Libellé de la marque']
+                'attr' => ['placeholder' => 'Libellé de la marque'],
             ])
-            ->add("url", UrlType::class, [
+            ->add('url', UrlType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Party-link de la marque']
+                'attr' => ['placeholder' => 'Party-link de la marque'],
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => false,
                 'required' => false,
-                'attr' => ['placeholder' => 'Sélectionnez une image']
+                'attr' => ['placeholder' => 'Sélectionnez une image'],
             ])
         ;
     }
