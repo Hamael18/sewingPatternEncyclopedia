@@ -3,41 +3,66 @@
 {% block title %}Acceuil enSewClopedia{% endblock %}
 
 {% block body %}
-    <form action="#" method="get">
+    <form action="{{ path('search') }}" method="get">
 
-                <div class="container">
-                    <div class="row my-lg-5">
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="form-group input-field col s10">
-                                    <i class="material-icons prefix">search</i>
-                                    <input type="text"
-                                           id="autocomplete-input"
-                                           name="q"
-                                           class="form-control search-field autocomplete"
-                                           placeholder="marque, patron, 'blouse manche courte col claudine'"
-                                    >
-                                </div>
-                                <div class="form-group input-field">
-                                    <button type="submit" name="search" class="btn-flat teal lighten-2">
-                                        Rechercher
-                                    </button>
-                                </div>
+        <div class="container">
+            <div class="row my-lg-5">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="form-group input-field col s10">
+                            <i class="material-icons prefix">search</i>
+                            <input type="text"
+                                   id="autocomplete-input"
+                                   name="q"
+                                   class="form-control search-field autocomplete"
+                                   placeholder="marque, patron, 'blouse manche courte col claudine'"
+                            >
+                        </div>
+                        <div class="form-group input-field">
+                            <button type="submit" name="search" class="btn-flat teal lighten-2">
+                                Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row my-lg-5">
+        <div class="container">
+            <div class="row">
+                <h3 class="teal-text text-darken-4">Nouveautés</h3>
+            </div>
+            <div class="row">
+                {% for pattern in lastPatterns %}
+                    <div class="col s12 m4">
+                        <div class="card medium">
+                            <div class="card-image responsive-img">
+                                <img src="https://placehold.it/320x320">
+                                <span class="card-title teal-text text-darken-4">{{ pattern.name }}</span>
+                            </div>
+                            <div class="card-content">
+                                <p>{{ pattern.description }}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">This is a link</a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row my-lg-5">
-                        <h2 class="teal-text text-darken-4">Nouveautés</h2>
-
-                    </div>
-
-                    <div class="row my-lg-5">
-                        <h2>Populaires</h2>
-
-                    </div>
-                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
 
-    </form>
+    <div class="row my-lg-5">
+        <div class="container">
+            <div class="row">
+                <h2 class="teal-text text-darken-4">Populaires</h2>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

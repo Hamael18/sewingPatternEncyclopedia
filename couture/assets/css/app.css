@@ -11,3 +11,7 @@ ul#menuMarques {
     -webkit-columns: 4;
     -moz-columns: 4;
 }
+.card-title {
+    font-weight: 500 !important;
+    font-size: 18px !important;
+}
