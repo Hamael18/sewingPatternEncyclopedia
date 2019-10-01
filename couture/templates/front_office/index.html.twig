@@ -32,16 +32,17 @@
 
     <div class="row my-lg-5">
         <div class="container">
-            <div class="row">
-                <h3 class="teal-text text-darken-4">Nouveautés</h3>
+            <div class="row app">
+                <h4 class="teal-text text-darken-4">Nouveautés</h4>
             </div>
-            <div class="row">
+            <div class="row hs full">
                 {% for pattern in lastPatterns %}
-                    <div class="col s12 m4">
+                    <div class="col s12 m6">
                         <div class="card medium">
                             <div class="card-image responsive-img">
                                 <img src="https://placehold.it/320x320">
-                                <span class="card-title teal-text text-darken-4">{{ pattern.name }}</span>
+                                <span class="card-title">{{ pattern.name }}</span>
+                                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                             </div>
                             <div class="card-content">
                                 <p>{{ pattern.description }}</p>
@@ -60,7 +61,7 @@
     <div class="row my-lg-5">
         <div class="container">
             <div class="row">
-                <h2 class="teal-text text-darken-4">Populaires</h2>
+                <h4 class="teal-text text-darken-4">Populaires</h4>
             </div>
         </div>
     </div>

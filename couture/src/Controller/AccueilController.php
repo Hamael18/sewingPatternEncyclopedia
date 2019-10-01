@@ -18,7 +18,7 @@ class AccueilController extends AbstractController
     public function index(PatternRepository $patternRepo)
     {
         return $this->render('front_office/index.html.twig', [
-            'lastPatterns' => $patternRepo->findBy([], ['createdAt' => 'DESC'], 5),
+            'lastPatterns' => $patternRepo->findBy([], ['createdAt' => 'DESC'], 10),
         ]);
     }
 }

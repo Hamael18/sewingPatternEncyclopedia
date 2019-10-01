@@ -34,9 +34,9 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>{{ include('bo_partials/_field_global_search.html.twig') }}</li>
                 <li>{% if app.user %}
-                        <a href="#"><i class="fas fa-user fa-2x"></i></a>
+                        <a href="#"><i class="fas fa-user fa-2x"></i> Mon compte</a>
                     {% else %}
-                        <a href="#"><i class="fas fa-user fa-2x"></i></a>
+                        <a href="{{ path('app_login') }}"><i class="fas fa-user fa-2x"></i> Connexion</a>
                     {% endif %}</li>
             </ul>
         </div>
@@ -58,7 +58,8 @@
     {{ encore_entry_script_tags('bootstrap') }}
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
     {{ encore_entry_script_tags('materializeJs') }}
-    <script>var dropdowns = document.querySelectorAll('.dropdown-trigger')
+    <script>
+        var dropdowns = document.querySelectorAll('.dropdown-trigger');
         var dropdownOptions = {
             'constrainWidth' : false,
             'coverTrigger' : false,
