@@ -27,8 +27,9 @@ class UserRepository extends ServiceEntityRepository
                 ->setParameter('email', '%'.$filterData['email'].'%');
         }
         if ($filterData['roles']) {
-            $query->andWhere('u.roles in (:roles)')
-                ->setParameter('roles', $filterData['roles']);
+            $query->join('u.roles', 'r')
+                ->andWhere('r.libelle IN (:role)')
+                ->setParameter('role', $filterData['roles']);
         }
 
         return $query->getQuery()
