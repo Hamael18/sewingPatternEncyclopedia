@@ -195,7 +195,7 @@ class AppFixtures extends Fixture
         foreach ($userMarques as $userMarque) {
             $m = $faker->randomElement([2, 3, 5]);
             for ($n = 1; $n <= $m; $n++) {
-                $image = $faker->image('/home/julie/PhpstormProjects/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
+                $image = $faker->image('/home/etienne/Documents/Perso/projets_perso/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
                 $marque = new Brand();
                 $marque ->setName($faker->company)
                     ->setDescription($faker->text(300))
@@ -209,7 +209,7 @@ class AppFixtures extends Fixture
 
         // 10 marques sans propriétaires
         for ($j = 1; $j <= 10; $j++) {
-            $image = $faker->image('/home/julie/PhpstormProjects/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
+            $image = $faker->image('/home/etienne/Documents/Perso/projets_perso/sewingPatternEncyclopedia/couture/public/uploads/brand_images', 1000, 400, 'cats', false);
             $marque = new Brand();
             $marque ->setName($faker->company)
                 ->setDescription($faker->text(300))
