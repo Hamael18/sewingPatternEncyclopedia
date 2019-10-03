@@ -41,4 +41,14 @@ class BrandRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->orderBy('b.name');
     }
+
+    /*
+     *
+     */
+    public function countBrand() {
+        return $this->createQueryBuilder('b')
+            ->select('COUNT(b) as count')
+            ->getQuery()
+            ->getResult();
+    }
 }
