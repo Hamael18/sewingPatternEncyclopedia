@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Brand;
 use App\Entity\User;
 use App\Form\AddBrandsToUserType;
+use App\Form\EditUserRoleType;
 use App\Form\SearchUserType;
 use App\Service\Pagination;
 use App\Service\setFilterCriteres;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,47 +72,28 @@ class AdminUserController extends BaseAdminController
     }
 
     /**
-     * @Route("/admin/user/{id}/add_role/{role}", name="admin_user_addRole")
-     *
+     * @Route("/admin/user/edit_role/{id}", name="admin_user_editRole")
+     * @param Request $request
+     * @param ObjectManager $manager
      * @param User $user
-     * @param      $role
-     *
-     * @return RedirectResponse
+     * @return RedirectResponse|Response
      */
-    public function addRole(User $user, $role)
+    public function changeRoleUser(Request $request, ObjectManager $manager, User $user)
     {
-        $add = $user->addRole($role);
-        if (false == $add) {
-            $this->addFlash('warning', 'Cet utilisateur dispose déjà du droit '.$role);
+        $form = $this->createForm(EditUserRoleType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+            $this->addFlash('success', "Rôle de l'utilisateur modifié avec succès !");
 
             return $this->redirectToRoute('admin_user');
         }
-        $this->manager->flush();
-        $this->addFlash('success', 'Utilisateur pourvu du '.$role);
 
-        return $this->redirectToRoute('admin_user');
-    }
-
-    /**
-     * @Route("/admin/user/{id}/remove_role/{role}", name="admin_user_removeRole")
-     *
-     * @param User $user
-     * @param      $role
-     *
-     * @return RedirectResponse
-     */
-    public function removeRole(User $user, $role)
-    {
-        $remove = $user->removeRole($role);
-        if (false == $remove) {
-            $this->addFlash('warning', 'Cet utilisateur ne possède pas le'.$role);
-
-            return $this->redirectToRoute('admin_user');
-        }
-        $this->manager->flush();
-        $this->addFlash('success', "Cet utilisateur n'a plus le role".$role);
-
-        return $this->redirectToRoute('admin_user');
+        return $this->render('admin/user/editRole.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
     }
 
     /**

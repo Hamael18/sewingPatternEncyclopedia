@@ -12,6 +12,7 @@ use App\Entity\Language;
 use App\Entity\Length;
 use App\Entity\Level;
 use App\Entity\Pattern;
+use App\Entity\Role;
 use App\Entity\Size;
 use App\Entity\Style;
 use App\Entity\User;
@@ -35,8 +36,12 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
 
         // ---> Roles
-        $roleAdmin = ['ROLE_ADMIN'];
-        $roleMarque = ['ROLE_MARQUE'];
+        $roleAdmin = new Role();
+        $roleAdmin->setLibelle('ROLE_ADMIN');
+        $roleMarque = new Role();
+        $roleMarque->setLibelle('ROLE_MARQUE');
+        $manager->persist($roleAdmin);
+        $manager->persist($roleMarque);
 
         // ---> Users
         $userMarques = [];

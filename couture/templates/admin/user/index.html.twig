@@ -39,24 +39,8 @@
                     <td class="align-middle">
                         <a href="{{ path('admin_user_addBrands', {'id': user.id}) }}"
                            class="btn btn-dark"><i class="fas fa-copyright"></i></a>
-                        {%  if 'ROLE_MARQUE' in user.roles %}
-                            <a href="{{ path('admin_user_removeRole', {'id': user.id, 'role': 'ROLE_MARQUE'}) }}"
-                               onclick="return confirm('Retirer les droits de marque à cet utilisateur ?')"
-                               class="btn btn-outline-warning"><i class="fas fa-user-tag"></i></a>
-                         {% else %}
-                             <a href="{{ path('admin_user_addRole', {'id': user.id, 'role': 'ROLE_MARQUE'}) }}"
-                                onclick="return confirm('Promouvoir cet utilisateur comme marque ?')"
-                                class="btn btn-outline-success"><i class="fas fa-user-tag"></i></a>
-                        {% endif %}
-                        {% if 'ROLE_ADMIN' in user.roles %}
-                        <a href="{{ path('admin_user_removeRole', {'id': user.id, 'role': 'ROLE_ADMIN'}) }}"
-                           onclick="return confirm('Retirer les droits d\'admin à cet utilisateur ?')"
-                           class="btn btn-outline-warning"><i class="fas fa-lock"></i></a>
-                        {% else %}
-                            <a href="{{ path('admin_user_addRole', {'id': user.id, 'role': 'ROLE_ADMIN'}) }}"
-                               onclick="return confirm('Promouvoir cet utilisateur comme admin ?')"
-                               class="btn btn-outline-success"><i class="fas fa-lock"></i></a>
-                        {% endif  %}
+                        <a href="{{ path('admin_user_editRole', {'id': user.id}) }}"
+                           class="btn btn-secondary"><i class="fa fa-edit"></i></a>
                         <a href="{{ path('admin_size_delete', {'id': user.id }) }}"
                            onclick="return confirm('Supprimer cet utilisateur ?')"
                            class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
