@@ -121,10 +121,15 @@
             </div>
         </div>
     </a>
-    <div class="collapse {% if requete starts with '/admin/user' %}show{% endif %}" id="user">
+    <div class="collapse {% if requete starts with '/admin/user' or requete starts with '/admin/role' %}show{% endif %}" id="user">
         <ul class="nav flex-column bg-light">
             <li class="nav-item">
                 <a class="nav-link text-center btn teal lighten-4 w-100 teal-text text-darken-4" href="{{ path('admin_user') }}"><i class="fas fa-list"></i> Liste</a>
+            </li>
+        </ul>
+        <ul class="nav flex-column bg-light">
+            <li class="nav-item">
+                <a class="nav-link text-center btn teal lighten-4 w-100 teal-text text-darken-4" href="{{ path('admin_role') }}"><i class="fas fa-user-shield"></i>Rôles</a>
             </li>
         </ul>
     </div>
