@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Handle;
 use App\Form\HandleType;
-use App\Repository\HandleRepository;
 use App\Service\Pagination;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,14 +20,17 @@ class AdminHandleController extends BaseAdminController
      * @param            $page
      *
      * @return Response
+     * @throws Exception
      */
     public function listHandles(Pagination $pagination, $page)
     {
         $pagination->setEntityClass(Handle::class)
             ->setRoute('admin_handle')
             ->setPage($page);
+
         return $this->render('admin/handle/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'data' => $pagination->getData(),
         ]);
     }
 
@@ -47,12 +50,13 @@ class AdminHandleController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($handle);
             $this->manager->flush();
-            $this->addFlash('success', "Manches ajoutées avec succès !");
+            $this->addFlash('success', 'Manches ajoutées avec succès !');
+
             return $this->redirectToRoute('admin_handle');
         }
 
         return $this->render('admin/handle/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,13 +75,14 @@ class AdminHandleController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Manches modifiées avec succès !");
+            $this->addFlash('success', 'Manches modifiées avec succès !');
+
             return $this->redirectToRoute('admin_handle');
         }
 
         return $this->render('admin/handle/edit.html.twig', [
             'form' => $form->createView(),
-            'handle' => $handle
+            'handle' => $handle,
         ]);
     }
 
@@ -92,7 +97,8 @@ class AdminHandleController extends BaseAdminController
     {
         $this->manager->remove($handle);
         $this->manager->flush();
-        $this->addFlash('success', "Manches supprimées avec succès !");
+        $this->addFlash('success', 'Manches supprimées avec succès !');
+
         return $this->redirectToRoute('admin_handle');
     }
 }

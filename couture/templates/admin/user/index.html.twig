@@ -5,6 +5,15 @@
 {% block content %}
     <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des utilisateurs</h1></div>
 
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-3">{{ form_row(form.roles) }}</div>
+        <div class="col-3">{{ form_row(form.email) }}</div>
+        <button type="submit" class="btn btn-outline-primary">Rechercher</button>
+        <a href="{{path('admin_user')}}" class="btn btn-outline-primary">Tous les utilisateurs</a>
+    </div>
+    {{ form_end(form) }}
+
     <div class="my-3">
         <table class="table table-hover table-striped">
             <thead class="thead-dark h5">
@@ -16,15 +25,14 @@
             </tr>
             </thead>
             <tbody>
-            {% for user in pagination.data %}
+            {% for user in data %}
                 <tr>
                     <td class="align-middle font-weight-bold h5"><a href="{{ path('admin_user_show',{'id': user.id}) }}">{{ user }}</a> </td>
                     <td class="align-middle">{{ user.brands | length }}</td>
                     <td class="align-middle">
                         {% for role in user.roles %}
-                            {% if role == 'ROLE_USER' %}
-                            {% else %}
-                            <p>{{ role }}</p>{% if loop.last == false %}<br/>{% endif %}
+                            {% if role != 'ROLE_USER' %}
+                                {% if role == 'ROLE_ADMIN' %}<p>Admin</p>{% elseif role == 'ROLE_MARQUE' %}<p>Marque</p>{% endif %}
                             {% endif %}
                         {% endfor %}
                     </td>

@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Fabric;
 use App\Form\FabricType;
-use App\Repository\FabricRepository;
 use App\Service\Pagination;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +20,8 @@ class AdminFabricController extends BaseController
      * @param            $page
      *
      * @return Response
+     *
+     * @throws Exception
      */
     public function index(Pagination $pagination, $page)
     {
@@ -28,7 +30,8 @@ class AdminFabricController extends BaseController
             ->setPage($page);
 
         return $this->render('admin/fabric/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'data' => $pagination->getData(),
         ]);
     }
 
@@ -48,12 +51,13 @@ class AdminFabricController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($fabric);
             $this->manager->flush();
-            $this->addFlash('success', "Tissu ajouté avec succès !");
+            $this->addFlash('success', 'Tissu ajouté avec succès !');
+
             return $this->redirectToRoute('admin_fabric');
         }
 
         return $this->render('admin/fabric/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -72,13 +76,14 @@ class AdminFabricController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Tissu modifié avec succès !");
+            $this->addFlash('success', 'Tissu modifié avec succès !');
+
             return $this->redirectToRoute('admin_fabric');
         }
 
         return $this->render('admin/fabric/edit.html.twig', [
             'form' => $form->createView(),
-            'fabric' => $fabric
+            'fabric' => $fabric,
         ]);
     }
 
@@ -93,7 +98,8 @@ class AdminFabricController extends BaseController
     {
         $this->manager->remove($fabric);
         $this->manager->flush();
-        $this->addFlash('success', "Tissu supprimé avec succès !");
+        $this->addFlash('success', 'Tissu supprimé avec succès !');
+
         return $this->redirectToRoute('admin_fabric');
     }
 }

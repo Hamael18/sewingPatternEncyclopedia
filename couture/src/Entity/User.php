@@ -98,7 +98,7 @@ class User implements UserInterface
 
     public function addRole($role)
     {
-        if (in_array($role, $this->roles) == true) {
+        if (true == in_array($role, $this->roles)) {
             return false;
         } else {
             // Sauvegarde des rôles actuels dans la variable $roles
@@ -116,8 +116,9 @@ class User implements UserInterface
     {
         $roles = $this->getRoles();
         $keyRole = array_search($role, $roles);
-        if ($keyRole !== false) {
+        if (false !== $keyRole) {
             unset($roles[$keyRole]);
+
             return $this->setRoles($roles); // la fin !
         } else {
             return false;
