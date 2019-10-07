@@ -13,7 +13,7 @@ install:
 ## Tu peux checker les docker qui tournent sur ton pc dans un terminal avec 'docker ps'
 ## EN DEHORS DE LA CONSOLE DOCKER
 start: ## Start the project
-	docker-compose up -d?
+	docker-compose up -d
 	@echo "started on http://127.0.0.1:8909"
 	@echo "PMA on http://127.0.0.1:8919/"
 
@@ -30,10 +30,20 @@ stop:
 console: ## Start a symfony console
 	docker-compose exec symfony bash
 
+## Permet de réindexer elastic Search
+## DANS LA CONSOLE DOCKER
+elastic:
+	php bin/console elastic:reindex
+
 ## Permet de vider le cache (équivalent voir en dessous)
 ## DANS LA CONSOLE DOCKER
 cc:
 	php bin/console cache:clear
+
+## Permet de compiler webpack une fois
+## DANS LA CONSOLE DOCKER
+webpack:
+	./node_modules/.bin/encore dev
 
 ## Permet de builder webpack (une fois le make install fait)
 ## DANS LA CONSOLE DOCKER
