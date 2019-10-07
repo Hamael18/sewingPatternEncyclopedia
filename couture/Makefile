@@ -4,16 +4,16 @@
 
 ## Commande à lancer une seule fois lors de la première install du projet sur le pc
 install:
-	docker-compose -p build
-	docker-compose -p up -d
-	docker-compose -p exec symfony composer install
-	docker-compose -p exec symfony npm install
+	docker-compose build
+	docker-compose up -d
+	docker-compose exec symfony composer install
+	docker-compose exec symfony npm install
 
 ## Commande pour lancer le projet (équivalent du bin/console s:r). Si tu éteins ton pc, il faudra surement la relancer
 ## Tu peux checker les docker qui tournent sur ton pc dans un terminal avec 'docker ps'
 ## EN DEHORS DE LA CONSOLE DOCKER
 start: ## Start the project
-	docker-compose up -d
+	docker-compose up -d?
 	@echo "started on http://127.0.0.1:8909"
 	@echo "PMA on http://127.0.0.1:8919/"
 

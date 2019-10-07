@@ -3,8 +3,9 @@ version: '3.2'
 services:
   database:
     image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: PASS
       MYSQL_DATABASE: sewingPatternEncyclopedia
     volumes:
       - database:/var/lib/mysql
@@ -16,6 +17,7 @@ services:
       - ./:/var/www/html/
     links:
       - database
+      - elastic01
     ports:
       - 127.0.0.1:8909:80
 
@@ -25,6 +27,20 @@ services:
       - database:db
     ports:
       - 8919:80
+
+  elastic01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    environment:
+      - cluster.initial_master_nodes=elastic01
+      - cluster.name=demo
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+        - 9200:9200
 
 volumes:
   database: ~
