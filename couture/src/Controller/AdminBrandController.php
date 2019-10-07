@@ -20,14 +20,17 @@ class AdminBrandController extends BaseAdminController
      * @param            $page
      *
      * @return Response
+     * @throws \Exception
      */
     public function listBrand(Pagination $pagination, $page)
     {
         $pagination->setEntityClass(Brand::class)
             ->setRoute('admin_brand')
             ->setPage($page);
+
         return $this->render('admin/brand/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'data' => $pagination->getData(),
         ]);
     }
 
@@ -47,12 +50,13 @@ class AdminBrandController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($brand);
             $this->manager->flush();
-            $this->addFlash('success', "Marque créé avec succès !");
+            $this->addFlash('success', 'Marque créé avec succès !');
+
             return $this->redirectToRoute('admin_brand');
         }
 
         return $this->render('admin/brand/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,13 +75,14 @@ class AdminBrandController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Marque modifiée avec succès !");
+            $this->addFlash('success', 'Marque modifiée avec succès !');
+
             return $this->redirectToRoute('admin_brand');
         }
 
         return $this->render('admin/brand/edit.html.twig', [
             'form' => $form->createView(),
-            'brand' => $brand
+            'brand' => $brand,
         ]);
     }
 
@@ -92,7 +97,7 @@ class AdminBrandController extends BaseAdminController
     {
         $this->manager->remove($brand);
         $this->manager->flush();
-        $this->addFlash('success', "Marque supprimée avec succès !");
+        $this->addFlash('success', 'Marque supprimée avec succès !');
 
         return $this->redirectToRoute('admin_brand');
     }
@@ -119,7 +124,7 @@ class AdminBrandController extends BaseAdminController
 
         return $this->render('admin/brand/addOwner.html.twig', [
             'form' => $form->createView(),
-            'brand' => $brand
+            'brand' => $brand,
         ]);
     }
 }

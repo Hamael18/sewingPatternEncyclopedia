@@ -25,11 +25,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
-
-    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -39,6 +34,12 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Brand", mappedBy="owner")
      */
     private $brands;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $roles;
 
     public function __construct()
     {
@@ -77,28 +78,9 @@ class User implements UserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
     public function addRole($role)
     {
-        if (in_array($role, $this->roles) == true) {
+        if (true == in_array($role, $this->roles)) {
             return false;
         } else {
             // Sauvegarde des rôles actuels dans la variable $roles
@@ -116,8 +98,9 @@ class User implements UserInterface
     {
         $roles = $this->getRoles();
         $keyRole = array_search($role, $roles);
-        if ($keyRole !== false) {
+        if (false !== $keyRole) {
             unset($roles[$keyRole]);
+
             return $this->setRoles($roles); // la fin !
         } else {
             return false;
@@ -183,6 +166,22 @@ class User implements UserInterface
                 $brand->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        if (!$this->roles) {
+            return $this->roles;
+        } else {
+            return ['ROLE_USER', $this->roles->getLibelle()];
+        }
+    }
+
+    public function setRoles(?Role $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

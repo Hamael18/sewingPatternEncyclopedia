@@ -33,19 +33,18 @@ class BrandIndexer
     {
         $owner = ($brand->getOwner()) ?  $brand->getOwner()->getUsername() : "";
         $patterns = $brand->getPatterns();
-        $patternsName = [];
-        foreach ($patterns as $pattern) {
-            $patternsName = [$pattern->getName()];
-        }
+        $image = $brand->getImage();
+
         return new Document(
             $brand->getId(), // Manually defined ID
             [
                 'name' => $brand->getName(),
                 'description' => $brand->getDescription(),
-                'patterns'=> $patternsName,
+                'patterns'=> $patterns,
 
                 // Not indexed but needed for display
-                'owner' => $owner
+                'owner' => $owner,
+                'image' => $image
             ]
         );
     }
@@ -59,7 +58,7 @@ class BrandIndexer
         foreach ($allBrands as $brand) {
             $documents[] = $this->buildDocument($brand);
         }
-dump($documents);
+
         $index->addDocuments($documents);
         $index->refresh();
     }

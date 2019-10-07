@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Language;
 use App\Form\NewLanguageType;
-use App\Repository\LanguageRepository;
 use App\Service\Pagination;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +20,17 @@ class AdminLanguageController extends BaseAdminController
      * @param            $page
      *
      * @return Response
+     * @throws Exception
      */
     public function listLanguages(Pagination $pagination, $page)
     {
         $pagination->setEntityClass(Language::class)
             ->setRoute('admin_language')
             ->setPage($page);
+
         return $this->render('admin/language/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'data' => $pagination->getData(),
         ]);
     }
 
@@ -49,11 +50,13 @@ class AdminLanguageController extends BaseAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($language);
             $this->manager->flush();
-            $this->addFlash('success', "Nouvelle langue ajouté avec succès !");
+            $this->addFlash('success', 'Nouvelle langue ajouté avec succès !');
+
             return $this->redirectToRoute('admin_language');
         }
+
         return $this->render('admin/language/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -72,12 +75,14 @@ class AdminLanguageController extends BaseAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
-            $this->addFlash('success', "Langue modifiée avec succès !");
+            $this->addFlash('success', 'Langue modifiée avec succès !');
+
             return $this->redirectToRoute('admin_language');
         }
+
         return $this->render('admin/language/edit.html.twig', [
             'form' => $form->createView(),
-            'language' => $language
+            'language' => $language,
         ]);
     }
 
@@ -92,7 +97,8 @@ class AdminLanguageController extends BaseAdminController
     {
         $this->manager->remove($language);
         $this->manager->flush();
-        $this->addFlash('success', "Langue supprimée avec succès !");
+        $this->addFlash('success', 'Langue supprimée avec succès !');
+
         return $this->redirectToRoute('admin_language');
     }
 }

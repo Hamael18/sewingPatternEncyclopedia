@@ -4,31 +4,29 @@ namespace App\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BaseAdminController extends AbstractController
+class BaseAdminController extends BaseController
 {
     protected $manager;
     protected $session;
-
-    public function __construct(ObjectManager $manager, SessionInterface $session)
-    {
-        $this->manager = $manager;
-        $this->session = $session;
-    }
 
     /**
      * @Route("/admin", name="admin_dashboard")
      */
     public function adminIndex()
     {
-        return $this->render('admin/dashboard/dashboard.html.twig');
+        return $this->render('admin/dashboard/dashboard.html.twig', [
+            'patternCount' =>$this->patternRepository->countPatterns(),
+            'brandCount' =>$this->brandRepository->countBrand()
+        ]);
     }
 
     /**
      * @Route("/marque", name="marque_dashboard")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function marqueIndex()
     {

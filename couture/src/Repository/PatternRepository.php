@@ -18,4 +18,14 @@ class PatternRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Pattern::class);
     }
+
+    /**
+     * @return mixed
+     */
+    public function countPatterns() {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p) as count')
+            ->getQuery()
+            ->getResult();
+    }
 }

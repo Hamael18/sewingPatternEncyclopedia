@@ -46,8 +46,8 @@ class MarquePatternController extends BaseAdminController
         $form = $this->createForm(SearchPatternType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $pagination = $filterCriteres->setFilter($form->getViewData(), $request);
-
+            $pagination = $filterCriteres->setFilterBrand($form->getViewData(), $request);
+          
             return $this->render('marque/pattern/index.html.twig', [
                 'pagination' => $pagination,
                 'form' => $form->createView(),

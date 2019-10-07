@@ -19,7 +19,6 @@ class ElasticController extends AbstractController
 {
     /**
      * @route("/searchTest", name="searchTest")
-     * @Method("GET")
      */
     public function elasticaSearchTest(Request $request, Client $client) : Response
     {
@@ -32,10 +31,10 @@ class ElasticController extends AbstractController
 
         $match = new MultiMatch();
         $match->setQuery($query);
-        $match->setFields(["name", "description"]);
+        $match->setFields(["name", "description", "patterns"]);
 
         $bool = new BoolQuery();
-        $bool->addMust($match);
+        $bool->addShould($match);
 
         $elasticaQuery = new Query($bool);
         $elasticaQuery->setSize($limit);
@@ -45,7 +44,6 @@ class ElasticController extends AbstractController
         foreach ($foundPosts as $post) {
             $results[] = $post->getSource();
         }
-
         return $this->json($results);
     }
 

@@ -3,25 +3,22 @@
 {% block title %}Patterns - Liste{% endblock %}
 
 {% block content %}
-    <div class="row"><i class="fas fa-list-alt fa-3x mr-3"></i><h1>Liste des patterns</h1></div>
+    <div class="row teal-text darken-4 mb-5"><h3>Liste des patrons</h3></div>
     <div class="row my-3">
         {% for pattern in pagination.data %}
+            {{ dump(pattern) }}
             <div class="card col-lg-3 m-2 p-0">
-                <div class="card-header bg-dark text-center">
+                <div class="card-header teal darken-2">
                     <span class="card-title h5 text-light">{{ pattern }}</span>
                 </div>
-                <div class="card-body text-center">
-                    <span class="card-text"><strong>Marque</strong> : {{ pattern.brand }}</span>
-                    <div class="dropdown-divider"></div>
-                    <span class="card-text"><strong>Prix</strong> : {{ pattern.price }} <i class="fas fa-euro-sign"></i></span><br />
-                    <div class="dropdown-divider"></div>
-                    <span class="card-text"><strong>Lien</strong> :
-                        {% if pattern.lien %}<a href="{{ pattern.lien }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                <div class="card-body">
+                    <div class="card-text teal-text text-darken-3 marque px-2"> {{ pattern.brand }}</div>
+                    <div class="card-text price teal-text text-darken-4 teal lighten-5 px-2"> {{ pattern.price }} <i class="fas fa-euro-sign"></i></div><br />
+                    <span class="card-text px-2">{% if pattern.lien %}<a href="{{ pattern.lien }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lien vers le site de la marque</a>
                         {% else %}<i class="fas fa-unlink"></i>
                         {% endif %}
                     </span>
 
-                    <p>
                     <div class="row mx-1">
                         {% if pattern.versions | length > 0 %}
                             <a class="btn btn-primary col-9" data-toggle="collapse" href="#collapse-{{ pattern.id }}" role="button" aria-expanded="false" aria-controls="collapse-{{ pattern.id }}">
@@ -33,9 +30,9 @@
                             </a>
                         {% endif %}
                         <a href="{{ path('admin_pattern_addVersion', {'id': pattern.id }) }}" title="Ajouter une version au patron {{ pattern }}"
-                           class="btn btn-success col-2 offset-1"><i class="fas fa-plus"></i></a>
+                           class="btn waves-effect waves-light col-2 offset-1"><i class="fas fa-plus"></i></a>
                     </div>
-                    </p>
+
                     <div class="collapse" id="collapse-{{ pattern.id }}">
                         <div class="card card-body">
                             <ul class="list-group">
@@ -50,12 +47,12 @@
                 </div>
                 <div class="card-footer">
                     <div class="row d-flex justify-content-center">
-                        <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn btn-outline-primary mx-2" title="Editer le patron {{ pattern }}">
+                        <a href="{{ path('admin_pattern_edit', {'id': pattern.id}) }}" class="btn teal lighten-3 mx-2" title="Editer le patron {{ pattern }}">
                             <i class="fas fa-wrench"></i></a>
                         {% if pattern.canBeDeleted %}
                             <a href="{{ path('admin_pattern_delete', {'id': pattern.id }) }}"
                                onclick="return confirm('Supprimer ce pattern ?')" title="Supprimer le patron {{ pattern }}"
-                               class="btn btn-outline-danger mx-2"><i class="fa fa-trash"></i></a>
+                               class="btn btn-flat grey-text text-lighten-1"><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </div>
                 </div>
