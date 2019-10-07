@@ -19,5 +19,5 @@ services:
 
     Elastica\Client:
         $config:
-            host: 'localhost'
+            host: elastic
             port: 9200
