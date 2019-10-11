@@ -19,7 +19,7 @@
     var InstantSearch = function (element, options) {
         this.$input = $(element);
         this.$form = this.$input.closest('form');
-        this.$preview = $('<ul class="search-preview list-group">').appendTo(this.$form);
+        this.$preview = $('<ul class="search-preview list-grooup">').appendTo(this.$form);
         this.options = $.extend({}, InstantSearch.DEFAULTS, this.$input.data(), options);
 
         this.$input.keyup(this.debounce());
@@ -32,15 +32,15 @@
         noResultsMessage: 'No results found',
         itemTemplate: '\
                 <brand class="post">\
-                \<img class="fit-picture"\
-     src="{{ image }}"\
-     alt="image de la marque {{ name }}">\
-                    <h2>{{ name }}</h2>\
-                    <p>{{ description }}</p>\
+                    <h2 class="text-danger">{{ name }}</h2>\
+                    <p class="text-info">{{ owner }}</p>\
                     </br>\
-                    <p> {{ image }}</p>\
-                    <p>{{ patterns }}</p>\
-                </brand>'
+                </brand>\
+                \<pattern class="pattern">\
+                    <h2 class="text-warning">{{ name }}</h2>\
+                    <p class="text-success">{{ toto }}</p>\
+                    </br>\
+                </pattern>'
     };
 
     InstantSearch.prototype.debounce = function () {

@@ -8,9 +8,8 @@ use Elastica\Client;
 use Elastica\Document;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-
 /**
- * Class BrandIndexer
+ * Class BrandIndexer.
  *
  * @author Julie
  */
@@ -31,8 +30,7 @@ class BrandIndexer
 
     public function buildDocument(Brand $brand)
     {
-        $owner = ($brand->getOwner()) ?  $brand->getOwner()->getUsername() : "";
-        $patterns = $brand->getPatterns();
+        $owner = ($brand->getOwner()) ? $brand->getOwner()->getUsername() : '';
         $image = $brand->getImage();
 
         return new Document(
@@ -40,11 +38,10 @@ class BrandIndexer
             [
                 'name' => $brand->getName(),
                 'description' => $brand->getDescription(),
-                'patterns'=> $patterns,
 
                 // Not indexed but needed for display
                 'owner' => $owner,
-                'image' => $image
+                'image' => $image,
             ]
         );
     }

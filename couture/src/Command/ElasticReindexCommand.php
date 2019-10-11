@@ -27,8 +27,6 @@ class ElasticReindexCommand extends Command
         $this->indexBuilder = $indexBuilder;
         $this->brandIndexer = $brandIndexer;
         $this->patternIndexer = $patternIndexer;
-
-
         parent::__construct();
     }
 
@@ -43,13 +41,13 @@ class ElasticReindexCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $index = $this->indexBuilder->createBrand();
-//        $index = $this->indexBuilder->createPattern();
+        $index1 = $this->indexBuilder->createBrand();
+        $index2 = $this->indexBuilder->createPattern();
 
         $io->success('Index created!');
 
-        $this->brandIndexer->indexAllDocuments($index->getName());
-//        $this->patternIndexer->indexAllDocuments($index->getName());
+        $this->brandIndexer->indexAllDocuments($index1->getName());
+        $this->patternIndexer->indexAllDocuments($index2->getName());
 
         $io->success('Index populated and ready!');
     }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Elasticsearch;
 
 use App\Entity\Pattern;
@@ -10,7 +9,7 @@ use Elastica\Document;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Class PatternIndexer
+ * Class PatternIndexer.
  *
  * @author Julie
  */
@@ -31,15 +30,16 @@ class PatternIndexer
 
     public function buildDocument(Pattern $pattern)
     {
-        $brand = ($pattern->getBrand()) ? $pattern->getBrand()->getName() : "";
+        $brand = ($pattern->getBrand()) ? $pattern->getBrand()->getName() : '';
+
         return new Document(
             $pattern->getId(), // Manually defined ID
             [
                 'name' => $pattern->getName(),
                 'description' => $pattern->getDescription(),
-                'brand'=> $brand,
-                'languages'=>$pattern->getLanguages(),
-                // Not indexed but needed for display
+                'brand' => $brand,
+                'languages' => $pattern->getLanguages(),
+                'toto' => 'toto',
                 'lien' => $pattern->getLien(),
             ]
         );
